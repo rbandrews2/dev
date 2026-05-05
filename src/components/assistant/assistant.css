@@ -1,0 +1,79 @@
+.ai-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 191, 0, 0.1);
+  border: 1px solid rgba(255,191,0,0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.ai-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+.ai-panel {
+  position: fixed;
+  bottom: 80px;
+  right: -420px;
+  width: 360px;
+  height: 480px;
+  background: rgba(0,0,0,0.85);
+  border: 1px solid rgba(255,191,0,0.4);
+  backdrop-filter: blur(10px);
+  transition: right 0.3s ease;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+}
+
+.ai-panel.open {
+  right: 20px;
+}
+
+.ai-header {
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,191,0,0.3);
+}
+
+.ai-body {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 14px;
+}
+
+.ai-msg {
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.ai-msg.user {
+  background: rgba(255,191,0,0.15);
+  text-align: right;
+}
+
+.ai-msg.ai {
+  background: rgba(255,255,255,0.08);
+}
+
+.ai-input {
+  padding: 10px;
+  border-top: 1px solid rgba(255,191,0,0.3);
+  display: flex;
+  gap: 8px;
+}

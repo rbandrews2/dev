@@ -1,0 +1,179 @@
+{
+  "version": "1.0",
+  "pass_threshold": 0.8,
+  "courses": [
+    {
+      "course_id": "pmt",
+      "title": "Project Management Technician (PMT)",
+      "category": "operations",
+      "required_roles": [
+        "supervisor",
+        "lead"
+      ],
+      "certificate_eligible": true,
+      "estimated_minutes": 90,
+      "description": "Field leadership, crew coordination, documentation responsibility, and operational oversight.",
+      "topics": [
+        "leadership",
+        "documentation",
+        "planning",
+        "communication"
+      ],
+      "requires_test": false,
+      "certificate_type": "pmt"
+    },
+    {
+      "course_id": "flagger",
+      "title": "Flagger Certification & Refresher",
+      "category": "traffic_control",
+      "required_roles": [
+        "flagger",
+        "crew"
+      ],
+      "certificate_eligible": true,
+      "estimated_minutes": 60,
+      "description": "Traffic control signaling, positioning, and live-traffic awareness.",
+      "topics": [
+        "flagger",
+        "traffic_control",
+        "safety",
+        "signals"
+      ],
+      "requires_test": true,
+      "certificate_type": "flagger"
+    },
+    {
+      "course_id": "ttc",
+      "title": "Temporary Traffic Control (TTC)",
+      "category": "traffic_control",
+      "required_roles": [
+        "flagger",
+        "supervisor",
+        "crew"
+      ],
+      "certificate_eligible": true,
+      "estimated_minutes": 75,
+      "description": "MUTCD-aligned lane closures, tapers, signage, and device placement.",
+      "topics": [
+        "traffic_control",
+        "setup",
+        "cones",
+        "signing"
+      ],
+      "requires_test": false,
+      "certificate_type": "ttc"
+    },
+    {
+      "course_id": "work_zone_safety",
+      "title": "Work Zone Safety Fundamentals",
+      "category": "safety",
+      "required_roles": [
+        "all"
+      ],
+      "certificate_eligible": false,
+      "estimated_minutes": 45,
+      "description": "General work zone safety awareness and hazard prevention.",
+      "topics": [
+        "safety"
+      ],
+      "requires_test": false,
+      "certificate_type": null
+    },
+    {
+      "course_id": "night_work",
+      "title": "Night Work Safety",
+      "category": "safety",
+      "required_roles": [
+        "crew",
+        "flagger",
+        "driver"
+      ],
+      "certificate_eligible": false,
+      "estimated_minutes": 40,
+      "description": "Low-visibility operations, lighting, reflective PPE, and fatigue management.",
+      "topics": [
+        "night_work",
+        "visibility",
+        "lighting",
+        "fatigue"
+      ],
+      "requires_test": false,
+      "certificate_type": "night_work"
+    },
+    {
+      "course_id": "ppe",
+      "title": "PPE & Jobsite Safety",
+      "category": "safety",
+      "required_roles": [
+        "all"
+      ],
+      "certificate_eligible": false,
+      "estimated_minutes": 30,
+      "description": "Proper PPE usage, inspection, and compliance.",
+      "topics": [
+        "safety"
+      ],
+      "requires_test": false,
+      "certificate_type": null
+    },
+    {
+      "course_id": "dvir",
+      "title": "DVIR & Vehicle Safety Awareness",
+      "category": "vehicle",
+      "required_roles": [
+        "driver",
+        "supervisor"
+      ],
+      "certificate_eligible": false,
+      "estimated_minutes": 35,
+      "description": "Pre-trip inspections, defect reporting, and vehicle readiness.",
+      "topics": [
+        "dvir",
+        "equipment",
+        "inspection",
+        "maintenance"
+      ],
+      "requires_test": false,
+      "certificate_type": "dvir"
+    },
+    {
+      "course_id": "harassment",
+      "title": "Workplace Harassment & Professional Conduct",
+      "category": "hr",
+      "required_roles": [
+        "all"
+      ],
+      "certificate_eligible": false,
+      "estimated_minutes": 30,
+      "description": "Harassment prevention, reporting procedures, and conduct expectations.",
+      "topics": [
+        "hr",
+        "conduct",
+        "workplace"
+      ],
+      "requires_test": false,
+      "certificate_type": null
+    },
+    {
+      "course_id": "cdl_prep",
+      "title": "CDL Preparation",
+      "category": "career",
+      "required_roles": [
+        "driver"
+      ],
+      "certificate_eligible": true,
+      "estimated_minutes": 120,
+      "description": "CDL knowledge prep including pre-trip inspection, vehicle systems, and safety rules.",
+      "topics": [
+        "cdl",
+        "driving",
+        "pre_trip",
+        "regulations",
+        "safety"
+      ],
+      "requires_test": true,
+      "certificate_type": "cdl_prep"
+    } 
+  ]
+} 
+

@@ -1,0 +1,184 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 23% 6%;
+    --foreground: 48 96% 96%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 48 96% 96%;
+
+    --popover: 220 18% 10%;
+    --popover-foreground: 48 96% 96%;
+
+    --primary: 42 100% 55%;
+    --primary-foreground: 222 84% 5%;
+
+    --secondary: 220 14% 16%;
+    --secondary-foreground: 48 96% 96%;
+
+    --muted: 220 14% 16%;
+    --muted-foreground: 220 10% 70%;
+
+    --accent: 42 100% 55%;
+    --accent-foreground: 222 84% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 18% 24%;
+    --input: 220 18% 24%;
+    --ring: 42 100% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 18% 8%;
+    --sidebar-foreground: 48 96% 96%;
+    --sidebar-primary: 42 100% 55%;
+    --sidebar-primary-foreground: 222 84% 5%;
+    --sidebar-accent: 220 18% 20%;
+    --sidebar-accent-foreground: 48 96% 96%;
+    --sidebar-border: 220 18% 24%;
+    --sidebar-ring: 42 100% 55%;
+  }
+
+  .dark {
+    --background: 220 23% 6%;
+    --foreground: 48 96% 96%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 48 96% 96%;
+
+    --popover: 220 18% 10%;
+    --popover-foreground: 48 96% 96%;
+
+    --primary: 42 100% 55%;
+    --primary-foreground: 222 84% 5%;
+
+    --secondary: 220 14% 16%;
+    --secondary-foreground: 48 96% 96%;
+
+    --muted: 220 14% 16%;
+    --muted-foreground: 220 10% 70%;
+
+    --accent: 42 100% 55%;
+    --accent-foreground: 222 84% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 18% 24%;
+    --input: 220 18% 24%;
+    --ring: 42 100% 55%;
+
+    --sidebar-background: 220 18% 8%;
+    --sidebar-foreground: 48 96% 96%;
+    --sidebar-primary: 42 100% 55%;
+    --sidebar-primary-foreground: 222 84% 5%;
+    --sidebar-accent: 220 18% 20%;
+    --sidebar-accent-foreground: 48 96% 96%;
+    --sidebar-border: 220 18% 24%;
+    --sidebar-ring: 42 100% 55%;
+  }
+}
+
+@layer base {
+  html {
+    font-size: 17px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground font-sans antialiased;
+    background-color: #050505;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(255, 179, 0, 0.05), transparent 25%),
+      radial-gradient(circle at 80% 0%, rgba(255, 179, 0, 0.04), transparent 22%),
+      linear-gradient(120deg, rgba(255, 179, 0, 0.05), transparent 45%),
+      linear-gradient(180deg, #050505 0%, #090909 40%, #050505 100%);
+    color: #f8fafc;
+  }
+
+  pre, code {
+    @apply font-mono;
+  }
+}
+
+.glass-surface {
+  @apply bg-wz_glass border border-wz_border backdrop-blur-md shadow-glow;
+}
+
+.glass-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background-clip: padding-box;
+}
+
+.glass-card-beam {
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(255, 204, 64, 0.16), transparent 28%),
+    radial-gradient(circle at 80% 2%, rgba(255, 255, 255, 0.08), transparent 20%);
+}
+
+.glass-parallax-card {
+  will-change: transform;
+  transition: transform 0.28s ease-out;
+}
+
+.glass-click-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 223, 88, 0.28), transparent 24%),
+    radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.16), transparent 18%);
+  opacity: 0.95;
+  animation: click-glow 0.32s ease-out forwards;
+}
+
+@keyframes click-glow {
+  from {
+    opacity: 0.95;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+
+.markdown-preview {
+  @apply prose max-w-none prose-blue dark:prose-invert;
+}
+
+.markdown-preview pre {
+  @apply bg-secondary p-4 rounded-md overflow-x-auto;
+}
+
+.markdown-preview code {
+  @apply text-sm font-mono text-primary;
+}
+
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3,
+.markdown-preview h4,
+.markdown-preview h5,
+.markdown-preview h6 {
+  @apply font-sans font-semibold text-foreground;
+}
+
+.markdown-preview ul,
+.markdown-preview ol {
+  @apply my-4 ml-6;
+}

@@ -1,0 +1,210 @@
+﻿Job Safety Analysis
+ 
+
+
+
+
+JOB INFORMATION
+
+
+Date:*(MM/DD/YYYY)
+
+
+ 
+Start Time:*
+
+
+End Time:*
+
+
+Client:*
+
+
+Client Contact:*
+
+
+Client Contact Number:*
+### ### ###                     Co. Competent Person:*
+First Name, Last Name
+Job Name:*
+
+
+Job Site Address:*
+Street line 1:
+Street line 2:
+City
+ 
+State/Province
+ 
+Zipcode
+Landmarks or Intersections:*
+
+
+Speed Limit:*
+ 
+Type Of Roadway*
+ One Way Road
+ Two Way Road
+ Three way Intersection
+ Four Way Intersection
+ Multilane Highway
+ Limited Access Highway
+ Paved Unpainted Road
+ Gravel Road
+ Dirt Road
+ Private Road
+Others. Please explain
+
+
+Traffic Volume:*
+ Light
+ Medium
+ Heavy
+Obstructions:*
+
+
+Weather Conditions:*
+ Light Rain
+ Heavy Rain
+ Foggy
+ Windy
+ Clear Sky
+ Partly Cloudy
+ Overcast
+ Thunder/Lightning
+ Snow
+ Ice
+ Smog
+Others. Please explain
+
+
+Shoulder Conditions:*
+ No Shoulder
+ Narrow Shoulder
+ Adequate Shoulder
+ Guardrail
+ Debris on Shoulder
+ Sharp Drop Off
+ Others. Please explain
+
+
+EMERGENCY PROCEDURES
+
+
+Designated Co. Competent Person:*
+First Name, Last Name
+Are 911 systems functional with cell phone use?*
+
+
+Local Medical Clinic:*
+
+
+Medical Clinic Contact Number:*
+### ### ####
+Is First Aid Kit on site and fully stocked? 
+
+
+ Is Fire extinguisher on site, fully charged, and appropriate for potential fire types?
+ 
+JOB/TASK FOR THE DAY
+
+
+Check Type Of Work Being Performed:*
+ Flagging
+ Flagging With Rumble Strips
+ Flagging With TMA
+ Shoulder Closure
+ Lane Closure
+ Slow Roll
+ Shop Work
+Others. Please explain
+
+
+Stationary or Mobile:*
+ Stationary
+ Mobile
+ 
+Others. Please explain
+Sidewalk Redirection:*
+ Yes
+ No
+JOBSITE EXPOSURES
+
+
+Hazard Identification: Number each hazard. Describe the mitigation in the Hazard Controls Measures section below. Items in this section relate to existing conditions or may be a result of site operations.
+
+
+
+
+Physical Hazards:*
+ Backing Equipment
+ Electrical
+ Falls from Elevation (Truck Bed)
+ Moving Equipment
+ Traffic Volume
+Others. Please explain
+Health Hazards*
+ Biological (Animal, Avian, Insect)
+ Chemical Exposure
+ Cold Stress
+ Heat Stress (CA __ > 80° __ > 95°)
+ High Noise (> 85 dB)
+ Lifting Over 50 lbs.
+Others. Please explain
+Environmental Hazards*
+ Elevation / Site Terrain
+ Fire Hazards/ Hot work
+ Nighttime Work/ Visibility
+ Road Surface/ Grade/ Visibility
+ Silica/ Dust
+ Weather
+Others. Please explain
+HAZARD CONTROL MEASURES
+
+
+Daily Toolbox Talk Subject:*
+
+
+Inspections Performed:*
+ Arrow board(s)
+ Equipment
+ Housekeeping
+ Load Securement
+ Cones/Barrels
+ Message Board(s)
+ Rumble strips
+ Radios (Charged)
+ Signs (Legible, Reflectivity)
+ Stands
+ Tools (Grounded/Guards)
+ Truck(s)
+ TMA(s)
+ your choice here.
+Others. Please explain
+PPE Required:*
+ Class 3 Vest
+ Class E Pants
+ Gators
+ Whistle
+ Gloves
+ Hard Hat
+ Halo Hard Hat Light
+ Safety Glasses
+ Ear Muffs (> 110 dB)
+ Ear Plugs (> 85 dB)
+ Respiratory
+ Safety Goggles
+ Shade (Flagger Joe)
+ Face Shield
+ Fall Protection
+ Safety Toe Boots
+Others. Please explain
+ADDITIONAL COMMENTS
+
+
+
+
+By signing below, I hereby acknowledge that I have attended the Job Hazard Assessment (JHA) meeting referenced on this document. Furthermore, I am stating the information presented was discussed and explained to my understanding. If for ANY reason there is an issue that arises during this task, I confirm my responsibility of using- Stop Work Authority to ensure all safety hazards and concerns are addressed completely.*
+
+
+Click to sign

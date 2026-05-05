@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Messaging Options</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    :root {
+      --bg: #050505;
+      --card: rgba(255, 255, 255, 0.04);
+      --text: #f8fafc;
+      --accent: #ffb300;
+      --muted: #f9e3b2;
+      --border: rgba(255, 179, 0, 0.28);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 179, 0, 0.08), transparent 32%),
+        radial-gradient(circle at 80% 0%, rgba(255, 179, 0, 0.06), transparent 26%),
+        linear-gradient(120deg, rgba(255, 179, 0, 0.05), transparent 45%),
+        linear-gradient(180deg, #050505 0%, #0b0b0b 40%, #050505 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px 48px;
+      box-sizing: border-box;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      display: grid;
+      gap: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: clamp(22px, 3vw, 30px);
+      line-height: 1.25;
+    }
+
+    .lead {
+      margin: 10px 0 0;
+      color: rgba(249, 227, 178, 0.8);
+      font-size: 15px;
+      max-width: 780px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 179, 0, 0.08), transparent 40%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), 0 0 22px rgba(255, 179, 0, 0.16);
+      backdrop-filter: blur(8px);
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h2 span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.18);
+    }
+
+    .card p {
+      margin: 0 0 12px;
+      color: rgba(249, 227, 178, 0.82);
+      font-size: 14px;
+    }
+
+    .minnit-container {
+      width: 100%;
+    }
+
+    .minnit-chat-sembed {
+      display: block !important;
+    }
+
+    .powered-by-minnit {
+      margin: 8px 0 0;
+      text-align: right;
+      font-size: 12px;
+      color: rgba(249, 227, 178, 0.75);
+    }
+
+    .powered-by-minnit a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .embed-frame {
+      width: 100%;
+      min-height: 340px;
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 14px;
+      }
+    }
+  </style>
+  <script src="https://minnit.chat/js/embed.js?c=1758971289" defer></script>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Add your organizations preferred communication options on this page. We recommend these options for a quality experience.</h1>
+      <p class="lead">Offer both real-time chat and a quick WhatsApp handoff so visitors can reach your team however they prefer.</p>
+    </header>
+
+    <section class="cards">
+      <article class="card">
+        <h2><span aria-hidden="true"></span> Group Chat</h2>
+        <p>Responsive embed powered by Minnit Chat for persistent, multi-user conversations.</p>
+        <div class="minnit-container">
+          <span
+            class="minnit-chat-sembed"
+            data-chatname="https://organizations.minnit.chat/766165092677830/c/Main?embed"
+            data-style="width:100%; height:520px; max-height:82vh; border-radius:12px; background:#050505;"
+            data-version="1.55"
+          >
+            Chat
+          </span>
+          <p class="powered-by-minnit">
+            <a href="https://minnit.chat" target="_blank" rel="noreferrer">Add a group chat to your website with Minnit Chat</a>
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2><span aria-hidden="true"></span> WhatsApp Handoff</h2>
+        <p>Let visitors jump into WhatsApp for quick, familiar messaging with your team.</p>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.min.js"></script>
+        <div style="display:flex; justify-content:center; border:1px solid rgba(255,179,0,0.28); border-radius:12px; overflow:hidden; background:#0a0a0a; box-shadow: inset 0 0 30px rgba(0,0,0,0.3);">
+          <div style="width:100%; max-width:520px;">
+            <iframe
+              id="whatsappEmbed"
+              class="embed-frame"
+              title="WhatsApp Message Embed"
+              src="https://6c87d8463a814b37a145f964deca9138.elf.site"
+              style="width:100%; height:360px; border:none; display:block; background:#000;"
+            ></iframe>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.iFrameResize) {
+        iFrameResize({ log: false, checkOrigin: false }, "#whatsappEmbed");
+      }
+    });
+  </script>
+</body>
+</html>

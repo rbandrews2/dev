@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGQ08QTY7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YGQ08QTY7Y');
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work Zone OS - Operating System for Deskless Workers</title>
+    <meta name="description" content="Work Zone OS is the complete operating system for deskless road crews. Manage work orders, forms, time clock, schedules, maps, messaging, training, and field performance from one PWA." />
+    <link rel="icon" type="image/png" href="/atlas-assistant.png" />
+    <link rel="apple-touch-icon" href="/atlas-assistant.png" />
+
+    <meta property="og:title" content="Work Zone OS - Operating System for Deskless Workers" />
+    <meta property="og:description" content="The complete operating system for deskless road crews. Manage work orders, forms, time clock, schedules, maps, messaging, training, and field performance from one PWA." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/atlas-assistant.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Work Zone OS - Operating System for Deskless Workers" />
+    <meta name="twitter:image" content="/atlas-assistant.png" />
+    <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000000">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18137982127">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18137982127');
+</script>
+</head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  <script>
+  window.__wzosInstallPrompt = null;
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    window.__wzosInstallPrompt = event;
+    window.dispatchEvent(new CustomEvent('wzos-beforeinstallprompt', { detail: event }));
+  });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+        registration.addEventListener('updatefound', () => {
+          const worker = registration.installing;
+          if (!worker) return;
+          worker.addEventListener('statechange', () => {
+            if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+              window.dispatchEvent(new CustomEvent('wzos-sw-update', { detail: registration }));
+            }
+          });
+        });
+      }).catch(err => {
+        console.error('SW registration failed', err);
+      });
+    });
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!window.__wzosRefreshing) {
+        window.__wzosRefreshing = true;
+        window.location.reload();
+      }
+    });
+  }
+</script>
+</body>
+</html>

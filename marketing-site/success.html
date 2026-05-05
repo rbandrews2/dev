@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGQ08QTY7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YGQ08QTY7Y');
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purchase Confirmed | Work Zone OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18137982127">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18137982127');
+</script>
+  </head>
+
+  <body data-page="success">
+    <div class="site-shell legal-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">WZ</span>
+          <span class="brand-copy">
+            <strong>Work Zone OS</strong>
+            <small>Purchase Confirmed</small>
+          </span>
+        </a>
+      </header>
+
+      <main class="legal-main">
+        <article class="legal-card status-card">
+          <span class="eyebrow">Stripe Checkout Success</span>
+          <h1>Your purchase is being verified.</h1>
+          <p id="purchase-status-message">
+            Please wait while Work Zone OS confirms your checkout with Supabase and Stripe.
+          </p>
+          <div class="activation-code-card" id="activation-code-card" hidden>
+            <span>Access / activation code</span>
+            <strong id="activation-code-value"></strong>
+            <button class="button button-tertiary" type="button" id="copy-activation-code">Copy code</button>
+          </div>
+          <div class="success-links" id="success-links" hidden>
+            <a class="button button-primary" href="https://app.superiorllc.org/organization?mode=create">Continue to app.superiorllc.org</a>
+            <a class="button button-secondary" href="mailto:customerservice@superiorllc.org">Need setup help?</a>
+            <a class="button button-tertiary" href="https://workzoneos.netlify.app">Use Netlify fallback</a>
+          </div>
+        </article>
+      </main>
+
+      <script src="./config.js"></script>
+      <script src="./app.js"></script>
+    </div>
+  </body>
+</html>

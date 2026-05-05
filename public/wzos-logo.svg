@@ -1,0 +1,20 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="64" fill="#1a1a1a"/>
+  
+  <!-- Top diagonal stripes -->
+  <path d="M64 64 L192 64 L128 128 L64 128 Z" fill="#FDB913"/>
+  <path d="M128 64 L256 64 L192 128 L128 128 Z" fill="#1a1a1a"/>
+  <path d="M192 64 L320 64 L256 128 L192 128 Z" fill="#FDB913"/>
+  <path d="M256 64 L384 64 L320 128 L256 128 Z" fill="#1a1a1a"/>
+  <path d="M320 64 L448 64 L384 128 L320 128 Z" fill="#FDB913"/>
+  
+  <!-- WZOS Text -->
+  <text x="256" y="320" font-family="Arial, sans-serif" font-size="180" font-weight="900" fill="white" text-anchor="middle">WZOS</text>
+  
+  <!-- Bottom diagonal stripes -->
+  <path d="M64 384 L192 384 L128 448 L64 448 Z" fill="#FDB913"/>
+  <path d="M128 384 L256 384 L192 448 L128 448 Z" fill="#1a1a1a"/>
+  <path d="M192 384 L320 384 L256 448 L192 448 Z" fill="#FDB913"/>
+  <path d="M256 384 L384 384 L320 448 L256 448 Z" fill="#1a1a1a"/>
+  <path d="M320 384 L448 384 L384 448 L320 448 Z" fill="#FDB913"/>
+</svg>
