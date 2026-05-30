@@ -8,7 +8,7 @@ export function AuthGuard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-amber-100">
+      <div className="min-h-screen flex items-center justify-center bg-black text-orange-100">
         Loading…
       </div>
     );
@@ -38,7 +38,7 @@ export function RequireAdminPage({ children }: { children: ReactNode }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-amber-100">
+      <div className="min-h-screen flex items-center justify-center bg-black text-orange-100">
         Loading…
       </div>
     );

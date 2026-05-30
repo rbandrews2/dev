@@ -8,17 +8,17 @@ import { security } from "@/lib/security";
  * - Do not hardcode URLs/keys in repo.
  * - Set these in your .env / hosting provider:
  *   VITE_SUPABASE_URL=
- *   VITE_SUPABASE_PUBLISHABLE_KEYS=
+ *   VITE_SUPABASE_ANON_KEY= or VITE_SUPABASE_PUBLISHABLE_KEYS=
  */
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEYS;
+const supabaseKey =
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEYS ||
+  import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseKey) {
-  // Fail fast: missing configuration should be obvious in dev/staging and never silently fall back.
-  throw new Error(
-    "Missing Supabase env vars. Set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEYS in your environment."
-  );
-}
+export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseKey);
+
+const resolvedSupabaseUrl = supabaseUrl || "https://not-configured.supabase.co";
+const resolvedSupabaseKey = supabaseKey || "not-configured";
 
 const toHeadersRecord = (headers?: HeadersInit): Record<string, string> => {
   if (!headers) return {};
@@ -30,6 +30,12 @@ const toHeadersRecord = (headers?: HeadersInit): Record<string, string> => {
 };
 
 const securedFetch: typeof fetch = async (input, init = {}) => {
+  if (!isSupabaseConfigured) {
+    throw new Error(
+      "Supabase environment variables are missing from the browser build. Restart Vite after setting VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY."
+    );
+  }
+
   const url =
     typeof input === "string"
       ? input
@@ -55,7 +61,7 @@ const securedFetch: typeof fetch = async (input, init = {}) => {
   return fetch(input as RequestInfo | URL, init as RequestInit);
 };
 
-export const supabase = createClient(supabaseUrl, supabaseKey, {
+export const supabase = createClient(resolvedSupabaseUrl, resolvedSupabaseKey, {
   global: {
     fetch: securedFetch,
   },

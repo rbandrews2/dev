@@ -7,83 +7,83 @@
 
 @layer base {
   :root {
-    --background: 220 23% 6%;
-    --foreground: 48 96% 96%;
+    --background: 24 18% 4%;
+    --foreground: 30 100% 97%;
 
-    --card: 220 18% 10%;
-    --card-foreground: 48 96% 96%;
+    --card: 24 12% 9%;
+    --card-foreground: 30 100% 97%;
 
-    --popover: 220 18% 10%;
-    --popover-foreground: 48 96% 96%;
+    --popover: 24 12% 9%;
+    --popover-foreground: 30 100% 97%;
 
-    --primary: 42 100% 55%;
-    --primary-foreground: 222 84% 5%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 24 24% 6%;
 
-    --secondary: 220 14% 16%;
-    --secondary-foreground: 48 96% 96%;
+    --secondary: 24 10% 15%;
+    --secondary-foreground: 30 100% 97%;
 
-    --muted: 220 14% 16%;
-    --muted-foreground: 220 10% 70%;
+    --muted: 24 10% 15%;
+    --muted-foreground: 30 12% 68%;
 
-    --accent: 42 100% 55%;
-    --accent-foreground: 222 84% 5%;
+    --accent: 32 95% 54%;
+    --accent-foreground: 24 24% 6%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 18% 24%;
-    --input: 220 18% 24%;
-    --ring: 42 100% 55%;
+    --border: 24 16% 22%;
+    --input: 24 16% 22%;
+    --ring: 24 95% 53%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 220 18% 8%;
-    --sidebar-foreground: 48 96% 96%;
-    --sidebar-primary: 42 100% 55%;
-    --sidebar-primary-foreground: 222 84% 5%;
-    --sidebar-accent: 220 18% 20%;
-    --sidebar-accent-foreground: 48 96% 96%;
-    --sidebar-border: 220 18% 24%;
-    --sidebar-ring: 42 100% 55%;
+    --sidebar-background: 24 18% 6%;
+    --sidebar-foreground: 30 100% 97%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 24 24% 6%;
+    --sidebar-accent: 24 12% 16%;
+    --sidebar-accent-foreground: 30 100% 97%;
+    --sidebar-border: 24 16% 22%;
+    --sidebar-ring: 24 95% 53%;
   }
 
   .dark {
-    --background: 220 23% 6%;
-    --foreground: 48 96% 96%;
+    --background: 24 18% 4%;
+    --foreground: 30 100% 97%;
 
-    --card: 220 18% 10%;
-    --card-foreground: 48 96% 96%;
+    --card: 24 12% 9%;
+    --card-foreground: 30 100% 97%;
 
-    --popover: 220 18% 10%;
-    --popover-foreground: 48 96% 96%;
+    --popover: 24 12% 9%;
+    --popover-foreground: 30 100% 97%;
 
-    --primary: 42 100% 55%;
-    --primary-foreground: 222 84% 5%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 24 24% 6%;
 
-    --secondary: 220 14% 16%;
-    --secondary-foreground: 48 96% 96%;
+    --secondary: 24 10% 15%;
+    --secondary-foreground: 30 100% 97%;
 
-    --muted: 220 14% 16%;
-    --muted-foreground: 220 10% 70%;
+    --muted: 24 10% 15%;
+    --muted-foreground: 30 12% 68%;
 
-    --accent: 42 100% 55%;
-    --accent-foreground: 222 84% 5%;
+    --accent: 32 95% 54%;
+    --accent-foreground: 24 24% 6%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 18% 24%;
-    --input: 220 18% 24%;
-    --ring: 42 100% 55%;
+    --border: 24 16% 22%;
+    --input: 24 16% 22%;
+    --ring: 24 95% 53%;
 
-    --sidebar-background: 220 18% 8%;
-    --sidebar-foreground: 48 96% 96%;
-    --sidebar-primary: 42 100% 55%;
-    --sidebar-primary-foreground: 222 84% 5%;
-    --sidebar-accent: 220 18% 20%;
-    --sidebar-accent-foreground: 48 96% 96%;
-    --sidebar-border: 220 18% 24%;
-    --sidebar-ring: 42 100% 55%;
+    --sidebar-background: 24 18% 6%;
+    --sidebar-foreground: 30 100% 97%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 24 24% 6%;
+    --sidebar-accent: 24 12% 16%;
+    --sidebar-accent-foreground: 30 100% 97%;
+    --sidebar-border: 24 16% 22%;
+    --sidebar-ring: 24 95% 53%;
   }
 }
 
@@ -98,12 +98,7 @@
 
   body {
     @apply text-foreground font-sans antialiased;
-    background-color: #050505;
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(255, 179, 0, 0.05), transparent 25%),
-      radial-gradient(circle at 80% 0%, rgba(255, 179, 0, 0.04), transparent 22%),
-      linear-gradient(120deg, rgba(255, 179, 0, 0.05), transparent 45%),
-      linear-gradient(180deg, #050505 0%, #090909 40%, #050505 100%);
+    background-color: #030303;
     color: #f8fafc;
   }
 
@@ -114,6 +109,69 @@
 
 .glass-surface {
   @apply bg-wz_glass border border-wz_border backdrop-blur-md shadow-glow;
+}
+
+.app-bg {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  background:
+    linear-gradient(145deg, rgba(0, 0, 0, 0.88), rgba(18, 12, 8, 0.82) 44%, rgba(0, 0, 0, 0.9)),
+    #000;
+}
+
+.app-bg::before {
+  content: "";
+  position: fixed;
+  inset: -18%;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(249, 115, 22, 0.18), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(234, 179, 8, 0.12), transparent 24%),
+    radial-gradient(circle at 60% 88%, rgba(249, 115, 22, 0.1), transparent 30%);
+  filter: blur(8px);
+}
+
+.app-bg::after {
+  content: "";
+  position: fixed;
+  inset: -6%;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.58;
+  background:
+    linear-gradient(115deg, transparent 0 20%, rgba(255, 255, 255, 0.14) 21%, transparent 28% 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.46)),
+    url("/wzos-enterprise-motion-bg.png");
+  background-size: 220% 220%, cover, min(162vw, 1960px);
+  background-position: 0% 50%, center, center 18%;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  animation: enterprise-layer-drift 22s ease-in-out infinite alternate;
+}
+
+.app-bg > .relative::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.14) 48%, rgba(0, 0, 0, 0.52)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.36));
+}
+
+@keyframes enterprise-layer-drift {
+  from {
+    transform: translate3d(-4%, -2%, 0) scale(1.03);
+    background-position: 0% 50%, center, center 16%;
+  }
+
+  to {
+    transform: translate3d(4%, 2%, 0) scale(1.09);
+    background-position: 100% 50%, center, center 24%;
+  }
 }
 
 .glass-card {

@@ -35,13 +35,13 @@ const STATUS_FILTERS: (IncidentStatus | "all")[] = ["all", "open", "under-review
 
 const severityBadgeClasses: Record<IncidentSeverity, string> = {
   minor: "bg-emerald-500/20 text-emerald-300 border-emerald-400/60",
-  moderate: "bg-amber-500/20 text-amber-300 border-amber-400/60",
+  moderate: "bg-orange-500/20 text-orange-300 border-orange-400/60",
   severe: "bg-red-500/20 text-red-300 border-red-400/60",
 };
 
 const statusBadgeClasses: Record<IncidentStatus, string> = {
   open: "bg-red-500/20 text-red-300 border-red-400/60",
-  "under-review": "bg-amber-500/20 text-amber-300 border-amber-400/60",
+  "under-review": "bg-orange-500/20 text-orange-300 border-orange-400/60",
   closed: "bg-emerald-500/20 text-emerald-300 border-emerald-400/60",
 };
 
@@ -464,7 +464,7 @@ const IncidentReportsPanel: React.FC = () => {
                       <Button
                         type="button"
                         variant="outline"
-                        className="border-amber-500/60 text-amber-300 hover:bg-amber-500/20 text-[11px] px-3"
+                        className="border-orange-500/60 text-orange-300 hover:bg-orange-500/20 text-[11px] px-3"
                         disabled={adminUpdatingId === i.id}
                         onClick={() =>
                           updateIncidentStatus(

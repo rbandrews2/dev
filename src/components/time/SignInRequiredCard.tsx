@@ -13,8 +13,8 @@ export default function SignInRequiredCard() {
   }
 
   return (
-    <div className="rounded-2xl border border-amber-400/30 bg-black/60 p-6 text-center space-y-4">
-      <div className="mx-auto h-12 w-12 rounded-xl border border-amber-400/40 flex items-center justify-center text-amber-300">
+    <div className="rounded-2xl border border-orange-400/30 bg-black/60 p-6 text-center space-y-4">
+      <div className="mx-auto h-12 w-12 rounded-xl border border-orange-400/40 flex items-center justify-center text-orange-300">
         <LogIn className="h-5 w-5" />
       </div>
 
@@ -22,7 +22,7 @@ export default function SignInRequiredCard() {
         Sign in required
       </h2>
 
-      <p className="text-sm text-amber-100/75">
+      <p className="text-sm text-orange-100/75">
         You must be signed in to clock in or out.
       </p>
 

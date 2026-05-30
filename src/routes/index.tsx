@@ -83,7 +83,7 @@ type AppRoute = {
 
 function RouteFallback() {
   return (
-    <div className="min-h-[40vh] flex items-center justify-center text-sm text-amber-100/80">
+    <div className="min-h-[40vh] flex items-center justify-center text-sm text-orange-100/80">
       Loading...
     </div>
   );
@@ -222,7 +222,7 @@ function AssistantRouteTracker() {
 
 export default function AppRoutes() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
       <AssistantRouteTracker />
       <OrgGateRedirect />
       <Routes>

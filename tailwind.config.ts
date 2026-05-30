@@ -21,8 +21,8 @@ export default {
     },
     extend: {
       boxShadow: {
-        glow: '0 0 20px rgba(255,179,0,0.18)',
-        'glow-strong': '0 0 30px rgba(255,179,0,0.28)',
+        glow: '0 0 20px rgba(249,115,22,0.2)',
+        'glow-strong': '0 0 30px rgba(249,115,22,0.32)',
         glass: '0 12px 50px rgba(0,0,0,0.45)',
       },
       colors: {
@@ -69,13 +69,13 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))'
         },
-        wz_yellow: '#FFB300',
-        wz_yellow_glow: '#FFC94D',
-        wz_black: '#050505',
+        wz_yellow: '#F97316',
+        wz_yellow_glow: '#FDBA74',
+        wz_black: '#030303',
         wz_glass: 'rgba(255, 255, 255, 0.04)',
         wz_border: 'rgba(255, 255, 255, 0.12)',
-        wz_glow: 'rgba(255, 179, 0, 0.16)',
-        wz_muted: '#0f0f0f'
+        wz_glow: 'rgba(249, 115, 22, 0.16)',
+        wz_muted: '#11100f'
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'monospace'],

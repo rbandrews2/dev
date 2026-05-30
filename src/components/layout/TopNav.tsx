@@ -27,7 +27,7 @@ export default function TopNav({
         fixed top-0 left-0 z-40
         bg-black/70 
         backdrop-blur-md 
-        border-b border-yellow-400/30
+        border-b border-orange-400/30
         shadow-[0_2px_10px_rgba(255,200,0,0.15)]
       "
     >
@@ -37,7 +37,7 @@ export default function TopNav({
           {showMenuToggle && (
             <button
               onClick={onMenuToggle}
-              className="md:hidden text-yellow-300 hover:text-yellow-400 transition"
+              className="md:hidden text-orange-300 hover:text-orange-400 transition"
               aria-label="Toggle navigation"
             >
               <Menu size={26} />
@@ -47,8 +47,8 @@ export default function TopNav({
           <Link to="/" className="flex items-center gap-3 min-w-0">
             <img src="/wzos-logo.svg" alt="Work Zone OS logo" className="h-8 w-8" />
             <div className="leading-tight min-w-0">
-              <p className="text-lg font-semibold text-yellow-200 truncate">Work Zone OS</p>
-              {subtitle && <p className="text-[11px] text-amber-100/75 truncate">{subtitle}</p>}
+              <p className="text-lg font-semibold text-orange-200 truncate">Work Zone OS</p>
+              {subtitle && <p className="text-[11px] text-orange-100/75 truncate">{subtitle}</p>}
             </div>
           </Link>
         </div>
@@ -57,7 +57,7 @@ export default function TopNav({
         <div className="flex items-center gap-4">
           <Link
             to="/organization"
-            className="inline-flex text-sm font-semibold text-amber-200 hover:text-white transition"
+            className="inline-flex text-sm font-semibold text-orange-200 hover:text-white transition"
           >
             Organization
           </Link>
@@ -65,12 +65,12 @@ export default function TopNav({
           <button
             type="button"
             onClick={user ? signOut : handleSignInClick}
-            className="flex items-center gap-2 text-yellow-300 hover:text-yellow-200 transition focus:outline-none"
+            className="flex items-center gap-2 text-orange-300 hover:text-orange-200 transition focus:outline-none"
             aria-label={user ? "Sign out" : "Open sign in"}
           >
             <User size={20} />
             <div className="hidden md:flex flex-col items-start leading-tight">
-              <span className="text-[11px] uppercase tracking-wide text-amber-100/80">
+              <span className="text-[11px] uppercase tracking-wide text-orange-100/80">
                 {user ? "Signed in" : "Guest"}
               </span>
               <span className="text-sm font-semibold">
@@ -85,7 +85,7 @@ export default function TopNav({
       </div>
 
       {/* Glowing underline bar */}
-      <div className="w-full h-[2px] bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-400 shadow-[0_0_8px_rgba(255,180,0,0.7)]" />
+      <div className="w-full h-[2px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-400 shadow-[0_0_8px_rgba(255,180,0,0.7)]" />
     </header>
   );
 }

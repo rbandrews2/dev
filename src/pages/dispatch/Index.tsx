@@ -146,7 +146,7 @@ export default function DispatchIndex() {
         </div>
 
         {!canAdmin && (
-          <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm text-amber-100">
+          <div className="rounded-lg border border-orange-500/40 bg-orange-500/10 p-3 text-sm text-orange-100">
             Dispatch creation is limited to admins and owners. You can view existing jobs below.
           </div>
         )}

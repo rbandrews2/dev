@@ -24,12 +24,12 @@ export default function TimeClockPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="h-11 w-11 rounded-2xl border border-amber-400/40 bg-black/60 flex items-center justify-center text-amber-300">
+        <div className="h-11 w-11 rounded-2xl border border-orange-400/40 bg-black/60 flex items-center justify-center text-orange-300">
           <Clock className="h-5 w-5" />
         </div>
         <div>
           <h1 className="text-3xl font-bold text-white">Time Clock</h1>
-          <p className="text-sm text-amber-100/75">
+          <p className="text-sm text-orange-100/75">
             Secure crew time tracking
           </p>
         </div>

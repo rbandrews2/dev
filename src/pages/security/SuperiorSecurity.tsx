@@ -33,7 +33,7 @@ type TestResult = {
 };
 
 const cardBase =
-  "rounded-2xl border border-amber-500/25 bg-gradient-to-br from-black/70 via-zinc-950 to-black shadow-[0_0_26px_rgba(0,0,0,0.45)]";
+  "rounded-2xl border border-orange-500/25 bg-gradient-to-br from-black/70 via-zinc-950 to-black shadow-[0_0_26px_rgba(0,0,0,0.45)]";
 
 const StatCard = ({
   title,
@@ -48,7 +48,7 @@ const StatCard = ({
 }) => (
   <div className={`${cardBase} p-5 flex items-center justify-between`}>
     <div>
-      <p className="text-xs uppercase tracking-[0.2em] text-amber-200/70">{title}</p>
+      <p className="text-xs uppercase tracking-[0.2em] text-orange-200/70">{title}</p>
       <p className="text-3xl font-semibold text-white mt-1">{value}</p>
     </div>
     <div className={`h-12 w-12 rounded-xl flex items-center justify-center ${accent}`}>{icon}</div>
@@ -70,7 +70,7 @@ const SectionCard = ({
     className={`${cardBase} p-6 ${tone === "success" ? "border-green-500/30 bg-gradient-to-br from-green-900/10 via-black to-black" : ""}`}
   >
     <div className="flex items-center gap-3 mb-4">
-      <div className="h-10 w-10 rounded-xl bg-amber-500/15 border border-amber-400/40 flex items-center justify-center text-amber-200">
+      <div className="h-10 w-10 rounded-xl bg-orange-500/15 border border-orange-400/40 flex items-center justify-center text-orange-200">
         {icon}
       </div>
       <h3 className="text-xl font-semibold text-white">{title}</h3>
@@ -82,7 +82,7 @@ const SectionCard = ({
 const badgeStyles = {
   high: "bg-red-900/40 text-red-200 border border-red-500/30",
   medium: "bg-orange-900/30 text-orange-200 border border-orange-400/30",
-  low: "bg-amber-500/15 text-amber-100 border border-amber-400/30",
+  low: "bg-orange-500/15 text-orange-100 border border-orange-400/30",
 };
 
 export default function SuperiorSecurityPage() {
@@ -199,14 +199,14 @@ export default function SuperiorSecurityPage() {
   };
 
   return (
-    <div className="space-y-8 text-amber-50">
+    <div className="space-y-8 text-orange-50">
       <div
-        className={`${cardBase} p-6 border-amber-400/40 bg-gradient-to-r from-amber-500/10 via-black to-black flex flex-col gap-4`}
+        className={`${cardBase} p-6 border-orange-400/40 bg-gradient-to-r from-orange-500/10 via-black to-black flex flex-col gap-4`}
         style={{ boxShadow: `${wzosTheme.glowShadow}, 0 30px 60px rgba(0,0,0,0.45)` }}
       >
         <div className="flex items-center gap-4 flex-wrap justify-between">
           <div className="flex items-center gap-4">
-            <div className="h-14 w-14 rounded-2xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-100 shadow-lg shadow-amber-500/20 overflow-hidden">
+            <div className="h-14 w-14 rounded-2xl bg-orange-500/20 border border-orange-400/50 flex items-center justify-center text-orange-100 shadow-lg shadow-orange-500/20 overflow-hidden">
               <img
                 src="/superior-security-shield.png"
                 alt="Superior Security Software"
@@ -215,9 +215,9 @@ export default function SuperiorSecurityPage() {
               />
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-amber-300/80">Security Layer</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-orange-300/80">Security Layer</p>
               <h1 className="text-3xl font-bold text-white leading-tight">Superior Security Dashboard</h1>
-              <p className="text-sm text-amber-100/80">
+              <p className="text-sm text-orange-100/80">
                 Anti-malware, anti-phishing, and anti-hacker controls tuned for Work Zone OS.
               </p>
             </div>
@@ -227,7 +227,7 @@ export default function SuperiorSecurityPage() {
             <span className="text-sm font-medium">Live protection</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-xs uppercase tracking-[0.2em] text-amber-200/70">Status</span>
+            <span className="text-xs uppercase tracking-[0.2em] text-orange-200/70">Status</span>
             <div className="flex items-center gap-2">
               <span
                 className={`h-3 w-3 rounded-full shadow-[0_0_12px_rgba(0,0,0,0.6)] ${
@@ -237,7 +237,7 @@ export default function SuperiorSecurityPage() {
               />
               <span
                 className={`h-3 w-3 rounded-full shadow-[0_0_12px_rgba(0,0,0,0.6)] ${
-                  threatLevel === "yellow" ? "bg-amber-400 shadow-[0_0_16px_rgba(251,191,36,0.9)]" : "bg-amber-900/40"
+                  threatLevel === "yellow" ? "bg-orange-400 shadow-[0_0_16px_rgba(251,191,36,0.9)]" : "bg-orange-900/40"
                 }`}
                 title="Warning"
               />
@@ -255,8 +255,8 @@ export default function SuperiorSecurityPage() {
           <StatCard
             title="Events Monitored"
             value={stats.total}
-            accent="bg-amber-500/15"
-            icon={<Shield className="h-6 w-6 text-amber-200" />}
+            accent="bg-orange-500/15"
+            icon={<Shield className="h-6 w-6 text-orange-200" />}
           />
           <StatCard
             title="High Severity"
@@ -273,21 +273,21 @@ export default function SuperiorSecurityPage() {
           <StatCard
             title="Low Severity"
             value={stats.low}
-            accent="bg-amber-500/15"
-            icon={<CheckCircle2 className="h-6 w-6 text-amber-100" />}
+            accent="bg-orange-500/15"
+            icon={<CheckCircle2 className="h-6 w-6 text-orange-100" />}
           />
         </div>
       </div>
 
-      <div className="flex gap-2 bg-black/50 border border-amber-500/20 rounded-xl p-1 w-full overflow-x-auto">
+      <div className="flex gap-2 bg-black/50 border border-orange-500/20 rounded-xl p-1 w-full overflow-x-auto">
         {(["overview", "testing", "logs"] as Tab[]).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`flex-1 min-w-[140px] px-4 py-2 rounded-lg text-sm font-medium transition ${
               activeTab === tab
-                ? "bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-[0_0_24px_rgba(250,204,21,0.35)]"
-                : "text-amber-100/80 hover:text-amber-50 hover:bg-amber-500/10"
+                ? "bg-gradient-to-r from-orange-500 to-orange-600 text-black shadow-[0_0_24px_rgba(249,115,22,0.35)]"
+                : "text-orange-100/80 hover:text-orange-50 hover:bg-orange-500/10"
             }`}
           >
             {tab === "overview" && "Coverage"}
@@ -307,8 +307,8 @@ export default function SuperiorSecurityPage() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-amber-100/80">Trusted domain whitelist</p>
-                  <p className="text-xs text-amber-100/70">*.supabase.co / supabase.com / supabase.io</p>
+                  <p className="text-sm text-orange-100/80">Trusted domain whitelist</p>
+                  <p className="text-xs text-orange-100/70">*.supabase.co / supabase.com / supabase.io</p>
                 </div>
                 <span className="text-sm font-semibold text-emerald-200">Active</span>
               </div>
@@ -316,21 +316,21 @@ export default function SuperiorSecurityPage() {
                 {["Auth API", "Database", "Storage", "Realtime"].map((service) => (
                   <div
                     key={service}
-                    className="rounded-lg border border-amber-500/20 bg-black/60 px-3 py-2 flex items-center justify-between"
+                    className="rounded-lg border border-orange-500/20 bg-black/60 px-3 py-2 flex items-center justify-between"
                   >
-                    <span className="text-amber-50">{service}</span>
+                    <span className="text-orange-50">{service}</span>
                     <span className="text-emerald-200 text-xs">Secured</span>
                   </div>
                 ))}
               </div>
-              <div className="rounded-lg border border-amber-500/25 bg-amber-500/5 px-3 py-2 text-xs text-amber-100/80">
+              <div className="rounded-lg border border-orange-500/25 bg-orange-500/5 px-3 py-2 text-xs text-orange-100/80">
                 Supabase traffic bypasses throttling while headers and origins stay validated.
               </div>
             </div>
           </SectionCard>
 
           <SectionCard title="Security Controls" icon={<Shield className="h-6 w-6" />}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-amber-100/80">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-orange-100/80">
               {[
                 "XSS sanitation on all inputs",
                 "SQL injection pattern filtering",
@@ -343,7 +343,7 @@ export default function SuperiorSecurityPage() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-2 rounded-lg border border-amber-500/15 bg-black/50 px-3 py-2"
+                  className="flex items-center gap-2 rounded-lg border border-orange-500/15 bg-black/50 px-3 py-2"
                 >
                   <CheckCircle2 className="h-4 w-4 text-emerald-300" />
                   <span>{item}</span>
@@ -355,17 +355,17 @@ export default function SuperiorSecurityPage() {
           <SectionCard title="Recent Events" icon={<Radar className="h-6 w-6" />}>
             <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1">
               {securityLog.length === 0 && (
-                <p className="text-amber-100/60 text-sm text-center py-6">No security events yet.</p>
+                <p className="text-orange-100/60 text-sm text-center py-6">No security events yet.</p>
               )}
               {securityLog.slice(0, 8).map((event) => (
                 <div
                   key={`${event.type}-${event.timestamp}`}
-                  className="rounded-lg border border-amber-500/15 bg-black/60 px-3 py-2"
+                  className="rounded-lg border border-orange-500/15 bg-black/60 px-3 py-2"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="text-sm font-semibold text-white">{event.type.replace(/_/g, " ")}</p>
-                      <p className="text-xs text-amber-100/70">
+                      <p className="text-xs text-orange-100/70">
                         {new Date(event.timestamp).toLocaleTimeString()}
                       </p>
                     </div>
@@ -373,7 +373,7 @@ export default function SuperiorSecurityPage() {
                       {event.severity}
                     </span>
                   </div>
-                  <p className="text-xs text-amber-100/70 mt-1">
+                  <p className="text-xs text-orange-100/70 mt-1">
                     {JSON.stringify(event.details).slice(0, 80)}
                   </p>
                 </div>
@@ -392,12 +392,12 @@ export default function SuperiorSecurityPage() {
                 value={testInput}
                 onChange={(e) => setTestInput(e.target.value)}
                 placeholder="Try: <script>alert('xss')</script>"
-                className="w-full rounded-xl border border-amber-500/25 bg-black/60 px-4 py-2 text-white placeholder:text-amber-100/50"
+                className="w-full rounded-xl border border-orange-500/25 bg-black/60 px-4 py-2 text-white placeholder:text-orange-100/50"
               />
               <button
                 type="button"
                 onClick={() => runSecurityTest("xss")}
-                className="w-full rounded-xl bg-amber-500 text-black font-semibold py-2 hover:bg-amber-400 transition"
+                className="w-full rounded-xl bg-orange-500 text-black font-semibold py-2 hover:bg-orange-400 transition"
               >
                 Test Sanitization
               </button>
@@ -412,12 +412,12 @@ export default function SuperiorSecurityPage() {
                   value={testPassword}
                   onChange={(e) => setTestPassword(e.target.value)}
                   placeholder="Minimum 12 characters"
-                  className="w-full rounded-xl border border-amber-500/25 bg-black/60 px-4 py-2 text-white placeholder:text-amber-100/50"
+                  className="w-full rounded-xl border border-orange-500/25 bg-black/60 px-4 py-2 text-white placeholder:text-orange-100/50"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-amber-100/70"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-orange-100/70"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -425,7 +425,7 @@ export default function SuperiorSecurityPage() {
               <button
                 type="button"
                 onClick={() => runSecurityTest("password")}
-                className="w-full rounded-xl bg-amber-500 text-black font-semibold py-2 hover:bg-amber-400 transition"
+                className="w-full rounded-xl bg-orange-500 text-black font-semibold py-2 hover:bg-orange-400 transition"
               >
                 Check Policy
               </button>
@@ -439,12 +439,12 @@ export default function SuperiorSecurityPage() {
                 value={sqlQuery}
                 onChange={(e) => setSqlQuery(e.target.value)}
                 placeholder="Try: ' OR '1'='1"
-                className="w-full rounded-xl border border-amber-500/25 bg-black/60 px-4 py-2 text-white placeholder:text-amber-100/50"
+                className="w-full rounded-xl border border-orange-500/25 bg-black/60 px-4 py-2 text-white placeholder:text-orange-100/50"
               />
               <button
                 type="button"
                 onClick={() => runSecurityTest("sql")}
-                className="w-full rounded-xl bg-amber-500 text-black font-semibold py-2 hover:bg-amber-400 transition"
+                className="w-full rounded-xl bg-orange-500 text-black font-semibold py-2 hover:bg-orange-400 transition"
               >
                 Scan Query
               </button>
@@ -463,7 +463,7 @@ export default function SuperiorSecurityPage() {
                   key={item.label}
                   type="button"
                   onClick={item.action}
-                  className="rounded-lg border border-amber-500/20 bg-black/60 px-3 py-2 text-left hover:border-amber-400/40 hover:text-amber-50 transition"
+                  className="rounded-lg border border-orange-500/20 bg-black/60 px-3 py-2 text-left hover:border-orange-400/40 hover:text-orange-50 transition"
                 >
                   {item.label}
                 </button>
@@ -483,7 +483,7 @@ export default function SuperiorSecurityPage() {
             }
           >
             {testResults.length === 0 ? (
-              <p className="text-sm text-amber-100/70">Run a test to see results.</p>
+              <p className="text-sm text-orange-100/70">Run a test to see results.</p>
             ) : (
               <div className="space-y-3">
                 {testResults.map((result) => (
@@ -503,16 +503,16 @@ export default function SuperiorSecurityPage() {
                         <AlertTriangle className="h-5 w-5 text-red-300" />
                       )}
                     </div>
-                    <p className="text-sm text-amber-100/80 mt-1">{result.message}</p>
+                    <p className="text-sm text-orange-100/80 mt-1">{result.message}</p>
                     {result.detail && (
-                      <p className="text-xs text-amber-100/60 mt-1 break-all">{result.detail}</p>
+                      <p className="text-xs text-orange-100/60 mt-1 break-all">{result.detail}</p>
                     )}
                     {result.meta && (
-                      <div className="text-[11px] text-amber-100/70 flex flex-wrap gap-2 mt-2">
+                      <div className="text-[11px] text-orange-100/70 flex flex-wrap gap-2 mt-2">
                         {Object.entries(result.meta).map(([key, value]) => (
                           <span
                             key={key}
-                            className="rounded bg-black/60 border border-amber-500/20 px-2 py-1"
+                            className="rounded bg-black/60 border border-orange-500/20 px-2 py-1"
                           >
                             {key}: {String(value)}
                           </span>
@@ -531,17 +531,17 @@ export default function SuperiorSecurityPage() {
         <SectionCard title="Security Event Log" icon={<Activity className="h-6 w-6" />}>
           <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
             {securityLog.length === 0 && (
-              <p className="text-sm text-amber-100/70 text-center py-8">No security events recorded yet.</p>
+              <p className="text-sm text-orange-100/70 text-center py-8">No security events recorded yet.</p>
             )}
             {securityLog.map((event) => (
               <div
                 key={`${event.type}-${event.timestamp}`}
-                className="rounded-lg border border-amber-500/20 bg-black/60 px-4 py-3"
+                className="rounded-lg border border-orange-500/20 bg-black/60 px-4 py-3"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm font-semibold text-white">{event.type.replace(/_/g, " ")}</p>
-                    <p className="text-xs text-amber-100/70">
+                    <p className="text-xs text-orange-100/70">
                       {new Date(event.timestamp).toLocaleString()}
                     </p>
                   </div>
@@ -549,7 +549,7 @@ export default function SuperiorSecurityPage() {
                     {event.severity}
                   </span>
                 </div>
-                <pre className="text-xs text-amber-100/70 bg-black/50 rounded-lg mt-2 p-2 overflow-x-auto">
+                <pre className="text-xs text-orange-100/70 bg-black/50 rounded-lg mt-2 p-2 overflow-x-auto">
                   {JSON.stringify(event.details, null, 2)}
                 </pre>
               </div>

@@ -48,9 +48,9 @@ export default function ActivationScreen({ onActivated }: { onActivated: () => v
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white px-6">
-      <div className="w-full max-w-md space-y-6 border border-amber-500/20 bg-zinc-950/70 backdrop-blur rounded-2xl p-6 shadow-[0_18px_48px_rgba(0,0,0,0.5)]">
+      <div className="w-full max-w-md space-y-6 border border-orange-500/20 bg-zinc-950/70 backdrop-blur rounded-2xl p-6 shadow-[0_18px_48px_rgba(0,0,0,0.5)]">
         <div className="space-y-2 text-center">
-          <p className="text-xs uppercase tracking-[0.18em] text-amber-200/70">
+          <p className="text-xs uppercase tracking-[0.18em] text-orange-200/70">
             Work Zone OS
           </p>
           <h1 className="text-2xl font-bold text-white">
@@ -62,7 +62,7 @@ export default function ActivationScreen({ onActivated }: { onActivated: () => v
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.12em] text-amber-200/70">
+          <label className="text-xs uppercase tracking-[0.12em] text-orange-200/70">
             Activation code
           </label>
           <input
@@ -71,7 +71,7 @@ export default function ActivationScreen({ onActivated }: { onActivated: () => v
             onChange={(e) => setCode(formatCode(e.target.value))}
             placeholder="WZOSX 12345 67890"
             maxLength={17}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-900 border border-amber-500/30 text-white tracking-[0.25em] text-center focus:outline-none focus:ring-2 focus:ring-amber-400/60"
+            className="w-full px-4 py-3 rounded-lg bg-zinc-900 border border-orange-500/30 text-white tracking-[0.25em] text-center focus:outline-none focus:ring-2 focus:ring-orange-400/60"
           />
           <p className="text-[11px] text-gray-400 text-center">
             Formatted automatically. Paste or type your code exactly as provided.

@@ -104,8 +104,8 @@ const ZoomMeetingCenter: React.FC = () => {
 
   if (!organization) {
     return (
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-6">
-        <h3 className="text-xl font-semibold text-amber-300 mb-2">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-6">
+        <h3 className="text-xl font-semibold text-orange-300 mb-2">
           Zoom Meeting Center
         </h3>
         <p className="text-sm text-gray-300">
@@ -119,10 +119,10 @@ const ZoomMeetingCenter: React.FC = () => {
     <div className="space-y-6">
       {/* Admin config */}
       {isAdmin && (
-        <Card className="bg-black/40 border border-amber-500/30 text-white p-6">
+        <Card className="bg-black/40 border border-orange-500/30 text-white p-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
-              <h3 className="text-xl font-semibold text-amber-300">
+              <h3 className="text-xl font-semibold text-orange-300">
                 Configure Zoom Meetings
               </h3>
               <p className="text-xs sm:text-sm text-gray-300">
@@ -131,7 +131,7 @@ const ZoomMeetingCenter: React.FC = () => {
             </div>
             <Badge
               variant="outline"
-              className="border-amber-500/60 text-amber-200 text-[10px] sm:text-[11px] bg-black/40"
+              className="border-orange-500/60 text-orange-200 text-[10px] sm:text-[11px] bg-black/40"
             >
               Admin configuration
             </Badge>
@@ -185,7 +185,7 @@ const ZoomMeetingCenter: React.FC = () => {
               <Button
                 type="submit"
                 disabled={!canSave}
-                className="bg-amber-500 hover:bg-amber-400 text-black text-sm px-6"
+                className="bg-orange-500 hover:bg-orange-400 text-black text-sm px-6"
               >
                 {saving ? "Saving..." : "Save Meeting Link"}
               </Button>
@@ -195,10 +195,10 @@ const ZoomMeetingCenter: React.FC = () => {
       )}
 
       {/* List of meetings with embedded client view */}
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-4 sm:p-6">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
           <div>
-            <h3 className="text-lg font-semibold text-amber-300">
+            <h3 className="text-lg font-semibold text-orange-300">
               Zoom Meeting Links
             </h3>
             <p className="text-xs sm:text-sm text-gray-300">
@@ -253,9 +253,9 @@ const ZoomMeetingCenter: React.FC = () => {
                 </div>
 
                 {/* Embedded client attempt */}
-                <div className="mt-2 rounded-lg border border-amber-500/30 bg-black/70 overflow-hidden">
-                  <div className="px-3 py-2 border-b border-amber-500/20 flex items-center justify-between">
-                    <p className="text-[11px] text-amber-200">
+                <div className="mt-2 rounded-lg border border-orange-500/30 bg-black/70 overflow-hidden">
+                  <div className="px-3 py-2 border-b border-orange-500/20 flex items-center justify-between">
+                    <p className="text-[11px] text-orange-200">
                       Embedded meeting view
                     </p>
                     <p className="text-[10px] text-gray-500">

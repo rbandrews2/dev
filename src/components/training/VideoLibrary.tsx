@@ -40,17 +40,17 @@ const VideoLibrary: React.FC<VideoLibraryProps> = ({ topics }) => {
 
   if (!selected) {
     return (
-      <Card className="bg-black/40 border border-amber-500/30 backdrop-blur-md shadow-[0_0_35px_rgba(255,179,0,0.18)] text-white mt-6 p-4">
+      <Card className="bg-black/40 border border-orange-500/30 backdrop-blur-md shadow-[0_0_35px_rgba(249,115,22,0.18)] text-white mt-6 p-4">
         No training videos configured. Add entries in <code>src/data/trainingVideos.ts</code>.
       </Card>
     );
   }
 
   return (
-    <Card className="bg-black/40 border border-amber-500/30 backdrop-blur-md shadow-[0_0_35px_rgba(255,179,0,0.18)] text-white mt-6">
-      <div className="p-4 sm:p-6 border-b border-amber-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <Card className="bg-black/40 border border-orange-500/30 backdrop-blur-md shadow-[0_0_35px_rgba(249,115,22,0.18)] text-white mt-6">
+      <div className="p-4 sm:p-6 border-b border-orange-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h3 className="text-xl sm:text-2xl font-semibold text-amber-300">
+          <h3 className="text-xl sm:text-2xl font-semibold text-orange-300">
             Video Training Library
           </h3>
           <p className="text-xs sm:text-sm text-gray-300 mt-1">
@@ -60,7 +60,7 @@ const VideoLibrary: React.FC<VideoLibraryProps> = ({ topics }) => {
         <div className="flex flex-wrap gap-2 justify-start sm:justify-end">
           <Badge
             variant="outline"
-            className="border-amber-500/60 text-amber-300 text-[10px] sm:text-[11px] bg-black/40"
+            className="border-orange-500/60 text-orange-300 text-[10px] sm:text-[11px] bg-black/40"
           >
             {library.length} videos
           </Badge>
@@ -76,7 +76,7 @@ const VideoLibrary: React.FC<VideoLibraryProps> = ({ topics }) => {
       <div className="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Player */}
         <div className="lg:col-span-2 space-y-3">
-          <div className="aspect-video w-full rounded-xl overflow-hidden bg-black border border-amber-500/40">
+          <div className="aspect-video w-full rounded-xl overflow-hidden bg-black border border-orange-500/40">
             <iframe
               key={selected.youtubeId}
               className="w-full h-full"
@@ -88,7 +88,7 @@ const VideoLibrary: React.FC<VideoLibraryProps> = ({ topics }) => {
             />
           </div>
           <div className="space-y-1">
-            <h4 className="text-lg font-semibold text-amber-300">
+            <h4 className="text-lg font-semibold text-orange-300">
               {selected.title}
             </h4>
             <p className="text-xs sm:text-sm text-gray-300">
@@ -106,7 +106,7 @@ const VideoLibrary: React.FC<VideoLibraryProps> = ({ topics }) => {
                 <Badge
                   key={topic}
                   variant="outline"
-                  className="border-amber-500/40 text-amber-300 text-[10px] bg-black/40"
+                  className="border-orange-500/40 text-orange-300 text-[10px] bg-black/40"
                 >
                   {topic}
                 </Badge>
@@ -129,11 +129,11 @@ const VideoLibrary: React.FC<VideoLibraryProps> = ({ topics }) => {
                     className={[
                       "w-full text-left rounded-lg px-3 py-2 transition-all border",
                       active
-                        ? "bg-amber-500/15 border-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.6)]"
-                        : "bg-black/40 border-transparent hover:border-amber-500/40 hover:bg-black/60",
+                        ? "bg-orange-500/15 border-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.6)]"
+                        : "bg-black/40 border-transparent hover:border-orange-500/40 hover:bg-black/60",
                     ].join(" ")}
                   >
-                    <p className="text-xs font-semibold text-amber-200 line-clamp-2">
+                    <p className="text-xs font-semibold text-orange-200 line-clamp-2">
                       {video.title}
                     </p>
                     <p className="text-[10px] text-gray-400 mt-1 line-clamp-2">

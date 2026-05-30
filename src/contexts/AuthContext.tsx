@@ -5,7 +5,7 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import { supabase } from "@/lib/supabase";
+import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 
 type Organization = {
@@ -232,6 +232,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const init = async () => {
       setLoading(true);
 
+      if (!isSupabaseConfigured) {
+        setUser(null);
+        setSession(null);
+        setOrganization(null);
+        setIsAdmin(false);
+        setProfile(null);
+        setUserProfile(null);
+        setOrgMemberships([]);
+        setActiveOrgIdState(null);
+        saveActiveOrg(null);
+        setActiveOrgRole(null);
+        setLoading(false);
+        return undefined;
+      }
+
       const { data, error } = await supabase.auth.getSession();
       if (!isMounted) return;
 
@@ -347,6 +362,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     isAuthed: Boolean(user),
     signOut: async () => {
       try {
+        if (!isSupabaseConfigured) {
+          setUser(null);
+          setSession(null);
+          setOrganization(null);
+          setIsAdmin(false);
+          setProfile(null);
+          setUserProfile(null);
+          setOrgMemberships([]);
+          setActiveOrgIdState(null);
+          saveActiveOrg(null);
+          setActiveOrgRole(null);
+          return;
+        }
+
         await supabase.auth.signOut();
         setUser(null);
         setSession(null);

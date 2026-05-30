@@ -15,14 +15,14 @@ export default function Weather() {
   }, []);
 
   return (
-    <div className="p-6 max-w-xl mx-auto text-yellow-200">
+    <div className="p-6 max-w-xl mx-auto text-orange-200">
       <h1 className="text-3xl font-bold mb-4">Weather Conditions</h1>
 
-      <div className="bg-black/40 border border-yellow-400/20 p-4 rounded-lg backdrop-blur-md shadow-md">
+      <div className="bg-black/40 border border-orange-400/20 p-4 rounded-lg backdrop-blur-md shadow-md">
         {coords ? (
           <>
             <p className="mb-2 opacity-80">Current GPS Location:</p>
-            <p className="font-semibold text-yellow-300">
+            <p className="font-semibold text-orange-300">
               {coords.lat.toFixed(5)}, {coords.lng.toFixed(5)}
             </p>
             <p className="mt-4 opacity-80">

@@ -13,7 +13,7 @@ const AiAvatar: React.FC<Props> = ({ size = 40 }) => {
       alt="AI Assistant"
       width={size}
       height={size}
-      className="rounded-full border border-amber-500/60 shadow-md bg-black/70 object-cover"
+      className="rounded-full border border-orange-500/60 shadow-md bg-black/70 object-cover"
       onError={() => setSrc("/Work_Zone_AI_Man.png")}
     />
   );

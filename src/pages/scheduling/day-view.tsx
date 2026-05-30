@@ -150,14 +150,14 @@ const sampleDays: Record<
 };
 
 const statusStyles: Record<DayEvent["status"], string> = {
-  active: "text-amber-200 bg-amber-500/15 border-amber-300/30",
+  active: "text-orange-200 bg-orange-500/15 border-orange-300/30",
   scheduled: "text-white bg-white/5 border-white/10",
   complete: "text-emerald-200 bg-emerald-500/10 border-emerald-400/30",
-  standby: "text-yellow-200 bg-yellow-500/10 border-yellow-400/25",
+  standby: "text-orange-200 bg-orange-500/10 border-orange-400/25",
 };
 
 const calendarOptionClass =
-  "inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-black/40 px-3 py-2 text-sm text-amber-100/80 transition-all hover:border-amber-200/80 hover:shadow-[0_0_18px_rgba(255,239,0,0.6)] hover:-translate-y-0.5";
+  "inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-black/40 px-3 py-2 text-sm text-orange-100/80 transition-all hover:border-orange-200/80 hover:shadow-[0_0_18px_rgba(255,239,0,0.6)] hover:-translate-y-0.5";
 
 function readableDate(dateStr: string) {
   const date = new Date(dateStr);
@@ -262,9 +262,9 @@ export default function DayViewPage() {
   }, [selectedDate, activeOrgId, fallbackData.headline, fallbackData.summary, fallbackData.events]);
 
   return (
-    <div className="space-y-6 text-yellow-100 max-w-7xl mx-auto">
+    <div className="space-y-6 text-orange-100 max-w-7xl mx-auto">
       <div className="flex items-center gap-3">
-        <div className="h-11 w-11 rounded-2xl border border-amber-400/40 bg-black/60 flex items-center justify-center text-amber-300 shadow-[0_10px_28px_rgba(0,0,0,0.45)]">
+        <div className="h-11 w-11 rounded-2xl border border-orange-400/40 bg-black/60 flex items-center justify-center text-orange-300 shadow-[0_10px_28px_rgba(0,0,0,0.45)]">
           <CalendarDays className="w-5 h-5" />
         </div>
         <div>
@@ -277,9 +277,9 @@ export default function DayViewPage() {
       <GlassCard className="p-5 space-y-4">
         <div className="flex flex-wrap gap-3 items-center justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.12em] text-yellow-200/70">Headline</p>
+            <p className="text-sm uppercase tracking-[0.12em] text-orange-200/70">Headline</p>
             <h2 className="text-xl font-semibold text-white">{headline}</h2>
-            <p className="text-sm text-yellow-100/75">{summary}</p>
+            <p className="text-sm text-orange-100/75">{summary}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             <button className={calendarOptionClass}>
@@ -298,20 +298,20 @@ export default function DayViewPage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-xl border border-amber-500/25 bg-black/50 p-4">
-            <p className="text-xs text-amber-100/70">Live crews</p>
+          <div className="rounded-xl border border-orange-500/25 bg-black/50 p-4">
+            <p className="text-xs text-orange-100/70">Live crews</p>
             <p className="text-2xl font-semibold text-white">4</p>
           </div>
-          <div className="rounded-xl border border-amber-500/25 bg-black/50 p-4">
-            <p className="text-xs text-amber-100/70">Active work windows</p>
+          <div className="rounded-xl border border-orange-500/25 bg-black/50 p-4">
+            <p className="text-xs text-orange-100/70">Active work windows</p>
             <p className="text-2xl font-semibold text-white">5</p>
           </div>
-          <div className="rounded-xl border border-amber-500/25 bg-black/50 p-4">
-            <p className="text-xs text-amber-100/70">Safety checks</p>
+          <div className="rounded-xl border border-orange-500/25 bg-black/50 p-4">
+            <p className="text-xs text-orange-100/70">Safety checks</p>
             <p className="text-2xl font-semibold text-white">QA + PPE logged</p>
           </div>
-          <div className="rounded-xl border border-amber-500/25 bg-black/50 p-4">
-            <p className="text-xs text-amber-100/70">Exports</p>
+          <div className="rounded-xl border border-orange-500/25 bg-black/50 p-4">
+            <p className="text-xs text-orange-100/70">Exports</p>
             <p className="text-2xl font-semibold text-white">CSV / Sheets / PDF</p>
           </div>
         </div>
@@ -322,22 +322,22 @@ export default function DayViewPage() {
           <GlassCard className="p-5">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-amber-200" />
+                <Clock className="w-4 h-4 text-orange-200" />
                 <h3 className="text-lg font-semibold text-white">Timeline</h3>
               </div>
-              <span className="text-xs px-3 py-1 rounded-full border border-amber-500/30 text-amber-200 bg-amber-500/10">
+              <span className="text-xs px-3 py-1 rounded-full border border-orange-500/30 text-orange-200 bg-orange-500/10">
                 Live data
               </span>
             </div>
 
-            <div className="relative border-l border-amber-400/20 pl-4 space-y-4">
+            <div className="relative border-l border-orange-400/20 pl-4 space-y-4">
               {events.map((event) => (
                 <div key={event.id} className="relative">
-                  <span className="absolute -left-5 top-2 h-2.5 w-2.5 rounded-full bg-amber-400 shadow-[0_0_16px_rgba(255,239,0,0.6)]" />
+                  <span className="absolute -left-5 top-2 h-2.5 w-2.5 rounded-full bg-orange-400 shadow-[0_0_16px_rgba(255,239,0,0.6)]" />
                   <div className="flex flex-wrap items-start justify-between gap-3 rounded-xl border border-white/5 bg-white/5 px-4 py-3">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-amber-200 font-semibold">
+                        <span className="text-sm text-orange-200 font-semibold">
                           {event.window}
                         </span>
                         <span
@@ -347,16 +347,16 @@ export default function DayViewPage() {
                         </span>
                       </div>
                       <h4 className="text-white font-semibold text-base">{event.title}</h4>
-                      <p className="text-sm text-amber-100/80 flex items-center gap-2">
+                      <p className="text-sm text-orange-100/80 flex items-center gap-2">
                         <MapPin className="w-4 h-4" />
                         {event.location}
                       </p>
-                      <p className="text-sm text-amber-100/80 flex items-center gap-2">
+                      <p className="text-sm text-orange-100/80 flex items-center gap-2">
                         <Users className="w-4 h-4" />
                         {event.crew}
                       </p>
                       {event.notes && (
-                        <p className="text-xs text-amber-100/70">Note: {event.notes}</p>
+                        <p className="text-xs text-orange-100/70">Note: {event.notes}</p>
                       )}
                     </div>
                   </div>
@@ -369,10 +369,10 @@ export default function DayViewPage() {
         <div className="space-y-4">
           <GlassCard className="p-5 space-y-3">
             <div className="flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-amber-200" />
+              <AlertTriangle className="w-4 h-4 text-orange-200" />
               <h3 className="text-lg font-semibold text-white">Resourcing snapshot</h3>
             </div>
-            <ul className="space-y-2 text-sm text-amber-100/80">
+            <ul className="space-y-2 text-sm text-orange-100/80">
               <li>ƒ?› Crew Alpha: Active on site ƒ?" bridge deck demo, 7 personnel.</li>
               <li>ƒ?› Traffic Ops: Flaggers staged, two trucks, amber beacons online.</li>
               <li>ƒ?› Safety / QA: QA walkthrough at 15:30 with photo upload required.</li>

@@ -3,7 +3,7 @@ import LegalPageShell from "./LegalPageShell";
 export default function LicenseAgreement() {
   return (
     <LegalPageShell title="Limited Ownership License Agreement" kicker="Work Zone OS">
-      <div className="space-y-4 text-amber-100/85">
+      <div className="space-y-4 text-orange-100/85">
         <p>Work Zone OS (WZOS)</p>
         <p>Superior Consultation, LLC</p>
         <p>Contact: info@superiorllc.org</p>

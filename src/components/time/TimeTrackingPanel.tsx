@@ -431,7 +431,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
   if (!user) {
     return (
       <div className="space-y-6">
-        <div className="bg-black/40 backdrop-blur-md border border-amber-500/30 rounded-xl p-5">
+        <div className="bg-black/40 backdrop-blur-md border border-orange-500/30 rounded-xl p-5">
           <h2 className="text-xl font-semibold text-white mb-2">
             Time clock &amp; timesheets
           </h2>
@@ -441,13 +441,13 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
             out and view your recent timesheets.
           </p>
 
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-black/70 p-1 text-[11px] mb-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/25 bg-black/70 p-1 text-[11px] mb-4">
             <button
               type="button"
               onClick={() => setAuthMode("signin")}
               className={`px-3 py-1 rounded-full ${
                 authMode === "signin"
-                  ? "bg-amber-500 text-black font-semibold"
+                  ? "bg-orange-500 text-black font-semibold"
                   : "text-gray-300 hover:text-white"
               }`}
             >
@@ -458,7 +458,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
               onClick={() => setAuthMode("signup")}
               className={`px-3 py-1 rounded-full ${
                 authMode === "signup"
-                  ? "bg-amber-500 text-black font-semibold"
+                  ? "bg-orange-500 text-black font-semibold"
                   : "text-gray-300 hover:text-white"
               }`}
             >
@@ -477,7 +477,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                   value={authEmail}
                   onChange={(e) => setAuthEmail(e.target.value)}
                   placeholder="you@yourcompany.com"
-                  className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                  className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
                 />
               </div>
               <div>
@@ -489,7 +489,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                   value={authPassword}
                   onChange={(e) => setAuthPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                  className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
                 />
               </div>
             </div>
@@ -517,7 +517,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
               type="button"
               disabled={authLoading}
               onClick={handleAuthSubmit}
-              className="px-4 py-2 rounded-md bg-amber-500 text-black text-xs font-semibold hover:bg-amber-400 disabled:opacity-60"
+              className="px-4 py-2 rounded-md bg-orange-500 text-black text-xs font-semibold hover:bg-orange-400 disabled:opacity-60"
             >
               {authLoading
                 ? authMode === "signin"
@@ -645,7 +645,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-black/40 backdrop-blur-md border border-amber-500/30 rounded-xl p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="bg-black/40 backdrop-blur-md border border-orange-500/30 rounded-xl p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h2 className="text-xl font-semibold text-white mb-1">
             Time clock &amp; timesheets
@@ -659,7 +659,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
         <div className="text-xs text-gray-300">
           <p>
             Signed in as{" "}
-            <span className="font-mono text-amber-300">{user.email}</span>
+            <span className="font-mono text-orange-300">{user.email}</span>
           </p>
           <p className="text-[11px] text-gray-500">
             Clocked-in status:{" "}
@@ -677,8 +677,8 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
       <div className="grid gap-6 md:grid-cols-[minmax(0,1.4fr),minmax(0,1.2fr)]">
         {/* Left: time clock controls + current status */}
         <div className="space-y-4">
-          <div className="bg-black/60 backdrop-blur-md border border-amber-500/25 rounded-xl p-5 space-y-4">
-            <h3 className="text-sm font-semibold text-amber-300 mb-1">
+          <div className="bg-black/60 backdrop-blur-md border border-orange-500/25 rounded-xl p-5 space-y-4">
+            <h3 className="text-sm font-semibold text-orange-300 mb-1">
               Clock-in details
             </h3>
 
@@ -693,10 +693,10 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                       : "No jobs are listed yet. Use Fast Clock-in only if your job is not listed, then tell your admin which job should be added."}
                   </p>
                 )}
-                <div className="rounded-lg border border-amber-500/20 bg-black/40 p-3">
+                <div className="rounded-lg border border-orange-500/20 bg-black/40 p-3">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-[11px] font-semibold text-amber-300">
+                      <p className="text-[11px] font-semibold text-orange-300">
                         Fast Clock-in
                       </p>
                       <p className="mt-1 text-[11px] text-gray-400">
@@ -723,7 +723,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                     <select
                       value={quickCategory}
                       onChange={(e) => setQuickCategory(e.target.value as QuickCategory)}
-                      className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                      className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-orange-500"
                     >
                       {QUICK_CATEGORIES.map((category) => (
                         <option key={category} value={category}>
@@ -741,7 +741,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                   <select
                     value={selectedJobId}
                     onChange={(e) => handleJobChange(e.target.value)}
-                    className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-orange-500"
                   >
                     {jobs.map((job) => (
                       <option key={job.id} value={job.id}>
@@ -758,7 +758,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                   <select
                     value={selectedTaskId}
                     onChange={(e) => setSelectedTaskId(e.target.value)}
-                    className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-orange-500"
                   >
                     {tasks.length === 0 ? (
                       <option value="">No tasks configured</option>
@@ -781,7 +781,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     rows={2}
-                    className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
                     placeholder="Example: Flagging lane closure near mile marker 135."
                   />
                 </div>
@@ -799,7 +799,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                     type="button"
                     disabled={switchCategoryDisabled}
                     onClick={handleSwitchCategory}
-                    className="px-4 py-2 rounded-md text-xs font-semibold bg-amber-500 hover:bg-amber-400 text-black disabled:opacity-60"
+                    className="px-4 py-2 rounded-md text-xs font-semibold bg-orange-500 hover:bg-orange-400 text-black disabled:opacity-60"
                   >
                     Switch category
                   </button>
@@ -827,8 +827,8 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
           </div>
 
           {/* Current entry overview */}
-          <div className="bg-black/60 backdrop-blur-md border border-amber-500/20 rounded-xl p-4">
-            <h3 className="text-sm font-semibold text-amber-300 mb-2">
+          <div className="bg-black/60 backdrop-blur-md border border-orange-500/20 rounded-xl p-4">
+            <h3 className="text-sm font-semibold text-orange-300 mb-2">
               Current status
             </h3>
             {isClockedIn && activeEntry ? (
@@ -851,7 +851,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                 </p>
                 <p className="text-[11px] text-gray-500">
                   To change jobs or categories, choose the next option above and
-                  use <span className="text-amber-300">Switch category</span>.
+                  use <span className="text-orange-300">Switch category</span>.
                 </p>
               </div>
             ) : (
@@ -877,10 +877,10 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
             />
           )}
 
-          <div className="bg-black/60 backdrop-blur-md border border-amber-500/25 rounded-xl p-5">
+          <div className="bg-black/60 backdrop-blur-md border border-orange-500/25 rounded-xl p-5">
             <div className="flex flex-col gap-2 mb-3">
               <div className="flex items-center justify-between gap-3">
-                <h3 className="text-sm font-semibold text-amber-300">
+                <h3 className="text-sm font-semibold text-orange-300">
                   Recent timesheet
                 </h3>
                 <div className="text-[11px] text-gray-400 text-right">
@@ -899,7 +899,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                   <select
                     value={filterJobId}
                     onChange={(e) => setFilterJobId(e.target.value)}
-                    className="rounded-md bg-black/80 border border-amber-500/40 px-2 py-1 text-[11px] text-gray-100 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="rounded-md bg-black/80 border border-orange-500/40 px-2 py-1 text-[11px] text-gray-100 focus:outline-none focus:ring-1 focus:ring-orange-500"
                   >
                     <option value="all">All jobs</option>
                     {jobs.map((job) => (
@@ -915,7 +915,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                     type="date"
                     value={filterStart}
                     onChange={(e) => setFilterStart(e.target.value)}
-                    className="rounded-md bg-black/80 border border-amber-500/40 px-2 py-1 text-[11px] text-gray-100 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="rounded-md bg-black/80 border border-orange-500/40 px-2 py-1 text-[11px] text-gray-100 focus:outline-none focus:ring-1 focus:ring-orange-500"
                   />
                 </div>
                 <div className="flex items-center gap-1">
@@ -924,7 +924,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                     type="date"
                     value={filterEnd}
                     onChange={(e) => setFilterEnd(e.target.value)}
-                    className="rounded-md bg-black/80 border border-amber-500/40 px-2 py-1 text-[11px] text-gray-100 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="rounded-md bg-black/80 border border-orange-500/40 px-2 py-1 text-[11px] text-gray-100 focus:outline-none focus:ring-1 focus:ring-orange-500"
                   />
                 </div>
                 {allowAdminControls && (
@@ -943,14 +943,14 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
                   <button
                     type="button"
                     onClick={handleExportCsv}
-                    className="px-2 py-1 rounded-md bg-black/80 border border-amber-500/40 text-[10px] text-amber-300 hover:bg-amber-500/10"
+                    className="px-2 py-1 rounded-md bg-black/80 border border-orange-500/40 text-[10px] text-orange-300 hover:bg-orange-500/10"
                   >
                     Export CSV
                   </button>
                   <button
                     type="button"
                     onClick={(e) => void handleExportPdf(e)}
-                    className="px-2 py-1 rounded-md bg-amber-500 text-[10px] text-black font-semibold hover:bg-amber-400"
+                    className="px-2 py-1 rounded-md bg-orange-500 text-[10px] text-black font-semibold hover:bg-orange-400"
                   >
                     Export PDF
                   </button>
@@ -968,7 +968,7 @@ const TimeTrackingPanel: React.FC<TimeTrackingPanelProps> = ({ adminMode = false
             ) : (
               <div className="max-h-64 overflow-auto">
                 <table className="w-full text-[11px] text-gray-300">
-                  <thead className="text-gray-400 border-b border-amber-500/20">
+                  <thead className="text-gray-400 border-b border-orange-500/20">
                     <tr>
                       <th className="text-left py-1 pr-2">Date</th>
                       <th className="text-left py-1 pr-2">Job / Task</th>
@@ -1091,8 +1091,8 @@ const JobSetupPanel: React.FC<JobSetupPanelProps> = ({
   };
 
   return (
-    <div className="bg-black/60 backdrop-blur-md border border-amber-500/25 rounded-xl p-5 space-y-4">
-      <h3 className="text-sm font-semibold text-amber-300">
+    <div className="bg-black/60 backdrop-blur-md border border-orange-500/25 rounded-xl p-5 space-y-4">
+      <h3 className="text-sm font-semibold text-orange-300">
         Job &amp; task setup (admin)
       </h3>
       <p className="text-[11px] text-gray-400 mb-1">
@@ -1114,7 +1114,7 @@ const JobSetupPanel: React.FC<JobSetupPanelProps> = ({
               value={jobName}
               onChange={(e) => setJobName(e.target.value)}
               placeholder='e.g. "Day Shift – Route 220"'
-              className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+              className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             />
           </div>
           <div>
@@ -1125,14 +1125,14 @@ const JobSetupPanel: React.FC<JobSetupPanelProps> = ({
               value={jobCode}
               onChange={(e) => setJobCode(e.target.value)}
               placeholder="e.g. RTE-220-DAY"
-              className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+              className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             />
           </div>
           <button
             type="button"
             disabled={savingJob}
             onClick={handleCreateJob}
-            className="mt-1 px-3 py-2 rounded-md bg-amber-500 text-black text-[11px] font-semibold hover:bg-amber-400 disabled:opacity-60"
+            className="mt-1 px-3 py-2 rounded-md bg-orange-500 text-black text-[11px] font-semibold hover:bg-orange-400 disabled:opacity-60"
           >
             {savingJob ? "Saving..." : "Save job"}
           </button>
@@ -1149,7 +1149,7 @@ const JobSetupPanel: React.FC<JobSetupPanelProps> = ({
             <select
               value={selectedJobForTask}
               onChange={(e) => setSelectedJobForTask(e.target.value)}
-              className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-amber-500"
+              className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-orange-500"
             >
               {jobs.length === 0 ? (
                 <option value="">No jobs yet</option>
@@ -1170,7 +1170,7 @@ const JobSetupPanel: React.FC<JobSetupPanelProps> = ({
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
               placeholder='e.g. "Travel time" or "Job site"'
-              className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+              className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
             />
           </div>
           <div>
@@ -1183,14 +1183,14 @@ const JobSetupPanel: React.FC<JobSetupPanelProps> = ({
               min="0"
               value={taskRate}
               onChange={(e) => setTaskRate(e.target.value)}
-              className="w-full rounded-md bg-black/80 border border-amber-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-amber-500"
+              className="w-full rounded-md bg-black/80 border border-orange-500/40 text-xs text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-orange-500"
             />
           </div>
           <button
             type="button"
             disabled={savingTask || jobs.length === 0}
             onClick={handleCreateTask}
-            className="mt-1 px-3 py-2 rounded-md bg-amber-500 text-black text-[11px] font-semibold hover:bg-amber-400 disabled:opacity-60"
+            className="mt-1 px-3 py-2 rounded-md bg-orange-500 text-black text-[11px] font-semibold hover:bg-orange-400 disabled:opacity-60"
           >
             {savingTask ? "Saving..." : "Save task"}
           </button>

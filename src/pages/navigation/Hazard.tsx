@@ -89,7 +89,7 @@ export default function Hazard() {
       <div className="absolute top-4 right-4 z-40">
         <button
           onClick={loadHazards}
-          className="px-4 py-2 bg-black/60 border border-yellow-400/30 text-yellow-200 rounded-md shadow hover:bg-black/50"
+          className="px-4 py-2 bg-black/60 border border-orange-400/30 text-orange-200 rounded-md shadow hover:bg-black/50"
         >
           Refresh Hazards
         </button>

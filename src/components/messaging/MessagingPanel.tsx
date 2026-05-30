@@ -94,8 +94,8 @@ const MessagingPanel: React.FC = () => {
 
   if (!user) {
     return (
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-6">
-        <h3 className="text-xl font-semibold text-amber-300 mb-2">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-6">
+        <h3 className="text-xl font-semibold text-orange-300 mb-2">
           Crew Messaging
         </h3>
         <p className="text-sm text-gray-300">
@@ -107,8 +107,8 @@ const MessagingPanel: React.FC = () => {
 
   if (!organization) {
     return (
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-6">
-        <h3 className="text-xl font-semibold text-amber-300 mb-2">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-6">
+        <h3 className="text-xl font-semibold text-orange-300 mb-2">
           Crew Messaging
         </h3>
         <p className="text-sm text-gray-300">
@@ -121,10 +121,10 @@ const MessagingPanel: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Compose */}
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-6">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <div>
-            <h3 className="text-xl font-semibold text-amber-300">
+            <h3 className="text-xl font-semibold text-orange-300">
               Post a Message to Your Crew
             </h3>
             <p className="text-xs sm:text-sm text-gray-300">
@@ -133,7 +133,7 @@ const MessagingPanel: React.FC = () => {
           </div>
           <Badge
             variant="outline"
-            className="border-amber-500/60 text-amber-200 text-[10px] sm:text-[11px] bg-black/40"
+            className="border-orange-500/60 text-orange-200 text-[10px] sm:text-[11px] bg-black/40"
           >
             Posting as {user.email ?? "user"}
           </Badge>
@@ -180,7 +180,7 @@ const MessagingPanel: React.FC = () => {
             <Button
               type="submit"
               disabled={!canSend}
-              className="bg-amber-500 hover:bg-amber-400 text-black text-sm px-6"
+              className="bg-orange-500 hover:bg-orange-400 text-black text-sm px-6"
             >
               {sending ? "Sending..." : "Post Message"}
             </Button>
@@ -189,9 +189,9 @@ const MessagingPanel: React.FC = () => {
       </Card>
 
       {/* Feed */}
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-4 sm:p-6">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-          <h3 className="text-lg font-semibold text-amber-300">
+          <h3 className="text-lg font-semibold text-orange-300">
             Organization Message Feed
           </h3>
           <span className="text-[11px] text-gray-400">
@@ -207,7 +207,7 @@ const MessagingPanel: React.FC = () => {
                 key={m.id}
                 className={`rounded-lg border px-3 py-2 space-y-1 ${
                   m.is_announcement
-                    ? "border-amber-500/60 bg-amber-500/10"
+                    ? "border-orange-500/60 bg-orange-500/10"
                     : "border-gray-800 bg-black/60"
                 }`}
               >
@@ -223,7 +223,7 @@ const MessagingPanel: React.FC = () => {
                   {m.is_announcement && (
                     <Badge
                       variant="outline"
-                      className="border-amber-500/60 text-amber-300 text-[10px] px-2 py-0.5 bg-black/40"
+                      className="border-orange-500/60 text-orange-300 text-[10px] px-2 py-0.5 bg-black/40"
                     >
                       Announcement
                     </Badge>

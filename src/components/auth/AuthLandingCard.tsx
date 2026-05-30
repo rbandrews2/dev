@@ -25,6 +25,7 @@ const AuthLandingCard: React.FC<AuthLandingCardProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
@@ -62,24 +63,24 @@ const AuthLandingCard: React.FC<AuthLandingCardProps> = ({
   };
 
   return (
-    <Card className="bg-black/40 border border-amber-500/30 rounded-xl p-5 text-white">
+    <Card className="bg-black/40 border border-orange-500/30 rounded-xl p-5 text-white">
       <h2 className="text-xl font-semibold mb-1">{title}</h2>
       <p className="text-sm text-gray-400 mb-4">{subtitle}</p>
 
       {loadingAuth && (
-        <div className="text-sm text-amber-100/80">Checking sign-in status…</div>
+        <div className="text-sm text-orange-100/80">Checking sign-in status…</div>
       )}
 
       {!loadingAuth && user && (
         <div className="flex items-center justify-between bg-black/60 border border-emerald-500/30 rounded-lg px-3 py-2 mb-3 text-sm">
           <div className="space-y-0.5">
             <p className="text-emerald-200 font-semibold">Signed in</p>
-            <p className="text-amber-100/70">{user.email}</p>
+            <p className="text-orange-100/70">{user.email}</p>
           </div>
           <Button
             type="button"
             onClick={signOut}
-            className="bg-amber-500 hover:bg-amber-400 text-black text-xs px-3"
+            className="bg-orange-500 hover:bg-orange-400 text-black text-xs px-3"
           >
             Sign out
           </Button>
@@ -88,13 +89,13 @@ const AuthLandingCard: React.FC<AuthLandingCardProps> = ({
 
       {!loadingAuth && !user && (
         <>
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-black/70 p-1 text-[11px] mb-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/25 bg-black/70 p-1 text-[11px] mb-4">
             <button
               type="button"
               onClick={() => setAuthMode("signin")}
               className={`px-3 py-1 rounded-full ${
                 authMode === "signin"
-                  ? "bg-amber-500 text-black font-semibold"
+                  ? "bg-orange-500 text-black font-semibold"
                   : "text-gray-300 hover:text-white"
               }`}
             >
@@ -105,7 +106,7 @@ const AuthLandingCard: React.FC<AuthLandingCardProps> = ({
               onClick={() => setAuthMode("signup")}
               className={`px-3 py-1 rounded-full ${
                 authMode === "signup"
-                  ? "bg-amber-500 text-black font-semibold"
+                  ? "bg-orange-500 text-black font-semibold"
                   : "text-gray-300 hover:text-white"
               }`}
             >
@@ -149,7 +150,7 @@ const AuthLandingCard: React.FC<AuthLandingCardProps> = ({
               <Button
                 type="submit"
                 disabled={loading}
-                className="bg-amber-500 hover:bg-amber-400 text-black text-sm px-5"
+                className="bg-orange-500 hover:bg-orange-400 text-black text-sm px-5"
               >
                 {loading
                   ? authMode === "signin"

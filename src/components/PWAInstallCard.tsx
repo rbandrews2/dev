@@ -43,16 +43,16 @@ export const PWAInstallCard: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 w-[calc(100vw-2rem)] max-w-sm rounded-lg border border-amber-400/50 bg-zinc-950/95 p-4 text-amber-50 shadow-2xl shadow-black/40 backdrop-blur">
+    <div className="fixed bottom-4 right-4 z-50 w-[calc(100vw-2rem)] max-w-sm rounded-lg border border-orange-400/50 bg-zinc-950/95 p-4 text-orange-50 shadow-2xl shadow-black/40 backdrop-blur">
       <button
         type="button"
         onClick={handleDismiss}
-        className="absolute right-2 top-2 rounded-md p-1 text-amber-100/70 hover:bg-white/10 hover:text-amber-50"
+        className="absolute right-2 top-2 rounded-md p-1 text-orange-100/70 hover:bg-white/10 hover:text-orange-50"
         aria-label="Dismiss install prompt"
       >
         <X className="h-4 w-4" />
       </button>
-      <div className="mb-2 flex items-center gap-2 pr-7 font-semibold text-amber-200">
+      <div className="mb-2 flex items-center gap-2 pr-7 font-semibold text-orange-200">
         <Download className="h-4 w-4" />
         Install Work Zone OS
       </div>
@@ -68,7 +68,7 @@ export const PWAInstallCard: React.FC = () => {
         <Button
           type="button"
           size="sm"
-          className="bg-amber-400 text-black hover:bg-amber-300"
+          className="bg-orange-400 text-black hover:bg-orange-300"
           onClick={handleInstall}
         >
           {isInstallable ? "Install App" : "Got it"}
@@ -77,7 +77,7 @@ export const PWAInstallCard: React.FC = () => {
           type="button"
           size="sm"
           variant="outline"
-          className="border-amber-400/40 bg-transparent text-amber-100 hover:bg-white/10 hover:text-amber-50"
+          className="border-orange-400/40 bg-transparent text-orange-100 hover:bg-white/10 hover:text-orange-50"
           onClick={handleDismiss}
         >
           Later

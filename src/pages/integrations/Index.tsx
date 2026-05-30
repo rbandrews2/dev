@@ -114,7 +114,7 @@ const integrationCatalog: Integration[] = [
 function statusBadge(status: IntegrationStatus) {
   const map: Record<IntegrationStatus, { label: string; className: string }> = {
     ready: { label: "Ready", className: "bg-emerald-500/15 text-emerald-200 border-emerald-400/40" },
-    connected: { label: "Connected", className: "bg-amber-500/15 text-amber-200 border-amber-400/50" },
+    connected: { label: "Connected", className: "bg-orange-500/15 text-orange-200 border-orange-400/50" },
     pending: { label: "Pending", className: "bg-blue-500/15 text-blue-200 border-blue-400/40" },
     error: { label: "Action needed", className: "bg-red-500/15 text-red-200 border-red-400/50" },
   };
@@ -311,14 +311,14 @@ export default function IntegrationsPage() {
 
   return (
     <div className="space-y-8 text-white">
-      <section className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-black/80 shadow-glow p-6 md:p-10">
+      <section className="relative overflow-hidden rounded-3xl border border-orange-500/30 bg-black/80 shadow-glow p-6 md:p-10">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-black/70 to-black/90" />
-          <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full bg-amber-500/10 blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-black/70 to-black/90" />
+          <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full bg-orange-500/10 blur-3xl" />
         </div>
         <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="space-y-4 max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-500/10 px-3 py-1.5 text-sm text-amber-100">
+            <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/40 bg-orange-500/10 px-3 py-1.5 text-sm text-orange-100">
               <PlugZap className="w-4 h-4" />
               App Integrations
             </div>
@@ -326,7 +326,7 @@ export default function IntegrationsPage() {
               <h1 className="text-3xl md:text-4xl font-bold">Connect your crew&apos;s favorite apps</h1>
               {activated ? statusBadge("connected") : statusBadge("pending")}
             </div>
-            <p className="text-amber-100/80 text-base leading-relaxed">
+            <p className="text-orange-100/80 text-base leading-relaxed">
               Integrations now use backend-managed connect, disconnect, and test flows. Webhooks are production-usable
               today; OAuth providers are tracked honestly as pending until their provider callback handoff is finished.
             </p>
@@ -334,14 +334,14 @@ export default function IntegrationsPage() {
               <button
                 type="button"
                 onClick={() => void loadConnections()}
-                className="rounded-xl bg-amber-500 text-black font-semibold px-4 py-2 hover:bg-amber-400 transition disabled:opacity-60"
+                className="rounded-xl bg-orange-500 text-black font-semibold px-4 py-2 hover:bg-orange-400 transition disabled:opacity-60"
                 disabled={!activated || loading}
               >
                 {loading ? "Refreshing..." : "Refresh status"}
               </button>
               <button
                 type="button"
-                className="rounded-xl border border-amber-400/40 px-4 py-2 text-amber-100 hover:bg-white/5 transition"
+                className="rounded-xl border border-orange-400/40 px-4 py-2 text-orange-100 hover:bg-white/5 transition"
                 onClick={() => setMessage("Run src/sql/integration_tables.sql in Supabase, then use this page to connect and test providers.")}
               >
                 View API handoff
@@ -377,12 +377,12 @@ export default function IntegrationsPage() {
       </section>
 
       {!activated && (
-        <GlassCard className="p-6 border border-amber-500/25 bg-black/70">
+        <GlassCard className="p-6 border border-orange-500/25 bg-black/70">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <p className="text-sm text-amber-100/70">Activation required</p>
+              <p className="text-sm text-orange-100/70">Activation required</p>
               <h2 className="text-2xl font-semibold text-white">Enable integrations for this workspace</h2>
-              <p className="text-sm text-amber-100/80 max-w-2xl mt-2">
+              <p className="text-sm text-orange-100/80 max-w-2xl mt-2">
                 The live connect and test actions stay disabled until the integration feature flag is turned on.
               </p>
             </div>
@@ -390,8 +390,8 @@ export default function IntegrationsPage() {
               <div className="rounded-full bg-red-500/15 text-red-200 border border-red-400/40 px-4 py-2 text-sm font-semibold">
                 Inactive
               </div>
-              <ArrowRight className="w-5 h-5 text-amber-300" />
-              <div className="rounded-full bg-amber-500/15 text-amber-100 border border-amber-400/40 px-4 py-2 text-sm font-semibold">
+              <ArrowRight className="w-5 h-5 text-orange-300" />
+              <div className="rounded-full bg-orange-500/15 text-orange-100 border border-orange-400/40 px-4 py-2 text-sm font-semibold">
                 Flip VITE_INTEGRATIONS_ENABLED
               </div>
             </div>
@@ -402,14 +402,14 @@ export default function IntegrationsPage() {
               return (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-amber-500/20 bg-black/60 p-4 flex items-start gap-3"
+                  className="rounded-2xl border border-orange-500/20 bg-black/60 p-4 flex items-start gap-3"
                 >
-                  <div className="h-10 w-10 rounded-xl border border-amber-400/30 bg-amber-500/10 flex items-center justify-center text-amber-200">
+                  <div className="h-10 w-10 rounded-xl border border-orange-400/30 bg-orange-500/10 flex items-center justify-center text-orange-200">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-white">{item.title}</p>
-                    <p className="text-xs text-amber-100/75">{item.description}</p>
+                    <p className="text-xs text-orange-100/75">{item.description}</p>
                   </div>
                 </div>
               );
@@ -419,18 +419,18 @@ export default function IntegrationsPage() {
       )}
 
       <section className="grid gap-4 lg:grid-cols-3">
-        <GlassCard className="lg:col-span-2 p-5 border border-amber-500/25 bg-black/70">
+        <GlassCard className="lg:col-span-2 p-5 border border-orange-500/25 bg-black/70">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-xl font-semibold text-white">Plug-and-play apps</h3>
-              <p className="text-sm text-amber-100/75">
+              <p className="text-sm text-orange-100/75">
                 Custom webhook is live-ready now. OAuth providers are tracked server-side until their callback flow is wired.
               </p>
             </div>
-            <BadgeCheck className="w-6 h-6 text-amber-300" />
+            <BadgeCheck className="w-6 h-6 text-orange-300" />
           </div>
           {!canAdmin && (
-            <div className="mb-4 rounded-xl border border-amber-500/30 bg-black/60 px-4 py-3 text-sm text-amber-100">
+            <div className="mb-4 rounded-xl border border-orange-500/30 bg-black/60 px-4 py-3 text-sm text-orange-100">
               Only owners and admins can connect, disconnect, or test integrations.
             </div>
           )}
@@ -444,23 +444,23 @@ export default function IntegrationsPage() {
               return (
                 <div
                   key={integration.id}
-                  className="rounded-2xl border border-amber-500/20 bg-black/60 p-4 flex flex-col gap-3"
+                  className="rounded-2xl border border-orange-500/20 bg-black/60 p-4 flex flex-col gap-3"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="text-lg font-semibold text-white">{integration.name}</p>
-                      <p className="text-xs uppercase tracking-[0.12em] text-amber-200/70">
+                      <p className="text-xs uppercase tracking-[0.12em] text-orange-200/70">
                         {integration.category}
                       </p>
                     </div>
                     {statusBadge(status)}
                   </div>
-                  <p className="text-sm text-amber-100/75">{integration.description}</p>
-                  <div className="flex flex-wrap gap-2 text-[11px] text-amber-100/70">
+                  <p className="text-sm text-orange-100/75">{integration.description}</p>
+                  <div className="flex flex-wrap gap-2 text-[11px] text-orange-100/70">
                     {integration.actions.map((action) => (
                       <span
                         key={action}
-                        className="rounded-full border border-amber-500/25 px-3 py-1 bg-white/5"
+                        className="rounded-full border border-orange-500/25 px-3 py-1 bg-white/5"
                       >
                         {action}
                       </span>
@@ -469,14 +469,14 @@ export default function IntegrationsPage() {
 
                   {integration.id === "webhook" && (
                     <div className="space-y-2">
-                      <label className="text-xs text-amber-100/75">Webhook URL</label>
+                      <label className="text-xs text-orange-100/75">Webhook URL</label>
                       <input
                         value={webhookUrl}
                         onChange={(e) => setWebhookUrl(e.target.value)}
                         placeholder="https://example.com/api/wzos/webhook"
-                        className="w-full rounded-lg border border-amber-500/30 bg-black/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        className="w-full rounded-lg border border-orange-500/30 bg-black/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
                       />
-                      <p className="text-[11px] text-amber-100/60">
+                      <p className="text-[11px] text-orange-100/60">
                         HTTPS only. Localhost and private network targets are blocked by the backend.
                       </p>
                     </div>
@@ -489,7 +489,7 @@ export default function IntegrationsPage() {
                   )}
 
                   {meta?.notes && (
-                    <div className="rounded-lg border border-amber-500/20 bg-black/40 px-3 py-2 text-xs text-amber-100/80">
+                    <div className="rounded-lg border border-orange-500/20 bg-black/40 px-3 py-2 text-xs text-orange-100/80">
                       {meta.notes}
                     </div>
                   )}
@@ -531,7 +531,7 @@ export default function IntegrationsPage() {
                     <button
                       type="button"
                       onClick={() => void handleConnect(integration.id)}
-                      className="rounded-lg bg-amber-500 text-black text-sm font-semibold px-3 py-1.5 hover:bg-amber-400 transition disabled:opacity-60"
+                      className="rounded-lg bg-orange-500 text-black text-sm font-semibold px-3 py-1.5 hover:bg-orange-400 transition disabled:opacity-60"
                       disabled={disabled}
                     >
                       {actionBusy === "connect" ? "Working..." : "Connect"}
@@ -539,7 +539,7 @@ export default function IntegrationsPage() {
                     <button
                       type="button"
                       onClick={() => void handleDisconnect(integration.id)}
-                      className="rounded-lg border border-amber-500/30 text-amber-100 text-sm px-3 py-1.5 hover:bg-white/5 transition disabled:opacity-60"
+                      className="rounded-lg border border-orange-500/30 text-orange-100 text-sm px-3 py-1.5 hover:bg-white/5 transition disabled:opacity-60"
                       disabled={disabled}
                     >
                       {actionBusy === "disconnect" ? "Working..." : "Reset"}
@@ -547,7 +547,7 @@ export default function IntegrationsPage() {
                     <button
                       type="button"
                       onClick={() => void handleTest(integration.id)}
-                      className="ml-auto inline-flex items-center gap-1 text-xs text-amber-200 hover:text-white disabled:opacity-60"
+                      className="ml-auto inline-flex items-center gap-1 text-xs text-orange-200 hover:text-white disabled:opacity-60"
                       disabled={disabled}
                     >
                       {actionBusy === "test" ? "Testing..." : "Test flow"} <ExternalLink className="w-3 h-3" />
@@ -559,15 +559,15 @@ export default function IntegrationsPage() {
           </div>
         </GlassCard>
 
-        <GlassCard className="p-5 border border-amber-500/25 bg-black/70 space-y-4">
+        <GlassCard className="p-5 border border-orange-500/25 bg-black/70 space-y-4">
           <div className="flex items-center gap-3">
-            <RefreshCcw className="w-6 h-6 text-amber-300" />
+            <RefreshCcw className="w-6 h-6 text-orange-300" />
             <div>
               <p className="text-sm font-semibold text-white">Quick wins</p>
-              <p className="text-xs text-amber-100/70">Practical rollout order for the next 10 days.</p>
+              <p className="text-xs text-orange-100/70">Practical rollout order for the next 10 days.</p>
             </div>
           </div>
-          <ul className="space-y-2 text-sm text-amber-100/80">
+          <ul className="space-y-2 text-sm text-orange-100/80">
             {quickWins.map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-300 mt-0.5" />
@@ -575,11 +575,11 @@ export default function IntegrationsPage() {
               </li>
             ))}
           </ul>
-          <div className="rounded-xl border border-amber-500/20 bg-black/60 p-4 space-y-2">
+          <div className="rounded-xl border border-orange-500/20 bg-black/60 p-4 space-y-2">
             <p className="text-sm font-semibold text-white flex items-center gap-2">
               <LockKeyhole className="w-4 h-4" /> Connection checklist
             </p>
-            <p className="text-xs text-amber-100/70">
+            <p className="text-xs text-orange-100/70">
               1) Run `src/sql/integration_tables.sql`. 2) Keep OAuth secrets server-side. 3) Use this page to save and
               test the webhook endpoint. 4) Finish provider OAuth callbacks before enabling Slack, Teams, Procore, or SharePoint in production.
             </p>
@@ -587,18 +587,18 @@ export default function IntegrationsPage() {
         </GlassCard>
       </section>
 
-      <GlassCard className="p-5 border border-amber-500/25 bg-black/70">
+      <GlassCard className="p-5 border border-orange-500/25 bg-black/70">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div>
-            <p className="text-sm text-amber-100/75">Implementation status</p>
+            <p className="text-sm text-orange-100/75">Implementation status</p>
             <h3 className="text-xl font-semibold text-white">API wiring notes</h3>
-            <p className="text-sm text-amber-100/75 max-w-3xl">
+            <p className="text-sm text-orange-100/75 max-w-3xl">
               The integrations page now talks to the backend instead of faking success in the browser. Webhook connections
               persist per workspace and signed test deliveries are executed server-side. OAuth providers still need callback
               implementation, so they remain visibly pending instead of incorrectly showing as connected.
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs text-amber-200">
+          <div className="flex items-center gap-2 text-xs text-orange-200">
             <ExternalLink className="w-4 h-4" />
             Production-safe state tracking is now in place.
           </div>
@@ -606,7 +606,7 @@ export default function IntegrationsPage() {
       </GlassCard>
 
       {message && (
-        <div className="rounded-xl border border-amber-500/30 bg-black/70 px-4 py-3 text-sm text-amber-100">
+        <div className="rounded-xl border border-orange-500/30 bg-black/70 px-4 py-3 text-sm text-orange-100">
           {message}
         </div>
       )}

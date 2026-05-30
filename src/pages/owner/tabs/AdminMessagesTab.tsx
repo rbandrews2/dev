@@ -88,7 +88,7 @@ export default function AdminMessagesTab() {
               <Send className="h-4 w-4" />
               {sending ? "Sending..." : "Send to every user"}
             </Button>
-            {status && <p className="text-sm text-amber-100/80">{status}</p>}
+            {status && <p className="text-sm text-orange-100/80">{status}</p>}
           </div>
         </div>
       </section>

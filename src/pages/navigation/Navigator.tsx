@@ -38,7 +38,7 @@ export default function Navigator() {
 
   // If offline but no map downloaded
   return (
-    <div className="p-6 text-yellow-300">
+    <div className="p-6 text-orange-300">
       <h1 className="text-xl font-semibold mb-2">Offline Navigation Unavailable</h1>
       <p>You are offline and do not have an offline map downloaded.</p>
       <p className="mt-2">Go to: Navigation → Offline Maps to download your state.</p>

@@ -11,9 +11,9 @@ type CheckboxGroup = {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-amber-500/30 bg-black/50 p-4 space-y-3">
+    <div className="rounded-2xl border border-orange-500/30 bg-black/50 p-4 space-y-3">
       <div className="flex items-center gap-2">
-        <div className="h-8 w-1 rounded-full bg-amber-400/70" />
+        <div className="h-8 w-1 rounded-full bg-orange-400/70" />
         <h2 className="text-lg font-semibold text-white">{title}</h2>
       </div>
       {children}
@@ -35,14 +35,14 @@ function InputRow({
   type?: string;
 }) {
   return (
-    <label className="flex flex-col gap-1 text-sm text-amber-100/80">
+    <label className="flex flex-col gap-1 text-sm text-orange-100/80">
       <span className="font-semibold text-white/90">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="rounded-lg border border-amber-500/30 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-amber-100/50 focus:outline-none focus:border-amber-400"
+        className="rounded-lg border border-orange-500/30 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-orange-100/50 focus:outline-none focus:border-orange-400"
       />
     </label>
   );
@@ -60,14 +60,14 @@ function TextAreaRow({
   placeholder?: string;
 }) {
   return (
-    <label className="flex flex-col gap-1 text-sm text-amber-100/80">
+    <label className="flex flex-col gap-1 text-sm text-orange-100/80">
       <span className="font-semibold text-white/90">{label}</span>
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         rows={3}
-        className="rounded-lg border border-amber-500/30 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-amber-100/50 focus:outline-none focus:border-amber-400"
+        className="rounded-lg border border-orange-500/30 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-orange-100/50 focus:outline-none focus:border-orange-400"
       />
     </label>
   );
@@ -91,12 +91,12 @@ function CheckboxList({
       <p className="text-sm font-semibold text-white/90">{title}</p>
       <div className={`grid gap-2 grid-cols-1 sm:grid-cols-${columns}`}>
         {options.map((opt) => (
-          <label key={opt} className="flex items-center gap-2 text-sm text-amber-100/80">
+          <label key={opt} className="flex items-center gap-2 text-sm text-orange-100/80">
             <input
               type="checkbox"
               checked={values.includes(opt)}
               onChange={() => toggle(opt)}
-              className="h-4 w-4 rounded border border-amber-500/40 bg-black text-amber-400 focus:ring-amber-400"
+              className="h-4 w-4 rounded border border-orange-500/40 bg-black text-orange-400 focus:ring-orange-400"
             />
             <span>{opt}</span>
           </label>
@@ -300,9 +300,9 @@ export default function JSAForm() {
     <div className="min-h-screen pb-16 space-y-6">
       <div className="flex items-center justify-between gap-3">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.2em] text-amber-200/80">Forms Hub</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-orange-200/80">Forms Hub</p>
           <h1 className="text-3xl font-semibold text-white">Job Safety Analysis (JSA)</h1>
-          <p className="text-sm text-amber-100/75">
+          <p className="text-sm text-orange-100/75">
             Fill every required field. Use Save JSON to keep a record or print to PDF for signing.
           </p>
         </div>
@@ -310,14 +310,14 @@ export default function JSAForm() {
           <button
             type="button"
             onClick={handleDownload}
-            className="rounded-lg bg-amber-500 px-3 py-2 text-sm font-semibold text-black shadow-[0_0_20px_rgba(255,193,7,0.25)] hover:bg-amber-400"
+            className="rounded-lg bg-orange-500 px-3 py-2 text-sm font-semibold text-black shadow-[0_0_20px_rgba(249,115,22,0.25)] hover:bg-orange-400"
           >
             Save JSON
           </button>
           <button
             type="button"
             onClick={handlePrint}
-            className="rounded-lg border border-amber-500/40 px-3 py-2 text-sm font-semibold text-amber-100 hover:bg-white/5"
+            className="rounded-lg border border-orange-500/40 px-3 py-2 text-sm font-semibold text-orange-100 hover:bg-white/5"
           >
             Download / Print PDF
           </button>
@@ -420,7 +420,7 @@ export default function JSAForm() {
       </Section>
 
       <Section title="Jobsite Exposures">
-        <p className="text-sm text-amber-100/80">
+        <p className="text-sm text-orange-100/80">
           Hazard Identification: Number each hazard. Describe the mitigation in the Hazard Control Measures section below.
         </p>
         <CheckboxList

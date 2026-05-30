@@ -1,4 +1,4 @@
-﻿import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Building2,
@@ -313,11 +313,11 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
   const renderCreate = () => (
     <GlassCard className="p-6 space-y-6">
       <div className="flex items-center gap-3">
-        <div className="h-11 w-11 rounded-2xl border border-amber-500/40 bg-amber-500/10 flex items-center justify-center text-amber-200">
+        <div className="h-11 w-11 rounded-2xl border border-orange-500/40 bg-orange-500/10 flex items-center justify-center text-orange-200">
           <ShieldCheck className="h-5 w-5" />
         </div>
         <div>
-          <p className="text-sm text-amber-100/80">Create Organization</p>
+          <p className="text-sm text-orange-100/80">Create Organization</p>
           <p className="text-lg font-semibold text-white">
             Enter your purchased access code to permanently unlock this organization.
           </p>
@@ -326,7 +326,7 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
 
       <form onSubmit={handleCreate} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="org-name" className="text-sm text-amber-50">
+          <Label htmlFor="org-name" className="text-sm text-orange-50">
             Organization name
           </Label>
           <Input
@@ -334,7 +334,7 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Sunrise Highway Contractors"
-            className="bg-black/60 border-amber-500/30 text-white"
+            className="bg-black/60 border-orange-500/30 text-white"
             disabled={submitting || !user}
             required
           />
@@ -347,16 +347,16 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label className="text-sm text-amber-50">Industry (optional)</Label>
+            <Label className="text-sm text-orange-50">Industry (optional)</Label>
             <Select
               value={industry}
               onValueChange={(val) => setIndustry(val)}
               disabled={submitting || !user}
             >
-              <SelectTrigger className="bg-black/60 border-amber-500/30 text-white">
+              <SelectTrigger className="bg-black/60 border-orange-500/30 text-white">
                 <SelectValue placeholder="Select industry" />
               </SelectTrigger>
-              <SelectContent className="bg-black/90 text-white border-amber-500/20">
+              <SelectContent className="bg-black/90 text-white border-orange-500/20">
                 {INDUSTRY_OPTIONS.map((option) => (
                   <SelectItem key={option} value={option}>
                     {option}
@@ -366,16 +366,16 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
             </Select>
           </div>
           <div className="space-y-2">
-            <Label className="text-sm text-amber-50">Company size (optional)</Label>
+            <Label className="text-sm text-orange-50">Company size (optional)</Label>
             <Select
               value={companySize}
               onValueChange={(val) => setCompanySize(val)}
               disabled={submitting || !user}
             >
-              <SelectTrigger className="bg-black/60 border-amber-500/30 text-white">
+              <SelectTrigger className="bg-black/60 border-orange-500/30 text-white">
                 <SelectValue placeholder="Select size" />
               </SelectTrigger>
-              <SelectContent className="bg-black/90 text-white border-amber-500/20">
+              <SelectContent className="bg-black/90 text-white border-orange-500/20">
                 {COMPANY_SIZE_OPTIONS.map((option) => (
                   <SelectItem key={option} value={option}>
                     {option}
@@ -387,7 +387,7 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="org-activation-code" className="text-sm text-amber-50">
+          <Label htmlFor="org-activation-code" className="text-sm text-orange-50">
             Access / activation code
           </Label>
           <Input
@@ -395,21 +395,21 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
             value={activationCode}
             onChange={(e) => setActivationCode(formatActivationCode(e.target.value))}
             placeholder="ABCDE 12345 FGHIJ"
-            className="bg-black/60 border-amber-500/30 text-white text-center tracking-[0.22em]"
+            className="bg-black/60 border-orange-500/30 text-white text-center tracking-[0.22em]"
             disabled={submitting || !user}
             maxLength={17}
             required
           />
-          <p className="text-xs text-amber-100/70">
+          <p className="text-xs text-orange-100/70">
             This code is permanently attached to this organization and all accounts added under it.
           </p>
         </div>
 
-        <div className="flex items-center justify-between pt-4 border-t border-amber-500/20">
+        <div className="flex items-center justify-between pt-4 border-t border-orange-500/20">
           <Button
             type="button"
             variant="ghost"
-            className="text-amber-200 hover:text-white"
+            className="text-orange-200 hover:text-white"
             onClick={() => signOut()}
             disabled={submitting}
           >
@@ -418,7 +418,7 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
           <Button
             type="submit"
             disabled={!canSubmit || !user}
-            className="bg-amber-500 hover:bg-amber-400 text-black px-6"
+            className="bg-orange-500 hover:bg-orange-400 text-black px-6"
           >
             {submitting ? (
               <span className="flex items-center gap-2">
@@ -437,60 +437,60 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
   const renderMemberManagement = () => (
     <GlassCard className="p-6 space-y-5">
       <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-2xl border border-amber-500/40 bg-amber-500/10 flex items-center justify-center text-amber-200">
+        <div className="h-10 w-10 rounded-2xl border border-orange-500/40 bg-orange-500/10 flex items-center justify-center text-orange-200">
           <UserPlus className="h-5 w-5" />
         </div>
         <div>
-          <p className="text-sm text-amber-100/80">Add members</p>
+          <p className="text-sm text-orange-100/80">Add members</p>
           <p className="text-lg font-semibold text-white">
             Invite admins or members by email
           </p>
-          <p className="text-xs text-amber-100/70">
+          <p className="text-xs text-orange-100/70">
             Only owners/admins can add members. CSV must include email and role (admin or member).
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="rounded-xl border border-amber-500/20 bg-black/60 p-4 space-y-3">
+        <div className="rounded-xl border border-orange-500/20 bg-black/60 p-4 space-y-3">
           <div className="flex items-center gap-2">
-            <UserPlus className="h-4 w-4 text-amber-300" />
+            <UserPlus className="h-4 w-4 text-orange-300" />
             <p className="text-sm font-semibold text-white">Single entry</p>
           </div>
           <form onSubmit={handleManualAdd} className="space-y-3">
             <div className="space-y-2">
-              <Label className="text-sm text-amber-50">Name (optional)</Label>
+              <Label className="text-sm text-orange-50">Name (optional)</Label>
               <Input
                 type="text"
                 value={memberName}
                 onChange={(e) => setMemberName(e.target.value)}
                 placeholder="Full name"
-                className="bg-black/60 border-amber-500/30 text-white"
+                className="bg-black/60 border-orange-500/30 text-white"
                 disabled={!isPrivileged || addingMember}
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-sm text-amber-50">Email</Label>
+              <Label className="text-sm text-orange-50">Email</Label>
               <Input
                 type="email"
                 value={memberEmail}
                 onChange={(e) => setMemberEmail(e.target.value)}
                 placeholder="crew.member@company.com"
-                className="bg-black/60 border-amber-500/30 text-white"
+                className="bg-black/60 border-orange-500/30 text-white"
                 disabled={!isPrivileged || addingMember}
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-sm text-amber-50">Role</Label>
+              <Label className="text-sm text-orange-50">Role</Label>
               <Select
                 value={memberRole}
                 onValueChange={(val: "admin" | "member") => setMemberRole(val)}
                 disabled={!isPrivileged || addingMember}
               >
-                <SelectTrigger className="bg-black/60 border-amber-500/30 text-white">
+                <SelectTrigger className="bg-black/60 border-orange-500/30 text-white">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-black/90 text-white border-amber-500/20">
+                <SelectContent className="bg-black/90 text-white border-orange-500/20">
                   <SelectItem value="admin">Admin</SelectItem>
                   <SelectItem value="member">Member</SelectItem>
                 </SelectContent>
@@ -505,7 +505,7 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
               <Button
                 type="submit"
                 disabled={!isPrivileged || addingMember || !memberEmail}
-                className="bg-amber-500 hover:bg-amber-400 text-black"
+                className="bg-orange-500 hover:bg-orange-400 text-black"
               >
                 {addingMember ? (
                   <span className="flex items-center gap-2">
@@ -520,36 +520,36 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
           </form>
         </div>
 
-        <div className="rounded-xl border border-amber-500/20 bg-black/60 p-4 space-y-3">
+        <div className="rounded-xl border border-orange-500/20 bg-black/60 p-4 space-y-3">
           <div className="flex items-center gap-2">
-            <FileSpreadsheet className="h-4 w-4 text-amber-300" />
+            <FileSpreadsheet className="h-4 w-4 text-orange-300" />
             <p className="text-sm font-semibold text-white">Upload CSV</p>
           </div>
           <div className="space-y-2">
-            <Label className="text-sm text-amber-50">CSV file</Label>
+            <Label className="text-sm text-orange-50">CSV file</Label>
             <div className="flex items-center gap-3">
               <Input
                 type="file"
                 accept=".csv"
                 onChange={handleCsvSelect}
                 disabled={!isPrivileged || processingCsv}
-                className="bg-black/60 border-amber-500/30 text-white"
+                className="bg-black/60 border-orange-500/30 text-white"
               />
-              <UploadCloud className="h-5 w-5 text-amber-300" />
+              <UploadCloud className="h-5 w-5 text-orange-300" />
             </div>
-            <p className="text-xs text-amber-100/70">
+            <p className="text-xs text-orange-100/70">
               Required columns: email, role. Roles must be admin or member.
             </p>
             {csvFileName && (
-              <p className="text-xs text-amber-200">Selected: {csvFileName}</p>
+              <p className="text-xs text-orange-200">Selected: {csvFileName}</p>
             )}
             {csvRows.length > 0 && (
-              <div className="rounded-lg border border-amber-500/20 bg-black/50 p-3 space-y-2 max-h-40 overflow-y-auto">
-                <p className="text-xs text-amber-200">
+              <div className="rounded-lg border border-orange-500/20 bg-black/50 p-3 space-y-2 max-h-40 overflow-y-auto">
+                <p className="text-xs text-orange-200">
                   Preview ({csvRows.length}):
                 </p>
                 {csvRows.map((row, idx) => (
-                  <p key={`${row.email}-${idx}`} className="text-xs text-amber-100/80">
+                  <p key={`${row.email}-${idx}`} className="text-xs text-orange-100/80">
                     {row.email} - {row.role}
                   </p>
                 ))}
@@ -566,7 +566,7 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
               type="button"
               onClick={handleBulkAdd}
               disabled={!isPrivileged || bulkAdding || !csvRows.length}
-              className="bg-amber-500 hover:bg-amber-400 text-black"
+              className="bg-orange-500 hover:bg-orange-400 text-black"
             >
               {bulkAdding ? (
                 <span className="flex items-center gap-2">
@@ -599,25 +599,25 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
         <GlassCard className="p-6 space-y-4">
           <div className="flex items-start justify-between gap-3">
             <div className="space-y-1">
-              <p className="text-sm text-amber-100/80">Organization</p>
+              <p className="text-sm text-orange-100/80">Organization</p>
               <div className="flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-amber-300" />
+                <Building2 className="h-5 w-5 text-orange-300" />
                 <h2 className="text-2xl font-semibold text-white">{orgName}</h2>
               </div>
-              <p className="text-xs text-amber-100/70">ID: {orgIdDisplay}</p>
-              <p className="text-xs text-amber-100/70">Access / activation code ID: {accessIdDisplay}</p>
+              <p className="text-xs text-orange-100/70">ID: {orgIdDisplay}</p>
+              <p className="text-xs text-orange-100/70">Access / activation code ID: {accessIdDisplay}</p>
             </div>
-            <Badge className="bg-amber-500/15 text-amber-200 border border-amber-500/40">
+            <Badge className="bg-orange-500/15 text-orange-200 border border-orange-500/40">
               {roleLabel}
             </Badge>
           </div>
 
-          <div className="rounded-xl border border-amber-500/20 bg-black/60 p-4 space-y-2">
-            <p className="text-sm text-amber-100/80">
+          <div className="rounded-xl border border-orange-500/20 bg-black/60 p-4 space-y-2">
+            <p className="text-sm text-orange-100/80">
               You&apos;re connected to this workspace. Use the dashboard to access forms, messaging,
               navigation, and scheduling with your organization context applied.
             </p>
-            <p className="text-xs text-amber-100/60">
+            <p className="text-xs text-orange-100/60">
               Need a different workspace? Switching and invites will be added once multi-org is enabled.
             </p>
           </div>
@@ -626,7 +626,7 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
             <Button
               type="button"
               variant="outline"
-              className="border-amber-500/40 text-amber-100 hover:bg-amber-500/10"
+              className="border-orange-500/40 text-orange-100 hover:bg-orange-500/10"
               onClick={() => navigate("/")}
             >
               Go to Dashboard
@@ -643,13 +643,13 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-amber-200/70">
+          <p className="text-xs uppercase tracking-[0.2em] text-orange-200/70">
             Organization
           </p>
           <h1 className="text-2xl font-semibold text-white mt-1">
             {mode === "create" ? "Create your organization" : "Organization settings"}
           </h1>
-          <p className="text-sm text-amber-100/75">
+          <p className="text-sm text-orange-100/75">
             {mode === "create"
               ? "We'll keep this short - name it and you're in."
               : "Manage your workspace details and access points."}
@@ -659,7 +659,7 @@ export default function OrganizationIndex({ adminMode = false }: OrganizationInd
           <Button
             type="button"
             variant="ghost"
-            className="text-amber-200 hover:text-white"
+            className="text-orange-200 hover:text-white"
             onClick={() => navigate("/")}
           >
             Dashboard

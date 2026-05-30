@@ -124,7 +124,7 @@ export default function TimesheetExportsPage() {
     <div className="max-w-7xl mx-auto space-y-8 px-2">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <div className="h-12 w-12 rounded-xl border border-amber-400/40 bg-black/70 flex items-center justify-center text-amber-300">
+        <div className="h-12 w-12 rounded-xl border border-orange-400/40 bg-black/70 flex items-center justify-center text-orange-300">
           <ShieldCheck className="h-6 w-6" />
         </div>
         <div>

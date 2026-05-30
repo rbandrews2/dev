@@ -159,11 +159,11 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
 
   if (!course) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-12 text-yellow-100">
+      <div className="max-w-4xl mx-auto px-4 py-12 text-orange-100">
         <GlassCard className="p-6 bg-black/60">
           <h1 className="text-2xl font-bold text-white">Course not found</h1>
-          <p className="text-amber-100/80 mt-2">This training course is not available in the catalog.</p>
-          <Link to="/training" className="inline-flex mt-4 text-amber-300 hover:underline">
+          <p className="text-orange-100/80 mt-2">This training course is not available in the catalog.</p>
+          <Link to="/training" className="inline-flex mt-4 text-orange-300 hover:underline">
             Back to Training Center
           </Link>
         </GlassCard>
@@ -174,30 +174,30 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
   const badge = (course as any).certificate_eligible ? "Certificate" : requiresQuiz ? "Assessment" : "Training";
 
   return (
-    <div className="min-h-screen text-yellow-100 pb-14">
+    <div className="min-h-screen text-orange-100 pb-14">
       <section className="max-w-6xl mx-auto px-4 pt-8 pb-6 space-y-6">
         <Link
           to="/training"
-          className="inline-flex items-center gap-2 rounded-xl border border-amber-500/30 bg-black/50 px-4 py-2 text-amber-200 hover:bg-black/60 transition"
+          className="inline-flex items-center gap-2 rounded-xl border border-orange-500/30 bg-black/50 px-4 py-2 text-orange-200 hover:bg-black/60 transition"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Training Center
         </Link>
 
         <div className="space-y-6">
-            <GlassCard className="p-6 bg-black/60 border border-amber-500/25">
+            <GlassCard className="p-6 bg-black/60 border border-orange-500/25">
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-amber-200 text-sm font-semibold">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-orange-200 text-sm font-semibold">
                     <GraduationCap className="w-4 h-4" />
                     {(course as any).title}
                   </div>
-                  <p className="text-amber-100/80 max-w-3xl">{(course as any).description}</p>
-                  <div className="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.14em] text-amber-200/80">
-                    <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/40 px-2 py-1">
+                  <p className="text-orange-100/80 max-w-3xl">{(course as any).description}</p>
+                  <div className="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.14em] text-orange-200/80">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-orange-400/40 px-2 py-1">
                       <Clock className="w-3 h-3" /> {(course as any).estimated_minutes} min
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/40 px-2 py-1">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-orange-400/40 px-2 py-1">
                       <Award className="w-3 h-3" /> {badge}
                     </span>
                   </div>
@@ -210,7 +210,7 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                     className={`rounded-xl px-4 py-2 text-sm font-semibold border transition ${
                       studyDone
                         ? "bg-emerald-500/20 border-emerald-400/30 text-emerald-200"
-                        : "bg-black/50 border-amber-500/30 text-amber-200 hover:bg-black/60"
+                        : "bg-black/50 border-orange-500/30 text-orange-200 hover:bg-black/60"
                     }`}
                   >
                     <span className="inline-flex items-center gap-2">
@@ -225,7 +225,7 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                     className={`rounded-xl px-4 py-2 text-sm font-semibold border transition ${
                       videosDone
                         ? "bg-emerald-500/20 border-emerald-400/30 text-emerald-200"
-                        : "bg-black/50 border-amber-500/30 text-amber-200 hover:bg-black/60"
+                        : "bg-black/50 border-orange-500/30 text-orange-200 hover:bg-black/60"
                     }`}
                   >
                     <span className="inline-flex items-center gap-2">
@@ -242,7 +242,7 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                         quizDone
                           ? "bg-emerald-500/20 border-emerald-400/30 text-emerald-200"
                           : quizPassed
-                          ? "bg-black/50 border-amber-500/30 text-amber-200 hover:bg-black/60"
+                          ? "bg-black/50 border-orange-500/30 text-orange-200 hover:bg-black/60"
                           : "bg-black/30 border-white/10 text-white/40 cursor-not-allowed"
                       }`}
                     >
@@ -259,7 +259,7 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                       disabled={!fullyComplete}
                       className={`rounded-xl px-4 py-2 text-sm font-semibold border transition ${
                         fullyComplete
-                          ? "bg-amber-400 text-black border-amber-300 hover:bg-amber-300"
+                          ? "bg-orange-400 text-black border-orange-300 hover:bg-orange-300"
                           : "bg-black/30 border-white/10 text-white/40 cursor-not-allowed"
                       }`}
                     >
@@ -270,13 +270,13 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
               </div>
             </GlassCard>
 
-            <GlassCard className="p-6 bg-black/60 border border-amber-500/25">
+            <GlassCard className="p-6 bg-black/60 border border-orange-500/25">
               <h2 className="text-xl font-bold text-white mb-4">Study Material</h2>
               <div className="space-y-4">
                 {material.study.map((s, idx) => (
-                  <div key={idx} className="rounded-xl border border-amber-500/20 bg-black/40 p-4">
+                  <div key={idx} className="rounded-xl border border-orange-500/20 bg-black/40 p-4">
                     <div className="text-white font-semibold mb-1">{s.title}</div>
-                    <div className="text-sm text-amber-100/80 leading-relaxed whitespace-pre-line">
+                    <div className="text-sm text-orange-100/80 leading-relaxed whitespace-pre-line">
                       {s.body}
                     </div>
                   </div>
@@ -284,11 +284,11 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
               </div>
             </GlassCard>
 
-            <GlassCard className="p-6 bg-black/60 border border-amber-500/25 space-y-4">
+            <GlassCard className="p-6 bg-black/60 border border-orange-500/25 space-y-4">
               <h2 className="text-xl font-bold text-white">Required Videos</h2>
               {requiredVideos && requiredVideos.length ? (
                 <>
-                  <div className="aspect-video w-full rounded-xl overflow-hidden bg-black border border-amber-500/40">
+                  <div className="aspect-video w-full rounded-xl overflow-hidden bg-black border border-orange-500/40">
                     <iframe
                       key={requiredVideos[0].youtubeId}
                       className="w-full h-full"
@@ -302,29 +302,29 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                   <div className="space-y-3">
                     <div>
                       <div className="text-white font-semibold">{requiredVideos[0].title}</div>
-                      <div className="text-sm text-amber-100/75 mt-1">
+                      <div className="text-sm text-orange-100/75 mt-1">
                         {requiredVideos[0].description || ""}
                       </div>
-                      <div className="text-[11px] text-amber-200/70 mt-1 uppercase tracking-[0.14em]">
+                      <div className="text-[11px] text-orange-200/70 mt-1 uppercase tracking-[0.14em]">
                         Required for completion
                       </div>
                     </div>
                     {requiredVideos.slice(1).length > 0 && (
                       <div className="space-y-2">
-                        <div className="text-sm text-amber-100/80 font-semibold">Up next</div>
+                        <div className="text-sm text-orange-100/80 font-semibold">Up next</div>
                         {requiredVideos.slice(1).map((v: any, idx: number) => (
                           <div
                             key={idx}
-                            className="rounded-xl border border-amber-500/20 bg-black/40 p-3 flex justify-between items-start gap-3"
+                            className="rounded-xl border border-orange-500/20 bg-black/40 p-3 flex justify-between items-start gap-3"
                           >
                             <div>
                               <div className="text-white font-semibold">{v.title}</div>
-                              <div className="text-sm text-amber-100/75 mt-1 line-clamp-2">
+                              <div className="text-sm text-orange-100/75 mt-1 line-clamp-2">
                                 {v.description || ""}
                               </div>
                             </div>
                             <a
-                              className="text-amber-300 hover:underline text-xs"
+                              className="text-orange-300 hover:underline text-xs"
                               href={`https://www.youtube.com/watch?v=${v.youtubeId}`}
                               target="_blank"
                               rel="noreferrer"
@@ -337,22 +337,22 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                     )}
                     {matchedVideos.length > 2 && (
                       <div className="space-y-2">
-                        <div className="text-sm text-amber-100/80 font-semibold">More recommended</div>
+                        <div className="text-sm text-orange-100/80 font-semibold">More recommended</div>
                         <ul className="space-y-2">
                           {matchedVideos
                             .filter((v: any) => !requiredVideos.find((r: any) => r.id === v.id))
                             .slice(0, 5)
                             .map((v: any, idx: number) => (
-                              <li key={idx} className="text-sm text-amber-100/75 flex justify-between items-start gap-3">
+                              <li key={idx} className="text-sm text-orange-100/75 flex justify-between items-start gap-3">
                                 <div className="space-y-1">
                                   <div className="text-white font-semibold">{v.title}</div>
-                                  <div className="text-xs text-amber-100/70 line-clamp-2">
+                                  <div className="text-xs text-orange-100/70 line-clamp-2">
                                     {v.description || ""}
                                   </div>
                                 </div>
                                 {v.url && (
                                   <a
-                                    className="text-amber-300 hover:underline text-xs whitespace-nowrap"
+                                    className="text-orange-300 hover:underline text-xs whitespace-nowrap"
                                     href={v.url}
                                     target="_blank"
                                     rel="noreferrer"
@@ -368,24 +368,24 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                   </div>
                 </>
               ) : (
-                <p className="text-sm text-amber-100/75">No videos matched this course’s topics yet.</p>
+                <p className="text-sm text-orange-100/75">No videos matched this course’s topics yet.</p>
               )}
-              <Link to="/training/videos" className="inline-flex mt-2 text-amber-300 hover:underline text-sm">
+              <Link to="/training/videos" className="inline-flex mt-2 text-orange-300 hover:underline text-sm">
                 Browse full Video Library
               </Link>
             </GlassCard>
 
             {requiresQuiz && (
-              <GlassCard className="p-6 bg-black/60 border border-amber-500/25">
+              <GlassCard className="p-6 bg-black/60 border border-orange-500/25">
                 <h2 className="text-xl font-bold text-white mb-2">Assessment</h2>
-                <p className="text-sm text-amber-100/75 mb-5">
+                <p className="text-sm text-orange-100/75 mb-5">
                   Pass with {passThreshold}% or higher to complete this course.
                 </p>
 
                 {isCDL ? (
                   <div className="space-y-4">
                     {cdlQuestions.map((q: any) => (
-                      <div key={q.id} className="rounded-xl border border-amber-500/20 bg-black/40 p-4 space-y-3">
+                      <div key={q.id} className="rounded-xl border border-orange-500/20 bg-black/40 p-4 space-y-3">
                         <div className="font-semibold text-white">{q.question}</div>
                         <div className="grid gap-2">
                           {Array.isArray(q.choices) &&
@@ -398,8 +398,8 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                                   onClick={() => (cdl as any).answerQuestion(q.id, idx)}
                                   className={`text-left rounded-lg px-3 py-2 border transition ${
                                     selected
-                                      ? "border-amber-400/60 bg-amber-500/10 text-amber-100"
-                                      : "border-white/10 bg-black/40 text-amber-100/80 hover:bg-black/50"
+                                      ? "border-orange-400/60 bg-orange-500/10 text-orange-100"
+                                      : "border-white/10 bg-black/40 text-orange-100/80 hover:bg-black/50"
                                   }`}
                                 >
                                   {choice}
@@ -409,11 +409,11 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                         </div>
                       </div>
                     ))}
-                    <div className="rounded-xl border border-amber-500/20 bg-black/40 p-4 flex items-center justify-between flex-wrap gap-3">
-                      <div className="text-sm text-amber-100/80">
+                    <div className="rounded-xl border border-orange-500/20 bg-black/40 p-4 flex items-center justify-between flex-wrap gap-3">
+                      <div className="text-sm text-orange-100/80">
                         Score: <span className="font-semibold text-white">{(cdl as any).percent}%</span>
                       </div>
-                      <div className={`text-sm font-semibold ${(cdl as any).passed ? "text-emerald-300" : "text-amber-200"}`}>
+                      <div className={`text-sm font-semibold ${(cdl as any).passed ? "text-emerald-300" : "text-orange-200"}`}>
                         {(cdl as any).passed ? "Passed" : "Not yet passed"}
                       </div>
                     </div>
@@ -421,7 +421,7 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                 ) : (
                   <div className="space-y-4">
                     {flaggerQuestions.map((q: any) => (
-                      <div key={q.id} className="rounded-xl border border-amber-500/20 bg-black/40 p-4 space-y-3">
+                      <div key={q.id} className="rounded-xl border border-orange-500/20 bg-black/40 p-4 space-y-3">
                         <div className="font-semibold text-white">{q.question}</div>
                         <div className="grid gap-2">
                           {Array.isArray(q.choices) &&
@@ -434,8 +434,8 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                                   onClick={() => (flagger as any).answerQuestion(q.id, idx)}
                                   className={`text-left rounded-lg px-3 py-2 border transition ${
                                     selected
-                                      ? "border-amber-400/60 bg-amber-500/10 text-amber-100"
-                                      : "border-white/10 bg-black/40 text-amber-100/80 hover:bg-black/50"
+                                      ? "border-orange-400/60 bg-orange-500/10 text-orange-100"
+                                      : "border-white/10 bg-black/40 text-orange-100/80 hover:bg-black/50"
                                   }`}
                                 >
                                   {choice}
@@ -445,11 +445,11 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                         </div>
                       </div>
                     ))}
-                    <div className="rounded-xl border border-amber-500/20 bg-black/40 p-4 flex items-center justify-between flex-wrap gap-3">
-                      <div className="text-sm text-amber-100/80">
+                    <div className="rounded-xl border border-orange-500/20 bg-black/40 p-4 flex items-center justify-between flex-wrap gap-3">
+                      <div className="text-sm text-orange-100/80">
                         Score: <span className="font-semibold text-white">{(flagger as any).percent}%</span>
                       </div>
-                      <div className={`text-sm font-semibold ${(flagger as any).passed ? "text-emerald-300" : "text-amber-200"}`}>
+                      <div className={`text-sm font-semibold ${(flagger as any).passed ? "text-emerald-300" : "text-orange-200"}`}>
                         {(flagger as any).passed ? "Passed" : "Not yet passed"}
                       </div>
                     </div>

@@ -71,10 +71,10 @@ export default function FormsIndex() {
   }
 
   return (
-    <div className="space-y-6 max-w-6xl w-full mx-auto text-yellow-100 px-1 sm:px-2">
+    <div className="space-y-6 max-w-6xl w-full mx-auto text-orange-100 px-1 sm:px-2">
       <header className="space-y-3">
         <div className="flex items-center gap-3">
-          <div className="h-11 w-11 rounded-2xl border border-yellow-400/40 bg-black/60 flex items-center justify-center text-yellow-300 shadow-[0_10px_28px_rgba(0,0,0,0.45)]">
+          <div className="h-11 w-11 rounded-2xl border border-orange-400/40 bg-black/60 flex items-center justify-center text-orange-300 shadow-[0_10px_28px_rgba(0,0,0,0.45)]">
             <ClipboardList className="w-5 h-5" />
           </div>
           <div>
@@ -83,16 +83,16 @@ export default function FormsIndex() {
             </h1>
           </div>
         </div>
-        <div className="h-[2px] w-48 bg-gradient-to-r from-yellow-400 via-amber-400 to-transparent rounded-full shadow-[0_0_16px_rgba(250,204,21,0.6)]" />
+        <div className="h-[2px] w-48 bg-gradient-to-r from-orange-400 via-orange-400 to-transparent rounded-full shadow-[0_0_16px_rgba(249,115,22,0.6)]" />
       </header>
 
-      <GlassCard className="p-4 text-sm text-yellow-100/80">
+      <GlassCard className="p-4 text-sm text-orange-100/80">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <span className="flex items-center gap-2">
-            <span className="inline-flex h-2 w-2 rounded-full bg-yellow-300 animate-pulse" />
+            <span className="inline-flex h-2 w-2 rounded-full bg-orange-300 animate-pulse" />
             Open any available form from this hub.
           </span>
-          <span className="text-yellow-200/70">
+          <span className="text-orange-200/70">
             C85, JSA, DVIR, Incident, Whistleblower, Company forms
           </span>
         </div>

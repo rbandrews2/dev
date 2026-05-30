@@ -42,13 +42,13 @@ export default function NavigationSidebar({ mobileOpen, closeMobile }: Props) {
   const navItems = baseNavItems.filter((item) => !item.adminOnly || canAdmin);
 
   const content = (
-    <div className="flex flex-col h-full bg-black/60 backdrop-blur-lg border-r border-amber-500/20 shadow-glow">
-      <div className="px-5 py-4 border-b border-amber-500/20">
+    <div className="flex flex-col h-full bg-black/60 backdrop-blur-lg border-r border-orange-500/20 shadow-glow">
+      <div className="px-5 py-4 border-b border-orange-500/20">
         <Link to="/" className="flex items-center gap-3">
           <img src="/wzos-logo.svg" alt="Work Zone OS" className="h-8 w-8" />
           <div>
-            <p className="text-sm font-semibold text-amber-200">Work Zone OS</p>
-            <p className="text-xs text-amber-100/70">Field ops + safety</p>
+            <p className="text-sm font-semibold text-orange-200">Work Zone OS</p>
+            <p className="text-xs text-orange-100/70">Field ops + safety</p>
           </div>
         </Link>
       </div>
@@ -65,13 +65,13 @@ export default function NavigationSidebar({ mobileOpen, closeMobile }: Props) {
             return (
               <div
                 key={item.label}
-                className="flex items-center justify-between rounded-xl border border-amber-500/20 bg-black/50 px-3 py-2 text-sm text-amber-200/70"
+                className="flex items-center justify-between rounded-xl border border-orange-500/20 bg-black/50 px-3 py-2 text-sm text-orange-200/70"
               >
                 <div className="flex items-center gap-3">
                   <Icon className="h-4 w-4" />
                   <span>{item.label}</span>
                 </div>
-                <span className="text-[11px] text-amber-300/70">
+                <span className="text-[11px] text-orange-300/70">
                   {item.inactiveMessage || "Available upon activation"}
                 </span>
               </div>
@@ -85,8 +85,8 @@ export default function NavigationSidebar({ mobileOpen, closeMobile }: Props) {
               onClick={closeMobile}
               className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition border ${
                 active
-                  ? "bg-amber-500/15 border-amber-400/50 text-amber-100 shadow-glow"
-                  : "bg-black/40 border-amber-500/10 text-amber-100/80 hover:border-amber-400/40 hover:text-amber-50"
+                  ? "bg-orange-500/15 border-orange-400/50 text-orange-100 shadow-glow"
+                  : "bg-black/40 border-orange-500/10 text-orange-100/80 hover:border-orange-400/40 hover:text-orange-50"
               }`}
             >
               <Icon className="h-4 w-4" />

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -150,7 +150,7 @@ export default function Editor() {
       <div className="p-6 space-y-4">
         <button
           type="button"
-          className="inline-flex items-center gap-2 text-amber-100 hover:text-white"
+          className="inline-flex items-center gap-2 text-orange-100 hover:text-white"
           onClick={() => navigate("/scheduling")}
         >
           <ArrowLeft className="h-4 w-4" />
@@ -158,7 +158,7 @@ export default function Editor() {
         </button>
         <GlassCard className="p-5 space-y-2">
           <h1 className="text-xl font-semibold text-white">Admin access required</h1>
-          <p className="text-sm text-amber-100/80">
+          <p className="text-sm text-orange-100/80">
             Only owners or admins can create or edit schedule entries. Ask an admin to make this change for you.
           </p>
         </GlassCard>
@@ -404,7 +404,7 @@ export default function Editor() {
           <button
             onClick={saveEvent}
             disabled={saving}
-            className="w-full mt-8 py-3 rounded-lg bg-yellow-500 hover:bg-yellow-600 text-black font-semibold transition disabled:opacity-40"
+            className="w-full mt-8 py-3 rounded-lg bg-orange-500 hover:bg-orange-600 text-black font-semibold transition disabled:opacity-40"
           >
             {saving ? "Saving..." : "Save Schedule"}
           </button>

@@ -7,7 +7,7 @@ export default function FeatureLocked() {
         <div className="space-y-3">
           <img src="/wzos-logo.svg" alt="Work Zone OS" className="h-10 w-10 mx-auto" />
           <h1 className="text-2xl font-semibold text-white">Available upon activation</h1>
-          <p className="text-sm text-amber-100/80">
+          <p className="text-sm text-orange-100/80">
             This module is locked for the current demo build. Contact Superior Consultation to enable it for your environment.
           </p>
         </div>

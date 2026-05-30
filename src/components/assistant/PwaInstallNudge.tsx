@@ -69,9 +69,9 @@ const PwaInstallNudge: React.FC = () => {
 
   return (
     <div className="fixed bottom-4 right-4 z-40">
-      <div className="bg-black/90 border border-amber-500/40 rounded-2xl px-4 py-3 text-[11px] text-amber-50 shadow-[0_0_16px_rgba(255,179,0,0.45)] max-w-xs flex items-start gap-3">
+      <div className="bg-black/90 border border-orange-500/40 rounded-2xl px-4 py-3 text-[11px] text-orange-50 shadow-[0_0_16px_rgba(249,115,22,0.45)] max-w-xs flex items-start gap-3">
         <div className="mt-0.5">
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-500 text-black text-xs font-bold">
+          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-orange-500 text-black text-xs font-bold">
             WZ
           </span>
         </div>
@@ -84,14 +84,14 @@ const PwaInstallNudge: React.FC = () => {
             <button
               type="button"
               onClick={handleInstall}
-              className="px-3 py-1 rounded-full bg-amber-500 text-black text-[11px] font-semibold hover:bg-amber-400"
+              className="px-3 py-1 rounded-full bg-orange-500 text-black text-[11px] font-semibold hover:bg-orange-400"
             >
               Install app
             </button>
             <button
               type="button"
               onClick={handleClose}
-              className="px-2 py-1 rounded-full border border-amber-500/40 text-[11px] text-amber-200 hover:bg-black/60"
+              className="px-2 py-1 rounded-full border border-orange-500/40 text-[11px] text-orange-200 hover:bg-black/60"
             >
               Later
             </button>

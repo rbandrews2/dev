@@ -87,13 +87,13 @@ export default function PurchaseSuccess() {
         </div>
       )}
 
-      <section className="rounded-3xl border border-amber-500/20 bg-black/40 p-6">
+      <section className="rounded-3xl border border-orange-500/20 bg-black/40 p-6">
         {!state?.ready ? (
-          <div className="flex items-center gap-3 text-amber-100">
-            <LoaderCircle className="h-5 w-5 animate-spin text-amber-300" />
+          <div className="flex items-center gap-3 text-orange-100">
+            <LoaderCircle className="h-5 w-5 animate-spin text-orange-300" />
             <div>
               <div className="font-semibold text-white">Finalizing your activation package</div>
-              <p className="text-sm text-amber-100/70">
+              <p className="text-sm text-orange-100/70">
                 This page updates automatically as soon as the Stripe webhook finishes issuing your code.
               </p>
             </div>
@@ -101,13 +101,13 @@ export default function PurchaseSuccess() {
         ) : (
           <div className="space-y-5">
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-amber-200/70">Activation code</p>
-              <div className="mt-2 flex flex-col gap-3 rounded-2xl border border-amber-500/20 bg-zinc-950/80 p-5 md:flex-row md:items-center md:justify-between">
+              <p className="text-xs uppercase tracking-[0.18em] text-orange-200/70">Activation code</p>
+              <div className="mt-2 flex flex-col gap-3 rounded-2xl border border-orange-500/20 bg-zinc-950/80 p-5 md:flex-row md:items-center md:justify-between">
                 <div className="font-mono text-2xl tracking-[0.28em] text-white">{state.activation_code}</div>
                 <button
                   type="button"
                   onClick={() => void copyCode()}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-amber-400/30 px-4 py-2 text-sm text-amber-100 transition hover:bg-white/5"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-orange-400/30 px-4 py-2 text-sm text-orange-100 transition hover:bg-white/5"
                 >
                   <Copy className="h-4 w-4" />
                   {copied ? "Copied" : "Copy code"}
@@ -121,14 +121,14 @@ export default function PurchaseSuccess() {
               <ActionLink href={state.support_url || "/contact"} label="Schedule installation help" />
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-amber-50/75">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-orange-50/75">
               After purchase, use this code to create the organization and add its members and admins.
             </div>
           </div>
         )}
       </section>
 
-      <div className="text-sm text-amber-100/70">
+      <div className="text-sm text-orange-100/70">
         Need to return later? Your activation code is also sent by email, and the download/install links remain available from that message.
       </div>
       <Link to="/" className="text-sm text-emerald-300 hover:text-emerald-200">

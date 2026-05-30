@@ -1,4 +1,4 @@
-﻿import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { wzosTheme, wzosCardClasses } from "@/theme/wzosTheme";
 
@@ -88,7 +88,7 @@ export default function LiquidGlassCard({
 
   const content = (
     <>
-      {icon && <div className="mb-3 text-amber-200">{icon}</div>}
+      {icon && <div className="mb-3 text-orange-200">{icon}</div>}
 
       <h2 className="font-semibold text-lg tracking-wide">{title}</h2>
       {subtitle && (
@@ -97,7 +97,7 @@ export default function LiquidGlassCard({
         </p>
       )}
       {statusText && (
-        <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-amber-200/60">
+        <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-orange-200/60">
           {statusText}
         </p>
       )}

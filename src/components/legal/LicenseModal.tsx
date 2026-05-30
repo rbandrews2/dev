@@ -42,16 +42,16 @@ export default function LicenseModal() {
 
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-md px-4">
-      <div className="w-full max-w-xl rounded-2xl border border-amber-500/40 bg-black/80 p-6 shadow-[0_18px_48px_rgba(0,0,0,0.7)]">
-        <p className="text-xs uppercase tracking-[0.18em] text-amber-200/80 mb-2">
+      <div className="w-full max-w-xl rounded-2xl border border-orange-500/40 bg-black/80 p-6 shadow-[0_18px_48px_rgba(0,0,0,0.7)]">
+        <p className="text-xs uppercase tracking-[0.18em] text-orange-200/80 mb-2">
           Limited Ownership License – Summary Notice
         </p>
         <h2 className="text-2xl font-semibold text-white mb-2">Work Zone OS (WZOS)</h2>
-        <p className="text-sm text-amber-100/80 mb-4">
+        <p className="text-sm text-orange-100/80 mb-4">
           Superior Consultation, LLC
         </p>
 
-        <ul className="space-y-2 text-sm text-amber-100/85 list-disc list-inside mb-5">
+        <ul className="space-y-2 text-sm text-orange-100/85 list-disc list-inside mb-5">
           <li>Work Zone OS is the exclusive property of Superior Consultation, LLC.</li>
           <li>You are granted a limited, non-transferable license for internal business use only.</li>
           <li>No modifications, reverse engineering, or integrations without explicit written consent.</li>
@@ -65,19 +65,19 @@ export default function LicenseModal() {
         <div className="flex flex-col sm:flex-row gap-3">
           <a
             href="/license-agreement"
-            className="inline-flex items-center justify-center rounded-lg border border-amber-500/50 bg-black/60 px-4 py-2 text-sm font-semibold text-amber-100 hover:border-amber-300 transition"
+            className="inline-flex items-center justify-center rounded-lg border border-orange-500/50 bg-black/60 px-4 py-2 text-sm font-semibold text-orange-100 hover:border-orange-300 transition"
           >
             View Full License Agreement
           </a>
           <button
             type="button"
             onClick={handleAgree}
-            className="inline-flex flex-1 items-center justify-center rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black shadow-[0_0_18px_rgba(255,193,7,0.45)] hover:bg-amber-400 transition"
+            className="inline-flex flex-1 items-center justify-center rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-black shadow-[0_0_18px_rgba(249,115,22,0.45)] hover:bg-orange-400 transition"
           >
             I Agree and Continue
           </button>
         </div>
-        <p className="mt-3 text-xs text-amber-100/70">
+        <p className="mt-3 text-xs text-orange-100/70">
           Acceptance required on first install, first launch, and after any update. Timestamp and app version are recorded locally.
         </p>
       </div>

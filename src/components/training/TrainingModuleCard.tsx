@@ -21,7 +21,7 @@ const TrainingModuleCard: React.FC<TrainingModuleCardProps> = ({
   return (
     <div 
       onClick={onClick}
-      className="bg-wz_glass backdrop-blur-xl border border-wz_border rounded-xl shadow-glow p-5 hover:shadow-glow-strong transition-all cursor-pointer hover:border-amber-400/40 hover:bg-white/5"
+      className="bg-wz_glass backdrop-blur-xl border border-wz_border rounded-xl shadow-glow p-5 hover:shadow-glow-strong transition-all cursor-pointer hover:border-orange-400/40 hover:bg-white/5"
     >
       <div className="flex justify-between items-start mb-3">
         <h3 className="font-bold text-white text-lg">{title}</h3>
@@ -36,7 +36,7 @@ const TrainingModuleCard: React.FC<TrainingModuleCardProps> = ({
           <span>{progress}%</span>
         </div>
         <div className="w-full bg-gray-700 rounded-full h-2">
-          <div className="bg-amber-500 h-2 rounded-full transition-all" style={{width: `${progress}%`}}></div>
+          <div className="bg-orange-500 h-2 rounded-full transition-all" style={{width: `${progress}%`}}></div>
         </div>
       </div>
       <p className="text-xs text-gray-500">Duration: {duration}</p>

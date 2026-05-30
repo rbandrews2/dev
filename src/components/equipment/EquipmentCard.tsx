@@ -13,7 +13,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
   name, image, status, location, operator, onClick
 }) => {
   const statusColors = {
-    available: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+    available: 'bg-orange-500/20 text-orange-300 border-orange-500/40',
     'in-use': 'bg-orange-500/20 text-orange-300 border-orange-500/40',
     maintenance: 'bg-red-500/20 text-red-300 border-red-500/40',
   } as const;
@@ -22,7 +22,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
   return (
     <div 
       onClick={onClick}
-      className="bg-wz_glass backdrop-blur-xl border border-wz_border rounded-xl shadow-glow overflow-hidden hover:shadow-glow-strong transition-all cursor-pointer hover:border-amber-400/40 hover:bg-white/5"
+      className="bg-wz_glass backdrop-blur-xl border border-wz_border rounded-xl shadow-glow overflow-hidden hover:shadow-glow-strong transition-all cursor-pointer hover:border-orange-400/40 hover:bg-white/5"
     >
       <div className="h-48 overflow-hidden">
         <img src={image} alt={name} className="w-full h-full object-cover hover:scale-105 transition-transform" />

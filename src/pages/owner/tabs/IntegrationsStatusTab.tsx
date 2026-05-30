@@ -40,7 +40,7 @@ function errorMessage(error: unknown, fallback: string) {
 
 function badgeClass(strength: SecretCheck["strength"]) {
   if (strength === "ok") return "border-emerald-700 bg-emerald-950/40 text-emerald-200";
-  if (strength === "weak") return "border-amber-700 bg-amber-950/40 text-amber-200";
+  if (strength === "weak") return "border-orange-700 bg-orange-950/40 text-orange-200";
   return "border-red-800 bg-red-950/40 text-red-200";
 }
 
@@ -126,10 +126,10 @@ export default function IntegrationsStatusTab() {
               )}
               {provider.missingClientConfig.length > 0 && (
                 <div className="mt-3">
-                  <div className="text-xs text-amber-300">Missing browser config</div>
+                  <div className="text-xs text-orange-300">Missing browser config</div>
                   <div className="mt-1 flex flex-wrap gap-2">
                     {provider.missingClientConfig.map((name) => (
-                      <span key={name} className="rounded border border-amber-700 bg-amber-950/30 px-2 py-1 font-mono text-[11px] text-amber-200">
+                      <span key={name} className="rounded border border-orange-700 bg-orange-950/30 px-2 py-1 font-mono text-[11px] text-orange-200">
                         {name}
                       </span>
                     ))}
@@ -168,7 +168,7 @@ function Kpi({ title, ok }: { title: string; ok: boolean }) {
   return (
     <div className="rounded border border-zinc-800 bg-zinc-950 p-4">
       <div className="text-xs text-zinc-400">{title}</div>
-      <div className={`mt-2 text-lg font-semibold ${ok ? "text-emerald-300" : "text-amber-200"}`}>
+      <div className={`mt-2 text-lg font-semibold ${ok ? "text-emerald-300" : "text-orange-200"}`}>
         {ok ? "Ready" : "Needs setup"}
       </div>
     </div>

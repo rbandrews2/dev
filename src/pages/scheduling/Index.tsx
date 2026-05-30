@@ -30,16 +30,16 @@ export default function SchedulingIndex() {
   ];
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto text-yellow-100">
+    <div className="space-y-6 max-w-6xl mx-auto text-orange-100">
       <div className="flex items-center gap-3">
-        <div className="h-11 w-11 rounded-2xl border border-yellow-400/40 bg-black/60 flex items-center justify-center text-yellow-300 shadow-[0_10px_28px_rgba(0,0,0,0.45)]">
+        <div className="h-11 w-11 rounded-2xl border border-orange-400/40 bg-black/60 flex items-center justify-center text-orange-300 shadow-[0_10px_28px_rgba(0,0,0,0.45)]">
           <CalendarClock className="w-5 h-5" />
         </div>
         <div>
           <h1 className="text-2xl md:text-3xl font-semibold tracking-wide">
             Scheduling
           </h1>
-          <p className="text-sm text-yellow-100/75">
+          <p className="text-sm text-orange-100/75">
             Consistent glass tiles + amber accents for the scheduling hub.
           </p>
         </div>
@@ -52,11 +52,11 @@ export default function SchedulingIndex() {
       </div>
 
       <GlassCard className="p-4 space-y-3">
-        <div className="text-sm uppercase tracking-[0.12em] text-yellow-200/80">
+        <div className="text-sm uppercase tracking-[0.12em] text-orange-200/80">
           Upcoming dates
         </div>
         {dates.length === 0 ? (
-          <div className="text-yellow-100/70 text-sm">
+          <div className="text-orange-100/70 text-sm">
             No dates found yet. Add schedules in the editor to populate this list.
           </div>
         ) : (
@@ -65,10 +65,10 @@ export default function SchedulingIndex() {
               <Link
                 key={d}
                 to={`/scheduling/day/${d}`}
-                className="block rounded-xl border border-yellow-400/25 bg-black/40 px-4 py-3 hover:border-yellow-300/50 transition-colors"
+                className="block rounded-xl border border-orange-400/25 bg-black/40 px-4 py-3 hover:border-orange-300/50 transition-colors"
               >
-                <div className="font-semibold text-yellow-100">{d}</div>
-                <div className="text-xs text-yellow-100/70">Tap for daily view</div>
+                <div className="font-semibold text-orange-100">{d}</div>
+                <div className="text-xs text-orange-100/70">Tap for daily view</div>
               </Link>
             ))}
           </div>

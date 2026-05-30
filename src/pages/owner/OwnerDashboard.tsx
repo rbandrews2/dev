@@ -101,7 +101,7 @@ export default function OwnerDashboard() {
       <header className="rounded-2xl border border-zinc-800 bg-black/70 px-4 py-4">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <div className="text-xs uppercase tracking-[0.18em] text-amber-200/70">Owner/Admin Dashboard</div>
+            <div className="text-xs uppercase tracking-[0.18em] text-orange-200/70">Owner/Admin Dashboard</div>
             <h1 className="text-2xl font-semibold">Admin Console</h1>
             <p className="text-sm text-zinc-400">
               All owner and admin actions live here. Crew pages expose only crew-level workflows.
@@ -118,7 +118,7 @@ export default function OwnerDashboard() {
                     ? "cursor-not-allowed border-zinc-800 bg-zinc-900/60 text-zinc-600"
                     : tab === item.key
                     ? "border-emerald-500 bg-emerald-600/20 text-emerald-100"
-                    : "border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-amber-500/50 hover:text-white"
+                    : "border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-orange-500/50 hover:text-white"
                 }`}
                 title={item.lockedInCore ? "upgrade to activate" : undefined}
               >
@@ -178,7 +178,7 @@ export default function OwnerDashboard() {
                   );
                 })}
             </div>
-            <div className="rounded-xl border border-amber-500/20 bg-black/50 p-4 text-sm text-amber-100/80">
+            <div className="rounded-xl border border-orange-500/20 bg-black/50 p-4 text-sm text-orange-100/80">
               Security, Vault, Dispatch, integrations, uploads, schedule edits, work-order creation, training content
               changes, user-role management, and time-clock corrections are centralized here.
             </div>
@@ -186,7 +186,7 @@ export default function OwnerDashboard() {
         ) : (
           <section className="space-y-4">
             <div className="rounded-xl border border-zinc-800 bg-black/60 p-4">
-              <div className="text-xs uppercase tracking-[0.18em] text-amber-200/70">Admin Section</div>
+              <div className="text-xs uppercase tracking-[0.18em] text-orange-200/70">Admin Section</div>
               <h2 className="text-2xl font-semibold">{activeConfig.label}</h2>
               <p className="text-sm text-zinc-400">{activeConfig.description}</p>
             </div>

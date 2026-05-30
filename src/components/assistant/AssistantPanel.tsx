@@ -91,7 +91,7 @@ export default function AssistantPanel({ open = false, onClose }: AssistantPanel
           h-[85vh] md:h-[600px]
           bg-[rgba(20,20,20,0.65)] 
           backdrop-blur-xl
-          border border-yellow-600/40
+          border border-orange-600/40
           rounded-t-2xl md:rounded-2xl
           shadow-[0_0_25px_rgba(255,200,50,0.35)]
           flex flex-col overflow-hidden
@@ -101,13 +101,13 @@ export default function AssistantPanel({ open = false, onClose }: AssistantPanel
         <div className="
           flex items-center justify-between
           px-4 py-3
-          border-b border-yellow-700/30
+          border-b border-orange-700/30
           bg-black/40 backdrop-blur-md
         ">
           <div className="flex items-center gap-3">
             <AiAvatar size={40} />
             <div className="flex flex-col">
-              <span className="font-semibold text-yellow-400 text-sm">
+              <span className="font-semibold text-orange-400 text-sm">
                 Work Zone AI
               </span>
               <span className="text-gray-400 text-xs -mt-0.5">
@@ -123,7 +123,7 @@ export default function AssistantPanel({ open = false, onClose }: AssistantPanel
             }}
             className="
               px-3 py-1.5 text-xs font-medium
-              bg-yellow-500 hover:bg-yellow-600
+              bg-orange-500 hover:bg-orange-600
               text-black rounded-md transition-colors
             "
           >
@@ -146,8 +146,8 @@ export default function AssistantPanel({ open = false, onClose }: AssistantPanel
               className={`
                 max-w-[85%] px-3 py-2 rounded-lg text-sm leading-relaxed
                 ${m.role === "user"
-                  ? "ml-auto bg-yellow-500 text-black"
-                  : "mr-auto bg-black/40 border border-yellow-700/30 backdrop-blur-md"
+                  ? "ml-auto bg-orange-500 text-black"
+                  : "mr-auto bg-black/40 border border-orange-700/30 backdrop-blur-md"
                 }
               `}
             >
@@ -158,7 +158,7 @@ export default function AssistantPanel({ open = false, onClose }: AssistantPanel
           {isLoading && (
             <div
               className="
-                w-fit bg-black/40 border border-yellow-700/30
+                w-fit bg-black/40 border border-orange-700/30
                 px-3 py-2 rounded-lg text-sm text-gray-300
                 animate-pulse
               "
@@ -173,7 +173,7 @@ export default function AssistantPanel({ open = false, onClose }: AssistantPanel
           className="
             w-full p-3 flex items-center gap-2
             bg-black/50 backdrop-blur-md
-            border-t border-yellow-700/30
+            border-t border-orange-700/30
           "
         >
           <input
@@ -184,9 +184,9 @@ export default function AssistantPanel({ open = false, onClose }: AssistantPanel
             onKeyPress={handleKeyPress}
             className="
               flex-1 px-3 py-2 text-sm rounded-md bg-black/70 
-              border border-yellow-700/40 text-gray-100
+              border border-orange-700/40 text-gray-100
               focus:outline-none focus:ring-1
-              focus:ring-yellow-500 placeholder-gray-500
+              focus:ring-orange-500 placeholder-gray-500
             "
           />
 
@@ -195,7 +195,7 @@ export default function AssistantPanel({ open = false, onClose }: AssistantPanel
             disabled={isLoading || input.trim().length === 0}
             className="
               px-4 py-2 text-sm font-medium rounded-md
-              bg-yellow-500 hover:bg-yellow-600
+              bg-orange-500 hover:bg-orange-600
               text-black transition-colors
               disabled:opacity-50 disabled:cursor-not-allowed
             "

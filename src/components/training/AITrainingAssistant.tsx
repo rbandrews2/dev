@@ -110,7 +110,7 @@ export function AITrainingAssistant({ moduleTitle, moduleId, context }: AITraini
             <div
               className={`max-w-[80%] rounded-xl px-3 py-2 text-sm ${
                 msg.role === "user"
-                  ? "bg-yellow-500 text-black"
+                  ? "bg-orange-500 text-black"
                   : "bg-black/80 text-neutral-50 border border-neutral-800"
               }`}
             >
@@ -134,7 +134,7 @@ export function AITrainingAssistant({ moduleTitle, moduleId, context }: AITraini
         <Button
           type="submit"
           disabled={loading || !input.trim()}
-          className="bg-yellow-500 text-black hover:bg-yellow-400 disabled:opacity-60"
+          className="bg-orange-500 text-black hover:bg-orange-400 disabled:opacity-60"
         >
           {loading ? (
             <Loader2 className="w-4 h-4 animate-spin" />

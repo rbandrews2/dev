@@ -22,17 +22,17 @@ export default function HazardManager() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold text-yellow-400 mb-4">
+      <h1 className="text-xl font-semibold text-orange-400 mb-4">
         Hazard Manager
       </h1>
 
       <HazardMapPanel />
 
-      <div className="mt-6 bg-black/30 p-4 rounded-xl backdrop-blur-md border border-yellow-400/30">
-        <h2 className="font-semibold text-yellow-300 mb-2">Active Hazards</h2>
+      <div className="mt-6 bg-black/30 p-4 rounded-xl backdrop-blur-md border border-orange-400/30">
+        <h2 className="font-semibold text-orange-300 mb-2">Active Hazards</h2>
 
         <table className="w-full text-sm">
-          <thead className="text-yellow-400">
+          <thead className="text-orange-400">
             <tr>
               <th className="text-left">Title</th>
               <th>Severity</th>
@@ -42,7 +42,7 @@ export default function HazardManager() {
 
           <tbody>
             {hazards.map((h) => (
-              <tr key={h.id} className="border-b border-yellow-400/10">
+              <tr key={h.id} className="border-b border-orange-400/10">
                 <td>{h.title}</td>
                 <td>{h.severity}</td>
                 <td className="flex gap-2">
@@ -59,7 +59,7 @@ export default function HazardManager() {
                       });
                       load();
                     }}
-                    className="text-yellow-400 hover:text-yellow-300"
+                    className="text-orange-400 hover:text-orange-300"
                   >
                     Update
                   </button>

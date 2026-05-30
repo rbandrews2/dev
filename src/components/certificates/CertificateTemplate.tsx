@@ -16,9 +16,9 @@ export function CertificateTemplate({ userName, courseName, completionDate, cert
 
   return (
     <div className="space-y-4">
-      <Card className="p-12 bg-white border-4 border-amber-400 print:border-amber-600 shadow-lg shadow-neutral-900/40">
+      <Card className="p-12 bg-white border-4 border-orange-400 print:border-orange-600 shadow-lg shadow-neutral-900/40">
         <div className="text-center space-y-6">
-          <div className="border-b-2 border-amber-300 pb-4">
+          <div className="border-b-2 border-orange-300 pb-4">
             <h1 className="text-4xl font-bold text-neutral-900">Certificate of Completion</h1>
             <p className="text-sm text-neutral-700 mt-2">Work Zone OS Training Academy</p>
           </div>
@@ -27,10 +27,10 @@ export function CertificateTemplate({ userName, courseName, completionDate, cert
             <p className="text-lg text-neutral-700">This certifies that</p>
             <h2 className="text-3xl font-bold text-neutral-900">{userName}</h2>
             <p className="text-lg text-neutral-700">has successfully completed</p>
-            <h3 className="text-2xl font-semibold text-amber-700">{courseName}</h3>
+            <h3 className="text-2xl font-semibold text-orange-700">{courseName}</h3>
             {score !== undefined && (
               <p className="text-md text-neutral-700">
-                with a final score of <span className="font-semibold text-amber-700">{score.toFixed(1)}%</span>
+                with a final score of <span className="font-semibold text-orange-700">{score.toFixed(1)}%</span>
               </p>
             )}
           </div>
@@ -60,10 +60,10 @@ export function CertificateTemplate({ userName, courseName, completionDate, cert
       </Card>
 
       <div className="flex gap-2 print:hidden">
-        <Button onClick={handlePrint} className="flex-1 bg-yellow-500 text-black hover:bg-yellow-400">
+        <Button onClick={handlePrint} className="flex-1 bg-orange-500 text-black hover:bg-orange-400">
           Print Certificate
         </Button>
-        <Button variant="outline" className="flex-1 border-amber-400 text-amber-700 hover:bg-amber-50">
+        <Button variant="outline" className="flex-1 border-orange-400 text-orange-700 hover:bg-orange-50">
           Download PDF
         </Button>
       </div>

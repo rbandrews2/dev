@@ -197,7 +197,7 @@ export default function AdminTimeClockTab() {
                 Refresh
               </Button>
             </div>
-            {status && <p className="text-sm text-amber-100/80">{status}</p>}
+            {status && <p className="text-sm text-orange-100/80">{status}</p>}
           </div>
         </div>
       </section>

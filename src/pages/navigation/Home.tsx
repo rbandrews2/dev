@@ -110,22 +110,22 @@ export default function NavigationHome() {
   }
 
   return (
-    <div className="space-y-6 max-w-3xl w-full mx-auto text-yellow-200">
+    <div className="space-y-6 max-w-3xl w-full mx-auto text-orange-200">
       <div className="flex items-center gap-3">
-        <div className="h-11 w-11 rounded-2xl border border-amber-400/40 bg-black/60 flex items-center justify-center text-amber-300">
+        <div className="h-11 w-11 rounded-2xl border border-orange-400/40 bg-black/60 flex items-center justify-center text-orange-300">
           <Map className="h-5 w-5" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Navigation</h1>
-          <p className="text-sm text-yellow-100/75">
+          <p className="text-sm text-orange-100/75">
             Online & offline routing with hazard awareness.
           </p>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-amber-400/25 bg-black/60 overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+      <div className="rounded-2xl border border-orange-400/25 bg-black/60 overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
         <div ref={mapRef} className="w-full min-h-[260px]" />
-        <div className="px-4 py-2 text-[11px] text-yellow-100/70 bg-black/50 border-t border-amber-400/20 flex items-center justify-between gap-3">
+        <div className="px-4 py-2 text-[11px] text-orange-100/70 bg-black/50 border-t border-orange-400/20 flex items-center justify-between gap-3">
           <span>Lightweight embed for quick situational awareness. Interactive routing loads after you start navigation.</span>
           {mapStatus && <span className="text-red-200">{mapStatus}</span>}
         </div>
@@ -138,7 +138,7 @@ export default function NavigationHome() {
             type="text"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
-            className="w-full p-3 bg-black/40 border border-yellow-400/20 rounded-md text-yellow-100"
+            className="w-full p-3 bg-black/40 border border-orange-400/20 rounded-md text-orange-100"
             placeholder="Enter starting point or use GPS"
           />
         </div>
@@ -150,7 +150,7 @@ export default function NavigationHome() {
             type="text"
             value={to}
             onChange={(e) => setTo(e.target.value)}
-            className="w-full p-3 bg-black/40 border border-yellow-400/20 rounded-md text-yellow-100"
+            className="w-full p-3 bg-black/40 border border-orange-400/20 rounded-md text-orange-100"
             placeholder="Enter destinationƒ?İ"
           />
         </div>
@@ -158,7 +158,7 @@ export default function NavigationHome() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             onClick={handleOnlineNav}
-            className="p-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-md shadow-lg transition"
+            className="p-4 bg-orange-500 hover:bg-orange-400 text-black font-bold rounded-md shadow-lg transition"
           >
             Start Online Navigation
           </button>
@@ -174,20 +174,20 @@ export default function NavigationHome() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             onClick={() => navigate("/navigation/hazard")}
-            className="p-4 bg-black/40 border border-yellow-400/20 rounded-md hover:bg-black/30 flex items-center justify-center gap-2"
+            className="p-4 bg-black/40 border border-orange-400/20 rounded-md hover:bg-black/30 flex items-center justify-center gap-2"
           >
             <AlertTriangle className="h-4 w-4" /> View Hazard Map
           </button>
 
           <button
             onClick={() => navigate("/navigation/weather")}
-            className="p-4 bg-black/40 border border-yellow-400/20 rounded-md hover:bg-black/30 flex items-center justify-center gap-2"
+            className="p-4 bg-black/40 border border-orange-400/20 rounded-md hover:bg-black/30 flex items-center justify-center gap-2"
           >
             <PinIcon className="h-4 w-4" /> Weather Conditions
           </button>
         </div>
 
-        <p className="text-xs text-yellow-100/70 flex items-center gap-2">
+        <p className="text-xs text-orange-100/70 flex items-center gap-2">
           <WifiOff className="h-4 w-4" /> Offline routing expects coordinates or a tapped map destination.
         </p>
       </GlassCard>

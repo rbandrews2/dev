@@ -84,11 +84,11 @@ export default function CompanyForms({ adminMode = false }: CompanyFormsProps) {
   return (
     <div className="min-h-screen pb-16 max-w-4xl mx-auto space-y-4 text-white">
       <div>
-        <p className="text-xs uppercase tracking-[0.2em] text-amber-200/80">
+        <p className="text-xs uppercase tracking-[0.2em] text-orange-200/80">
           Forms Hub
         </p>
         <h1 className="text-3xl font-semibold">Company Forms</h1>
-        <p className="text-sm text-amber-100/75">
+        <p className="text-sm text-orange-100/75">
           {adminMode ? "Admin uploads | Employees download" : "Employee document library"}
         </p>
       </div>
@@ -101,7 +101,7 @@ export default function CompanyForms({ adminMode = false }: CompanyFormsProps) {
             {uploading && <p className="text-emerald-400 text-sm">Uploading...</p>}
           </div>
         ) : adminMode ? (
-          <div className="rounded-lg border border-amber-500/30 bg-black/40 p-3 text-sm text-amber-100/80">
+          <div className="rounded-lg border border-orange-500/30 bg-black/40 p-3 text-sm text-orange-100/80">
             Uploads are limited to owners and admins. Available documents remain visible below.
           </div>
         ) : null}
@@ -112,7 +112,7 @@ export default function CompanyForms({ adminMode = false }: CompanyFormsProps) {
           <div className="space-y-2">
             {files.map((f) => (
               <a key={f.name}
-                className="block p-3 bg-black/30 border border-amber-400/20 rounded hover:border-amber-300/40 transition"
+                className="block p-3 bg-black/30 border border-orange-400/20 rounded hover:border-orange-300/40 transition"
                 href={supabase.storage.from("company_forms").getPublicUrl(f.name).data.publicUrl}
                 target="_blank"
                 rel="noreferrer"
@@ -121,7 +121,7 @@ export default function CompanyForms({ adminMode = false }: CompanyFormsProps) {
               </a>
             ))}
             {files.length === 0 && (
-              <p className="text-sm text-amber-100/75">No documents available yet.</p>
+              <p className="text-sm text-orange-100/75">No documents available yet.</p>
             )}
           </div>
         </div>

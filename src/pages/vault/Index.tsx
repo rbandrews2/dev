@@ -239,36 +239,36 @@ export default function VaultPage() {
               vaultOpen ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
             }`}
           >
-            <div className="relative w-full max-w-4xl aspect-[4/3] bg-gradient-to-br from-gray-900 via-black to-gray-950 border border-amber-500/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] overflow-hidden flex items-center justify-center">
+            <div className="relative w-full max-w-4xl aspect-[4/3] bg-gradient-to-br from-gray-900 via-black to-gray-950 border border-orange-500/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] overflow-hidden flex items-center justify-center">
               <div
-                className={`h-40 w-40 rounded-full border-4 border-amber-400/60 bg-black/60 flex items-center justify-center transition-transform duration-700 ${
+                className={`h-40 w-40 rounded-full border-4 border-orange-400/60 bg-black/60 flex items-center justify-center transition-transform duration-700 ${
                   sealing ? "animate-spin" : ""
                 }`}
               >
-                <div className="h-6 w-6 rounded-full bg-amber-400 shadow-[0_0_18px_rgba(251,191,36,0.8)]" />
+                <div className="h-6 w-6 rounded-full bg-orange-400 shadow-[0_0_18px_rgba(251,191,36,0.8)]" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-amber-500/5" />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-orange-500/5" />
               <div className="absolute inset-x-8 top-6 text-center">
-                <p className="text-sm text-amber-200/80 font-semibold tracking-wide">Vault locked</p>
+                <p className="text-sm text-orange-200/80 font-semibold tracking-wide">Vault locked</p>
                 {sealedMessage && <p className="text-xs text-emerald-300 mt-1">{sealedMessage}</p>}
               </div>
-              <div className="absolute bottom-6 inset-x-0 text-center text-xs text-amber-200/70">
+              <div className="absolute bottom-6 inset-x-0 text-center text-xs text-orange-200/70">
                 Hover to access the server vault controls.
               </div>
             </div>
           </div>
 
           <div className={`space-y-4 relative z-10 ${vaultOpen ? "" : "opacity-0 pointer-events-none"}`}>
-            <div className="rounded-2xl border border-amber-500/30 bg-black/60 p-5 shadow-lg shadow-amber-500/10">
+            <div className="rounded-2xl border border-orange-500/30 bg-black/60 p-5 shadow-lg shadow-orange-500/10">
               <div className="flex items-center justify-between mb-3">
                 <div>
                   <div className="text-lg font-semibold text-white">Vault controls</div>
-                  <div className="text-xs text-amber-100/70">Server-encrypted storage for integration and operator secrets.</div>
+                  <div className="text-xs text-orange-100/70">Server-encrypted storage for integration and operator secrets.</div>
                 </div>
                 <button
                   type="button"
                   onClick={handleSeal}
-                  className="rounded-full border border-amber-500/40 bg-amber-500 text-black px-3 py-1.5 text-xs font-semibold hover:bg-amber-400 transition"
+                  className="rounded-full border border-orange-500/40 bg-orange-500 text-black px-3 py-1.5 text-xs font-semibold hover:bg-orange-400 transition"
                 >
                   Seal the vault
                 </button>
@@ -280,7 +280,7 @@ export default function VaultPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. quickbooks_client_secret"
-                    className="mt-1 w-full rounded-lg border border-zinc-700 bg-black/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    className="mt-1 w-full rounded-lg border border-zinc-700 bg-black/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
                 <div>
@@ -289,7 +289,7 @@ export default function VaultPage() {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     placeholder="integration"
-                    className="mt-1 w-full rounded-lg border border-zinc-700 bg-black/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    className="mt-1 w-full rounded-lg border border-zinc-700 bg-black/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
                 <div className="sm:col-span-2">
@@ -298,7 +298,7 @@ export default function VaultPage() {
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="What this secret is used for"
-                    className="mt-1 w-full rounded-lg border border-zinc-700 bg-black/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    className="mt-1 w-full rounded-lg border border-zinc-700 bg-black/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
                 <div className="sm:col-span-2">
@@ -308,29 +308,29 @@ export default function VaultPage() {
                     onChange={(e) => setValue(e.target.value)}
                     placeholder="Paste the secret..."
                     rows={3}
-                    className="mt-1 w-full rounded-lg border border-zinc-700 bg-black/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    className="mt-1 w-full rounded-lg border border-zinc-700 bg-black/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 <button
                   onClick={handleWash}
-                  className="rounded-lg border border-amber-500/30 px-3 py-2 text-sm hover:border-amber-400 hover:text-amber-200"
+                  className="rounded-lg border border-orange-500/30 px-3 py-2 text-sm hover:border-orange-400 hover:text-orange-200"
                 >
                   Wash secret
                 </button>
                 <button
                   onClick={() => void handleAddSecret()}
                   disabled={!ready || busyState === "saving"}
-                  className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400 disabled:opacity-60"
+                  className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-black hover:bg-orange-400 disabled:opacity-60"
                 >
                   {busyState === "saving" ? "Saving..." : "Encrypt and store"}
                 </button>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-amber-500/10 bg-black/50 p-5 space-y-3">
-              <h3 className="text-lg font-semibold text-amber-200">Rotation policy</h3>
+            <div className="rounded-2xl border border-orange-500/10 bg-black/50 p-5 space-y-3">
+              <h3 className="text-lg font-semibold text-orange-200">Rotation policy</h3>
               <p className="text-sm text-gray-400">
                 Browser-managed master keys are no longer used. Rotate the server-side `WZOS_VAULT_MASTER_KEY` through your
                 secret manager and rewrap records in a controlled backend maintenance task when needed.
@@ -338,10 +338,10 @@ export default function VaultPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-amber-500/30 bg-black/60 p-5 shadow-lg shadow-amber-500/10 space-y-4">
+          <div className="rounded-2xl border border-orange-500/30 bg-black/60 p-5 shadow-lg shadow-orange-500/10 space-y-4">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <h3 className="text-lg font-semibold text-amber-200">Stored secrets</h3>
+                <h3 className="text-lg font-semibold text-orange-200">Stored secrets</h3>
                 <p className="text-xs text-gray-400">
                   {loading ? "Loading..." : `${vault.length} total`} • workspace: {organization?.name ?? "No organization selected"}
                 </p>
@@ -350,7 +350,7 @@ export default function VaultPage() {
                 type="button"
                 onClick={() => void loadVault()}
                 disabled={!ready || loading}
-                className="rounded-lg border border-amber-500/30 px-3 py-2 text-xs text-amber-100 hover:border-amber-400 disabled:opacity-60"
+                className="rounded-lg border border-orange-500/30 px-3 py-2 text-xs text-orange-100 hover:border-orange-400 disabled:opacity-60"
               >
                 Refresh
               </button>
@@ -363,7 +363,7 @@ export default function VaultPage() {
                 return (
                   <div
                     key={item.id}
-                    className="rounded-xl border border-amber-500/20 bg-zinc-900/70 px-3 py-3 flex flex-col gap-2"
+                    className="rounded-xl border border-orange-500/20 bg-zinc-900/70 px-3 py-3 flex flex-col gap-2"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div>
@@ -376,7 +376,7 @@ export default function VaultPage() {
                         <button
                           onClick={() => void handleReveal(item)}
                           disabled={!ready || isBusy}
-                          className="text-xs rounded border border-amber-500/30 px-2 py-1 hover:border-amber-400 hover:text-amber-200 disabled:opacity-60"
+                          className="text-xs rounded border border-orange-500/30 px-2 py-1 hover:border-orange-400 hover:text-orange-200 disabled:opacity-60"
                         >
                           {isBusy && busyState === "revealing" ? "Opening..." : isRevealed ? "Re-open" : "Reveal"}
                         </button>
@@ -390,7 +390,7 @@ export default function VaultPage() {
                       </div>
                     </div>
                     {item.notes && (
-                      <div className="rounded-lg bg-black/40 border border-amber-500/20 p-2 text-xs text-amber-100/80">
+                      <div className="rounded-lg bg-black/40 border border-orange-500/20 p-2 text-xs text-orange-100/80">
                         {item.notes}
                       </div>
                     )}
@@ -398,7 +398,7 @@ export default function VaultPage() {
                       Created by {item.created_by_email ?? "unknown"} • Updated by {item.updated_by_email ?? "unknown"}
                     </div>
                     {isRevealed && (
-                      <div className="rounded-lg bg-black/60 border border-amber-500/30 p-2 text-xs text-amber-100 whitespace-pre-wrap">
+                      <div className="rounded-lg bg-black/60 border border-orange-500/30 p-2 text-xs text-orange-100 whitespace-pre-wrap">
                         {reveal?.value}
                       </div>
                     )}
@@ -410,7 +410,7 @@ export default function VaultPage() {
               <button
                 onClick={() => void handleEnvExport()}
                 disabled={!ready || busyState === "exporting"}
-                className="w-full rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400 disabled:opacity-60"
+                className="w-full rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-black hover:bg-orange-400 disabled:opacity-60"
               >
                 {busyState === "exporting" ? "Exporting..." : "Convert to .env block"}
               </button>
@@ -418,7 +418,7 @@ export default function VaultPage() {
                 value={envPreview}
                 onChange={() => undefined}
                 placeholder=".env preview will appear here after export"
-                className="w-full min-h-[120px] rounded-lg border border-amber-500/30 bg-black/50 px-3 py-2 text-xs text-amber-100"
+                className="w-full min-h-[120px] rounded-lg border border-orange-500/30 bg-black/50 px-3 py-2 text-xs text-orange-100"
               />
             </div>
           </div>
@@ -436,7 +436,7 @@ export default function VaultPage() {
         </div>
 
         {status && (
-          <div className="rounded-xl border border-amber-500/30 bg-black/60 px-4 py-3 text-sm text-amber-100">
+          <div className="rounded-xl border border-orange-500/30 bg-black/60 px-4 py-3 text-sm text-orange-100">
             {status}
           </div>
         )}

@@ -353,9 +353,9 @@ function QuizBlock({
     <div className="space-y-4">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <div className="text-xs uppercase tracking-[0.18em] text-amber-200/80">Required Test</div>
-          <p className="text-sm text-amber-100/80">
-            Pass at least <span className="font-semibold text-amber-100">{percent(PASS_THRESHOLD)}%</span> to unlock certificate.
+          <div className="text-xs uppercase tracking-[0.18em] text-orange-200/80">Required Test</div>
+          <p className="text-sm text-orange-100/80">
+            Pass at least <span className="font-semibold text-orange-100">{percent(PASS_THRESHOLD)}%</span> to unlock certificate.
           </p>
         </div>
 
@@ -371,13 +371,13 @@ function QuizBlock({
                 scorePct: result.scorePct,
               })
             }
-            className="bg-amber-400 text-black hover:bg-amber-300"
+            className="bg-orange-400 text-black hover:bg-orange-300"
           >
             Download {certificate.kind === "pocket" ? "Pocket " : ""}Certificate (PDF)
           </Button>
         ) : (
-          <div className="inline-flex items-center gap-2 rounded-lg border border-amber-500/25 bg-black/50 px-3 py-2 text-xs text-amber-100/80">
-            <ClipboardCheck className="w-4 h-4 text-amber-300" />
+          <div className="inline-flex items-center gap-2 rounded-lg border border-orange-500/25 bg-black/50 px-3 py-2 text-xs text-orange-100/80">
+            <ClipboardCheck className="w-4 h-4 text-orange-300" />
             Complete the test to unlock
           </div>
         )}
@@ -385,7 +385,7 @@ function QuizBlock({
 
       <div className="space-y-4">
         {quiz.map((q, idx) => (
-          <div key={q.id} className="rounded-xl border border-amber-500/20 bg-black/55 p-4">
+          <div key={q.id} className="rounded-xl border border-orange-500/20 bg-black/55 p-4">
             <div className="text-sm font-semibold text-white mb-3">
               {idx + 1}. {q.question}
             </div>
@@ -406,13 +406,13 @@ function QuizBlock({
                     }}
                     className={[
                       "text-left rounded-lg border px-3 py-2 text-sm transition",
-                      selected ? "border-amber-400/60 bg-amber-500/10" : "border-amber-500/15 bg-black/35 hover:bg-black/50",
+                      selected ? "border-orange-400/60 bg-orange-500/10" : "border-orange-500/15 bg-black/35 hover:bg-black/50",
                       isWrongPick ? "border-red-500/50" : "",
                       showCorrect && isCorrect ? "border-emerald-500/50" : "",
                     ].join(" ")}
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-amber-50/90">{opt}</span>
+                      <span className="text-orange-50/90">{opt}</span>
                       {showCorrect && isCorrect ? (
                         <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                       ) : null}
@@ -426,7 +426,7 @@ function QuizBlock({
       </div>
 
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <div className="text-sm text-amber-100/80">
+        <div className="text-sm text-orange-100/80">
           Score: <span className="font-semibold text-white">{result.scorePct}%</span>{" "}
           {result.passed ? (
             <span className="inline-flex items-center gap-2 text-emerald-300 ml-2">
@@ -434,7 +434,7 @@ function QuizBlock({
               Passed
             </span>
           ) : submitted ? (
-            <span className="text-amber-200/80 ml-2">Not passed yet—review and retry.</span>
+            <span className="text-orange-200/80 ml-2">Not passed yet—review and retry.</span>
           ) : null}
         </div>
 
@@ -477,14 +477,14 @@ function CompletionCertificateBlock({
     <div className="space-y-4">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <div className="text-xs uppercase tracking-[0.18em] text-amber-200/80">Certificate</div>
-          <p className="text-sm text-amber-100/80">
+          <div className="text-xs uppercase tracking-[0.18em] text-orange-200/80">Certificate</div>
+          <p className="text-sm text-orange-100/80">
             Mark complete to issue your certificate for records and compliance.
           </p>
         </div>
 
         <div className="flex gap-2">
-          <Button onClick={markComplete} disabled={Boolean(state)} className="bg-amber-400 text-black hover:bg-amber-300">
+          <Button onClick={markComplete} disabled={Boolean(state)} className="bg-orange-400 text-black hover:bg-orange-300">
             {state ? "Completed" : "Mark Complete"}
           </Button>
 
@@ -516,7 +516,7 @@ function CompletionCertificateBlock({
           <div className="text-xs text-emerald-200/80 mt-2">Certificate ID: {state.certId}</div>
         </div>
       ) : (
-        <div className="rounded-xl border border-amber-500/15 bg-black/55 p-4 text-sm text-amber-100/75">
+        <div className="rounded-xl border border-orange-500/15 bg-black/55 p-4 text-sm text-orange-100/75">
           When you are ready, mark this course complete. If your organization requires supervisor verification, complete that step before marking done.
         </div>
       )}
@@ -551,10 +551,10 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
 
   if (!course) {
     return (
-      <div className="space-y-4 text-amber-100">
+      <div className="space-y-4 text-orange-100">
         <GlassCard className="p-5 bg-black/60">
           <h1 className="text-xl font-semibold text-white">Course not found</h1>
-          <p className="text-sm text-amber-100/75">The requested course does not exist.</p>
+          <p className="text-sm text-orange-100/75">The requested course does not exist.</p>
         </GlassCard>
       </div>
     );
@@ -567,22 +567,22 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
     <div className="space-y-5 max-w-6xl">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Main content */}
-        <div className="lg:col-span-2 space-y-5 text-amber-100">
-          <GlassCard className="p-6 space-y-4 bg-black/60 border border-amber-500/25">
+        <div className="lg:col-span-2 space-y-5 text-orange-100">
+          <GlassCard className="p-6 space-y-4 bg-black/60 border border-orange-500/25">
             <div className="flex items-start justify-between gap-4 flex-wrap">
               <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.18em] text-amber-200/80">Course</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-orange-200/80">Course</p>
                 <h1 className="text-2xl md:text-3xl font-bold text-white">{course.title}</h1>
-                <p className="text-sm text-amber-100/75">{course.description}</p>
+                <p className="text-sm text-orange-100/75">{course.description}</p>
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="inline-flex items-center gap-2 rounded-xl border border-amber-500/25 bg-black/50 px-3 py-2 text-xs text-amber-100/80">
-                  <ShieldCheck className="w-4 h-4 text-amber-300" />
+                <div className="inline-flex items-center gap-2 rounded-xl border border-orange-500/25 bg-black/50 px-3 py-2 text-xs text-orange-100/80">
+                  <ShieldCheck className="w-4 h-4 text-orange-300" />
                   {course.estimated_minutes} min
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-xl border border-amber-500/25 bg-black/50 px-3 py-2 text-xs text-amber-100/80">
-                  <Award className="w-4 h-4 text-amber-300" />
+                <div className="inline-flex items-center gap-2 rounded-xl border border-orange-500/25 bg-black/50 px-3 py-2 text-xs text-orange-100/80">
+                  <Award className="w-4 h-4 text-orange-300" />
                   {certificateEligible ? "Certificate Path" : "Study Path"}
                 </div>
               </div>
@@ -590,35 +590,35 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
           </GlassCard>
 
           {/* Study */}
-          <GlassCard className="p-6 bg-black/60 border border-amber-500/25 space-y-4">
+          <GlassCard className="p-6 bg-black/60 border border-orange-500/25 space-y-4">
             <div className="flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-amber-300" />
+              <BookOpen className="w-5 h-5 text-orange-300" />
               <h2 className="text-lg font-semibold text-white">Study Material</h2>
             </div>
 
             {materials.study.length ? (
               <div className="space-y-4">
                 {materials.study.map((s) => (
-                  <div key={s.title} className="rounded-xl border border-amber-500/15 bg-black/50 p-4">
+                  <div key={s.title} className="rounded-xl border border-orange-500/15 bg-black/50 p-4">
                     <div className="text-sm font-semibold text-white mb-2">{s.title}</div>
-                    <div className="text-sm text-amber-100/80 whitespace-pre-line">{s.body}</div>
+                    <div className="text-sm text-orange-100/80 whitespace-pre-line">{s.body}</div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="text-sm text-amber-100/75">This course currently has no study text. Use the videos and ask the assistant for guidance.</div>
+              <div className="text-sm text-orange-100/75">This course currently has no study text. Use the videos and ask the assistant for guidance.</div>
             )}
           </GlassCard>
 
           {/* Videos */}
           {videos.length ? (
-            <GlassCard className="p-6 bg-black/60 border border-amber-500/25 space-y-4">
+            <GlassCard className="p-6 bg-black/60 border border-orange-500/25 space-y-4">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <Film className="w-5 h-5 text-amber-300" />
+                  <Film className="w-5 h-5 text-orange-300" />
                   <h2 className="text-lg font-semibold text-white">Recommended Videos</h2>
                 </div>
-                <Link to="/training/videos" className="text-sm text-amber-200 hover:text-amber-100 inline-flex items-center gap-2">
+                <Link to="/training/videos" className="text-sm text-orange-200 hover:text-orange-100 inline-flex items-center gap-2">
                   <Sparkles className="w-4 h-4" />
                   Open full library
                 </Link>
@@ -631,18 +631,18 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                     href={v.url || `https://www.youtube.com/watch?v=${v.youtubeId}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-xl border border-amber-500/15 bg-black/50 p-4 hover:bg-black/60 transition"
+                    className="rounded-xl border border-orange-500/15 bg-black/50 p-4 hover:bg-black/60 transition"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <div className="text-sm font-semibold text-white">{v.title}</div>
-                        <div className="text-xs text-amber-100/70 mt-1">{v.description}</div>
+                        <div className="text-xs text-orange-100/70 mt-1">{v.description}</div>
                       </div>
-                      <div className="shrink-0 text-xs rounded-full border border-amber-500/25 bg-black/60 px-3 py-1 text-amber-200/90">
+                      <div className="shrink-0 text-xs rounded-full border border-orange-500/25 bg-black/60 px-3 py-1 text-orange-200/90">
                         {v.level}
                       </div>
                     </div>
-                    <div className="text-[11px] uppercase tracking-[0.14em] text-amber-200/70 mt-3">
+                    <div className="text-[11px] uppercase tracking-[0.14em] text-orange-200/70 mt-3">
                       Open video
                     </div>
                   </a>
@@ -653,7 +653,7 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
 
           {/* References */}
           {materials.resources.length ? (
-            <GlassCard className="p-6 bg-black/60 border border-amber-500/25 space-y-3">
+            <GlassCard className="p-6 bg-black/60 border border-orange-500/25 space-y-3">
               <div className="text-lg font-semibold text-white">Reference Links</div>
               <div className="grid gap-2">
                 {materials.resources.map((r) => (
@@ -662,12 +662,12 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
                     href={r.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-xl border border-amber-500/15 bg-black/50 px-4 py-3 hover:bg-black/60 transition"
+                    className="rounded-xl border border-orange-500/15 bg-black/50 px-4 py-3 hover:bg-black/60 transition"
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <div className="text-sm text-amber-50/90">{r.title}</div>
+                      <div className="text-sm text-orange-50/90">{r.title}</div>
                       {r.label ? (
-                        <div className="text-[11px] uppercase tracking-[0.14em] text-amber-200/80">{r.label}</div>
+                        <div className="text-[11px] uppercase tracking-[0.14em] text-orange-200/80">{r.label}</div>
                       ) : null}
                     </div>
                   </a>
@@ -678,9 +678,9 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
 
           {/* Test + Certificate */}
           {materials.requiresTest && materials.quiz.length ? (
-            <GlassCard className="p-6 bg-black/60 border border-amber-500/25 space-y-4">
+            <GlassCard className="p-6 bg-black/60 border border-orange-500/25 space-y-4">
               <div className="flex items-center gap-2">
-                <ClipboardCheck className="w-5 h-5 text-amber-300" />
+                <ClipboardCheck className="w-5 h-5 text-orange-300" />
                 <h2 className="text-lg font-semibold text-white">Test and Certificate</h2>
               </div>
 
@@ -696,7 +696,7 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
               />
             </GlassCard>
           ) : certificateEligible ? (
-            <GlassCard className="p-6 bg-black/60 border border-amber-500/25 space-y-4">
+            <GlassCard className="p-6 bg-black/60 border border-orange-500/25 space-y-4">
               <CompletionCertificateBlock
                 courseId={course.course_id}
                 courseTitle={course.title}
@@ -712,12 +712,12 @@ export function CourseDetailContent({ courseId }: { courseId: string }) {
 
         {/* Sidebar */}
         <div className="lg:col-span-1 space-y-5">
-          <GlassCard className="p-5 bg-black/60 border border-amber-500/25">
+          <GlassCard className="p-5 bg-black/60 border border-orange-500/25">
             <div className="flex items-center gap-2 text-sm font-semibold text-white">
-              <GraduationCap className="w-4 h-4 text-amber-300" />
+              <GraduationCap className="w-4 h-4 text-orange-300" />
               How to complete
             </div>
-            <ol className="mt-3 space-y-2 text-sm text-amber-100/80 list-decimal list-inside">
+            <ol className="mt-3 space-y-2 text-sm text-orange-100/80 list-decimal list-inside">
               <li>Review the study material.</li>
               <li>Watch recommended videos (or open the full library).</li>
               {materials.requiresTest ? <li>Take the test and pass with {percent(PASS_THRESHOLD)}% or higher.</li> : <li>Confirm completion with your supervisor.</li>}
@@ -735,21 +735,21 @@ export default function CourseDetail() {
 
   if (!id) {
     return (
-      <div className="space-y-4 text-amber-100">
-        <Link to="/training" className="inline-flex items-center gap-2 text-sm text-amber-200 hover:text-amber-100">
+      <div className="space-y-4 text-orange-100">
+        <Link to="/training" className="inline-flex items-center gap-2 text-sm text-orange-200 hover:text-orange-100">
           <ArrowLeft className="w-4 h-4" /> Back to Training Center
         </Link>
         <GlassCard className="p-5 bg-black/60">
           <h1 className="text-xl font-semibold text-white">Course not found</h1>
-          <p className="text-sm text-amber-100/75">The requested course does not exist.</p>
+          <p className="text-sm text-orange-100/75">The requested course does not exist.</p>
         </GlassCard>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4 text-amber-100">
-      <Link to="/training" className="inline-flex items-center gap-2 text-sm text-amber-200 hover:text-amber-100">
+    <div className="space-y-4 text-orange-100">
+      <Link to="/training" className="inline-flex items-center gap-2 text-sm text-orange-200 hover:text-orange-100">
         <ArrowLeft className="w-4 h-4" /> Back to Training Center
       </Link>
       <CourseDetailContent courseId={id} />

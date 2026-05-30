@@ -37,7 +37,7 @@ const TIME_OFF_TYPES = [
 ];
 
 const statusColors: Record<TimeOffStatus, string> = {
-  pending: "bg-amber-500/20 text-amber-300 border-amber-400/60",
+  pending: "bg-orange-500/20 text-orange-300 border-orange-400/60",
   approved: "bg-emerald-500/20 text-emerald-300 border-emerald-400/60",
   denied: "bg-red-500/20 text-red-300 border-red-400/60",
 };
@@ -182,8 +182,8 @@ const TimeOffPanel: React.FC = () => {
 
   if (!user) {
     return (
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-6">
-        <h3 className="text-xl font-semibold text-amber-300 mb-2">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-6">
+        <h3 className="text-xl font-semibold text-orange-300 mb-2">
           Time-Off Requests
         </h3>
         <p className="text-sm text-gray-300">
@@ -196,10 +196,10 @@ const TimeOffPanel: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Request Form */}
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-6">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <div>
-            <h3 className="text-xl font-semibold text-amber-300">
+            <h3 className="text-xl font-semibold text-orange-300">
               Request Time Off
             </h3>
             <p className="text-xs sm:text-sm text-gray-300">
@@ -208,7 +208,7 @@ const TimeOffPanel: React.FC = () => {
           </div>
           <Badge
             variant="outline"
-            className="border-amber-500/40 text-amber-200 text-[10px] sm:text-[11px] bg-black/40"
+            className="border-orange-500/40 text-orange-200 text-[10px] sm:text-[11px] bg-black/40"
           >
             Signed in as {user.email ?? "user"}
           </Badge>
@@ -269,7 +269,7 @@ const TimeOffPanel: React.FC = () => {
             <Button
               type="submit"
               disabled={!canSubmit}
-              className="bg-amber-500 hover:bg-amber-400 text-black text-sm px-6"
+              className="bg-orange-500 hover:bg-orange-400 text-black text-sm px-6"
             >
               {submitting ? "Submitting..." : "Submit Request"}
             </Button>
@@ -278,9 +278,9 @@ const TimeOffPanel: React.FC = () => {
       </Card>
 
       {/* My Requests */}
-      <Card className="bg-black/40 border border-amber-500/30 text-white p-4 sm:p-6">
+      <Card className="bg-black/40 border border-orange-500/30 text-white p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-          <h3 className="text-lg font-semibold text-amber-300">
+          <h3 className="text-lg font-semibold text-orange-300">
             My Time-Off Requests
           </h3>
           <span className="text-[11px] text-gray-400">
@@ -332,10 +332,10 @@ const TimeOffPanel: React.FC = () => {
 
       {/* Admin: Team Requests */}
       {isAdmin && organization && (
-        <Card className="bg-black/40 border border-amber-500/30 text-white p-4 sm:p-6">
+        <Card className="bg-black/40 border border-orange-500/30 text-white p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
             <div>
-              <h3 className="text-lg font-semibold text-amber-300">
+              <h3 className="text-lg font-semibold text-orange-300">
                 Team Time-Off Requests
               </h3>
               <p className="text-xs sm:text-sm text-gray-300">

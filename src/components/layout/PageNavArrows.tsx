@@ -41,7 +41,7 @@ export default function PageNavArrows() {
         <button
           type="button"
           onClick={handleBack}
-          className="pointer-events-auto rounded-full bg-black/60 border border-amber-500/40 text-amber-100 shadow-glow p-2 hover:bg-black/50 transition focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
+          className="pointer-events-auto rounded-full bg-black/60 border border-orange-500/40 text-orange-100 shadow-glow p-2 hover:bg-black/50 transition focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
           aria-label="Go back"
           disabled={!canGoBack}
         >
@@ -50,7 +50,7 @@ export default function PageNavArrows() {
         <button
           type="button"
           onClick={handleForward}
-          className="pointer-events-auto rounded-full bg-black/60 border border-amber-500/40 text-amber-100 shadow-glow p-2 hover:bg-black/50 transition focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
+          className="pointer-events-auto rounded-full bg-black/60 border border-orange-500/40 text-orange-100 shadow-glow p-2 hover:bg-black/50 transition focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
           aria-label="Go forward"
           disabled={!canGoForward}
         >

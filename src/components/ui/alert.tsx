@@ -14,7 +14,7 @@ const alertVariants = cva(
         success:
           "border-green-500/50 text-green-600 dark:text-green-400 [&>svg]:text-green-600 dark:[&>svg]:text-green-400 bg-green-50 dark:bg-green-950/20",
         warning:
-          "border-yellow-500/50 text-yellow-600 dark:text-yellow-400 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-400 bg-yellow-50 dark:bg-yellow-950/20",
+          "border-orange-500/50 text-orange-600 dark:text-orange-400 [&>svg]:text-orange-600 dark:[&>svg]:text-orange-400 bg-orange-50 dark:bg-orange-950/20",
         info:
           "border-primary/50 text-primary dark:text-primary-foreground [&>svg]:text-primary bg-primary/10 dark:bg-primary/20",
       },

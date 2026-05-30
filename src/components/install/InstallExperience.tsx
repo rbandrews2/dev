@@ -101,25 +101,25 @@ export default function InstallExperience({
           className="h-full w-full object-cover object-center opacity-55"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.26),transparent_36%),linear-gradient(180deg,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.72)_42%,rgba(0,0,0,0.94)_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-amber-500/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-orange-500/10" />
       </div>
 
       <div className="relative flex min-h-screen items-start justify-center px-3 py-4 sm:items-center sm:p-6">
-        <div className="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-3xl border border-amber-400/30 bg-black/70 shadow-[0_28px_90px_rgba(0,0,0,0.55)] backdrop-blur-xl">
+        <div className="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-3xl border border-orange-400/30 bg-black/70 shadow-[0_28px_90px_rgba(0,0,0,0.55)] backdrop-blur-xl">
           <div className="px-4 pb-4 pt-5 sm:px-6 sm:pb-6 sm:pt-6">
             <div className="mb-4 flex items-start justify-between gap-4 sm:mb-5">
               <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/35 bg-black/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-100/80">
+                <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/35 bg-black/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-orange-100/80">
                   <Smartphone className="h-3.5 w-3.5" />
                   One-screen install
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-amber-200/70">Work Zone OS</p>
+                  <p className="text-xs uppercase tracking-[0.24em] text-orange-200/70">Work Zone OS</p>
                   <h1 className="mt-2 text-2xl font-semibold leading-tight text-white sm:text-3xl">
                     Set up the app for field use.
                   </h1>
                 </div>
-                <p className="max-w-sm text-sm leading-6 text-amber-50/78">
+                <p className="max-w-sm text-sm leading-6 text-orange-50/78">
                   Review the permissions below, tick each item, then continue. We&apos;ll request the real
                   browser permissions immediately after.
                 </p>
@@ -131,7 +131,7 @@ export default function InstallExperience({
               {permissionCards.map(({ key, icon: Icon, title, description }) => (
                 <div
                   key={key}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/6 px-3 py-3 transition hover:border-amber-300/35 hover:bg-white/10 sm:gap-4 sm:px-4 sm:py-4"
+                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/6 px-3 py-3 transition hover:border-orange-300/35 hover:bg-white/10 sm:gap-4 sm:px-4 sm:py-4"
                 >
                   <Checkbox
                     checked={checklist[key]}
@@ -143,26 +143,26 @@ export default function InstallExperience({
                       }
                     }}
                     disabled={key !== "license" && permissionStates[key] === "granted"}
-                    className="mt-1 h-5 w-5 rounded-md border-amber-300/60 data-[state=checked]:bg-amber-400 data-[state=checked]:text-black"
+                    className="mt-1 h-5 w-5 rounded-md border-orange-300/60 data-[state=checked]:bg-orange-400 data-[state=checked]:text-black"
                   />
                   <div className="flex-1">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                       <div className="flex items-center gap-2 min-w-0">
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-amber-400/20 bg-amber-400/10 text-amber-200 sm:h-9 sm:w-9 sm:rounded-2xl">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-orange-400/20 bg-orange-400/10 text-orange-200 sm:h-9 sm:w-9 sm:rounded-2xl">
                           <Icon className="h-4 w-4" />
                         </div>
                         <p className="text-sm font-semibold text-white">{title}</p>
                       </div>
-                      <span className="rounded-full border border-amber-300/25 bg-black/30 px-2.5 py-1 text-[11px] font-semibold text-amber-100/80">
+                      <span className="rounded-full border border-orange-300/25 bg-black/30 px-2.5 py-1 text-[11px] font-semibold text-orange-100/80">
                         {renderState(key)}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm leading-6 text-amber-50/72">{description}</p>
+                    <p className="mt-2 text-sm leading-6 text-orange-50/72">{description}</p>
                     {key !== "license" && permissionStates[key] !== "granted" && (
                       <button
                         type="button"
                         onClick={() => onPermissionRequest(key)}
-                        className="mt-3 inline-flex items-center gap-2 rounded-xl border border-amber-300/30 bg-black/25 px-3 py-2 text-xs font-semibold text-amber-100 transition hover:bg-amber-400/10"
+                        className="mt-3 inline-flex items-center gap-2 rounded-xl border border-orange-300/30 bg-black/25 px-3 py-2 text-xs font-semibold text-orange-100 transition hover:bg-orange-400/10"
                       >
                         Request permission
                         <ChevronRight className="h-3.5 w-3.5" />
@@ -201,7 +201,7 @@ export default function InstallExperience({
                 type="button"
                 onClick={onInstall}
                 disabled={!allChecked || installing || installed}
-                className="flex w-full items-center justify-center gap-2 rounded-[1.2rem] bg-amber-400 px-4 py-4 text-sm font-semibold text-black transition hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-2 rounded-[1.2rem] bg-orange-400 px-4 py-4 text-sm font-semibold text-black transition hover:bg-orange-300 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {installed ? <CheckCircle2 className="h-4 w-4" /> : <DownloadCloud className="h-4 w-4" />}
                 <span>{installButtonLabel}</span>
@@ -211,7 +211,7 @@ export default function InstallExperience({
               <button
                 type="button"
                 onClick={onLater}
-                className="w-full rounded-[1.2rem] border border-white/12 bg-black/25 px-4 py-3 text-sm font-medium text-amber-50/88 transition hover:bg-white/8"
+                className="w-full rounded-[1.2rem] border border-white/12 bg-black/25 px-4 py-3 text-sm font-medium text-orange-50/88 transition hover:bg-white/8"
               >
                 Maybe later
               </button>
@@ -219,17 +219,17 @@ export default function InstallExperience({
 
             <div className="mt-4 space-y-2 text-center">
               {permissionNote ? (
-                <p className="text-xs text-amber-100/76">{permissionNote}</p>
+                <p className="text-xs text-orange-100/76">{permissionNote}</p>
               ) : (
-                <p className="text-xs text-amber-100/60">
+                <p className="text-xs text-orange-100/60">
                   {installable
                     ? "The browser install prompt appears after permissions are approved."
                     : "If your browser does not show an install prompt, use its menu to add Work Zone OS to your home screen."}
                 </p>
               )}
-              <p className="text-[11px] text-amber-100/52">
+              <p className="text-[11px] text-orange-100/52">
                 By continuing, you agree to the{" "}
-                <Link to="/license-agreement" className="text-amber-200 underline underline-offset-2">
+                <Link to="/license-agreement" className="text-orange-200 underline underline-offset-2">
                   license terms
                 </Link>{" "}
                 and your organization&apos;s safety policy.

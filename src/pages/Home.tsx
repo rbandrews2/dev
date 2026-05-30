@@ -66,12 +66,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="space-y-6 text-yellow-200">
-      <div className="rounded-2xl border border-amber-500/25 bg-black/60 p-5 shadow-[0_0_30px_rgba(0,0,0,0.6)]">
+    <div className="space-y-6 text-orange-200">
+      <div className="rounded-2xl border border-orange-500/25 bg-black/60 p-5 shadow-[0_0_30px_rgba(0,0,0,0.6)]">
         <h1 className="text-2xl md:text-3xl font-semibold text-white tracking-wide">
           Crew Dashboard
         </h1>
-        <p className="text-sm text-yellow-100/75 mt-2">
+        <p className="text-sm text-orange-100/75 mt-2">
           Access daily forms, navigation, training, and scheduling. Locked modules show an activation notice instead of routing to missing pages.
         </p>
       </div>

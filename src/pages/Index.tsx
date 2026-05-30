@@ -403,14 +403,14 @@ const Index: React.FC = () => {
             />
           </div>
           <div className="relative space-y-2">
-            <div className="w-11 h-11 rounded-2xl border border-amber-400/30 bg-black/70 flex items-center justify-center text-amber-200 shadow-[0_0_18px_rgba(255,238,88,0.35)]">
+            <div className="w-11 h-11 rounded-2xl border border-orange-400/30 bg-black/70 flex items-center justify-center text-orange-200 shadow-[0_0_18px_rgba(249,115,22,0.35)]">
               {card.icon}
             </div>
             <div>
               <h3 className="text-lg font-semibold text-white">{card.title}</h3>
-              <p className="text-sm text-amber-100/75">{card.description}</p>
+              <p className="text-sm text-orange-100/75">{card.description}</p>
             </div>
-            <p className="text-[11px] uppercase tracking-[0.12em] text-amber-200/65">
+            <p className="text-[11px] uppercase tracking-[0.12em] text-orange-200/65">
               Branded placeholder
             </p>
           </div>
@@ -422,15 +422,15 @@ const Index: React.FC = () => {
       <GlassCard
         className={`h-full p-5 flex flex-col gap-3 ${card.active ? "cursor-pointer" : "cursor-not-allowed opacity-80"}`}
       >
-        <div className="w-11 h-11 rounded-2xl border border-amber-400/30 bg-black/50 flex items-center justify-center text-amber-300">
+        <div className="w-11 h-11 rounded-2xl border border-orange-400/30 bg-black/50 flex items-center justify-center text-orange-300">
           {card.icon}
         </div>
         <div>
           <h3 className="text-lg font-semibold text-white">{card.title}</h3>
-          <p className="text-sm text-amber-100/75">{card.description}</p>
+          <p className="text-sm text-orange-100/75">{card.description}</p>
         </div>
         {!card.active && (
-          <p className="text-[11px] uppercase tracking-[0.14em] text-amber-200/70">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-orange-200/70">
             Available upon activation
           </p>
         )}
@@ -465,7 +465,7 @@ const Index: React.FC = () => {
   return (
     <div className="space-y-10">
       {/* Hero / Story block */}
-      <section className="relative overflow-hidden rounded-3xl border border-amber-500/20 shadow-glow p-6 md:p-10 bg-black">
+      <section className="relative overflow-hidden rounded-3xl border border-orange-500/20 shadow-glow p-6 md:p-10 bg-black">
         <div className="absolute inset-0">
           <img
             src="/hero-construction.png"
@@ -473,7 +473,7 @@ const Index: React.FC = () => {
             className="h-full w-full object-cover scale-105 blur-[2px]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/85" />
-          <div className="absolute inset-0 bg-amber-500/15 mix-blend-screen" />
+          <div className="absolute inset-0 bg-orange-500/15 mix-blend-screen" />
         </div>
 
         <div className="relative grid lg:grid-cols-2 gap-10 items-center">
@@ -481,7 +481,7 @@ const Index: React.FC = () => {
             <div className="flex flex-wrap items-center gap-4">
               <Link
                 to="/"
-                className="flex items-center gap-3 rounded-full bg-black/60 border border-amber-400/40 px-3 py-2 backdrop-blur"
+                className="flex items-center gap-3 rounded-full bg-black/60 border border-orange-400/40 px-3 py-2 backdrop-blur"
               >
                 <img
                   src="/wzos-logo.svg"
@@ -489,7 +489,7 @@ const Index: React.FC = () => {
                   className="h-8 w-auto"
                 />
               </Link>
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-500/10 px-4 py-2 text-amber-200 text-sm font-semibold">
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-4 py-2 text-orange-200 text-sm font-semibold">
                 <Sparkles className="w-4 h-4" />
                 The Operating System for Road Crews
               </div>
@@ -498,14 +498,14 @@ const Index: React.FC = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg leading-tight">
               Work Zone OS
             </h1>
-            <p className="text-lg text-amber-100/85 max-w-3xl">
+            <p className="text-lg text-orange-100/85 max-w-3xl">
               Work Zone OS is a centralized operations platform designed to modernize how road crews and field teams manage daily work in active and regulated environments. It brings together essential functions—including digital forms, inspections, training, scheduling, messaging, and compliance tracking—into a single, secure system that is accessible from any device.
             </p>
             <div className="flex flex-wrap gap-3">
               <button
                 type="button"
                 onClick={handleViewWorkOrders}
-                className="bg-amber-500 text-black px-6 py-3 rounded-xl font-semibold hover:bg-amber-400 hover:shadow-glow-strong transition-all"
+                className="bg-orange-500 text-black px-6 py-3 rounded-xl font-semibold hover:bg-orange-400 hover:shadow-glow-strong transition-all"
               >
                 View Work Orders
               </button>
@@ -518,51 +518,51 @@ const Index: React.FC = () => {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 text-sm text-amber-100/85">
+            <div className="grid grid-cols-2 gap-4 text-sm text-orange-100/85">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-amber-300" />
+                <ShieldCheck className="w-5 h-5 text-orange-300" />
                 SOC2-ready data handling
               </div>
               <div className="flex items-center gap-2">
-                <WifiOff className="w-5 h-5 text-amber-300" />
+                <WifiOff className="w-5 h-5 text-orange-300" />
                 Offline-first navigation
               </div>
               <div className="flex items-center gap-2">
-                <Brain className="w-5 h-5 text-amber-300" />
+                <Brain className="w-5 h-5 text-orange-300" />
                 Embedded AI assistant
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-amber-300" />
+                <MapPin className="w-5 h-5 text-orange-300" />
                 Live hazard mapping
               </div>
             </div>
           </div>
 
-          <div className="relative glass-surface rounded-2xl border border-amber-500/30 p-6 lg:p-8 backdrop-blur-md bg-black/50">
-            <div className="absolute -top-10 -right-6 h-40 w-40 rounded-full bg-amber-500/20 blur-3xl" />
+          <div className="relative glass-surface rounded-2xl border border-orange-500/30 p-6 lg:p-8 backdrop-blur-md bg-black/50">
+            <div className="absolute -top-10 -right-6 h-40 w-40 rounded-full bg-orange-500/20 blur-3xl" />
             <div className="relative flex items-center gap-4">
-              <div className="h-16 w-16 rounded-2xl border border-amber-400/30 bg-amber-500/10 flex items-center justify-center text-amber-200 shadow-glow">
+              <div className="h-16 w-16 rounded-2xl border border-orange-400/30 bg-orange-500/10 flex items-center justify-center text-orange-200 shadow-glow">
                 <ShieldCheck className="w-7 h-7" />
               </div>
               <div>
-                <p className="text-sm text-amber-100/80 mb-1">AI Crew Companion</p>
+                <p className="text-sm text-orange-100/80 mb-1">AI Crew Companion</p>
                 <h3 className="text-xl font-semibold text-white">Atlas - Safety + Ops</h3>
-                <p className="text-sm text-amber-100/70 mt-2">
+                <p className="text-sm text-orange-100/70 mt-2">
                   Predictive alerts, crew briefings, and automatic report drafting baked into the workflow.
                 </p>
               </div>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-4">
-              <div className="rounded-xl border border-amber-500/25 bg-white/5 p-4 backdrop-blur">
-                <p className="text-xs text-amber-100/70">Active Work Orders</p>
+              <div className="rounded-xl border border-orange-500/25 bg-white/5 p-4 backdrop-blur">
+                <p className="text-xs text-orange-100/70">Active Work Orders</p>
                 <p className="text-2xl font-bold text-white mt-1">28</p>
-                <p className="text-xs text-amber-200/80 mt-1">+12% from last week</p>
+                <p className="text-xs text-orange-200/80 mt-1">+12% from last week</p>
               </div>
-              <div className="rounded-xl border border-amber-500/25 bg-white/5 p-4 backdrop-blur">
-                <p className="text-xs text-amber-100/70">Total Hours Today</p>
+              <div className="rounded-xl border border-orange-500/25 bg-white/5 p-4 backdrop-blur">
+                <p className="text-xs text-orange-100/70">Total Hours Today</p>
                 <p className="text-2xl font-bold text-white mt-1">25.5</p>
-                <p className="text-xs text-amber-200/80 mt-1">Crew-wide</p>
+                <p className="text-xs text-orange-200/80 mt-1">Crew-wide</p>
               </div>
             </div>
           </div>
@@ -579,12 +579,12 @@ const Index: React.FC = () => {
       {/* Card Grid for quick access */}
       <section className="space-y-3">
         <div className="flex items-center gap-2">
-          <div className="h-10 w-10 rounded-xl border border-amber-500/25 bg-black/50 flex items-center justify-center text-amber-300">
+          <div className="h-10 w-10 rounded-xl border border-orange-500/25 bg-black/50 flex items-center justify-center text-orange-300">
             <ClipboardList className="w-5 h-5" />
           </div>
           <div>
             <h2 className="text-xl font-semibold text-white">Access modules</h2>
-            <p className="text-sm text-amber-100/75">Key destinations for your crew.</p>
+            <p className="text-sm text-orange-100/75">Key destinations for your crew.</p>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

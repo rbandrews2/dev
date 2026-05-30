@@ -140,7 +140,7 @@ export default function WhistleblowerPage() {
                 Subject
               </label>
               <input
-                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm outline-none transition focus:border-yellow-400/70 focus:ring-2 focus:ring-yellow-400/40"
+                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm outline-none transition focus:border-orange-400/70 focus:ring-2 focus:ring-orange-400/40"
                 placeholder="Brief summary of your concern"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
@@ -152,7 +152,7 @@ export default function WhistleblowerPage() {
                 Details
               </label>
               <textarea
-                className="min-h-[140px] w-full resize-y rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm outline-none transition focus:border-yellow-400/70 focus:ring-2 focus:ring-yellow-400/40"
+                className="min-h-[140px] w-full resize-y rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm outline-none transition focus:border-orange-400/70 focus:ring-2 focus:ring-orange-400/40"
                 placeholder="Describe what happened, who was involved, dates, locations, and any other details."
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
@@ -165,7 +165,7 @@ export default function WhistleblowerPage() {
               </label>
               <input
                 type="file"
-                className="block w-full text-sm text-white/70 file:mr-4 file:rounded-md file:border-0 file:bg-yellow-400 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-black hover:file:bg-yellow-300"
+                className="block w-full text-sm text-white/70 file:mr-4 file:rounded-md file:border-0 file:bg-orange-400 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-black hover:file:bg-orange-300"
                 onChange={(e) =>
                   setFile(e.target.files && e.target.files[0] ? e.target.files[0] : null)
                 }
@@ -178,7 +178,7 @@ export default function WhistleblowerPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex w-full items-center justify-center rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold text-black shadow-md transition hover:bg-yellow-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center rounded-lg bg-orange-400 px-4 py-2 text-sm font-semibold text-black shadow-md transition hover:bg-orange-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-60"
             >
               {submitting ? "Submitting..." : "Submit Report"}
             </button>
@@ -225,7 +225,7 @@ export default function WhistleblowerPage() {
                       href={r.evidence_url}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-2 inline-flex text-xs font-semibold text-yellow-300 underline underline-offset-2 hover:text-yellow-200"
+                      className="mt-2 inline-flex text-xs font-semibold text-orange-300 underline underline-offset-2 hover:text-orange-200"
                     >
                       View evidence
                     </a>

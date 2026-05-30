@@ -11,7 +11,7 @@ interface StatCardProps {
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon, trend, trendUp }) => {
   return (
     <div
-      className="bg-wz_glass backdrop-blur-xl border border-wz_border rounded-xl p-6 shadow-glow transition-all hover:shadow-glow-strong hover:border-amber-400/40"
+      className="bg-wz_glass backdrop-blur-xl border border-wz_border rounded-xl p-6 shadow-glow transition-all hover:shadow-glow-strong hover:border-orange-400/40"
     >
       <div className="flex items-center justify-between">
         <div>
@@ -23,7 +23,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, icon, trend, trendUp 
             </p>
           )}
         </div>
-        <div className="text-amber-300 bg-amber-500/10 p-3 rounded-lg border border-amber-500/20 shadow-inner">
+        <div className="text-orange-300 bg-orange-500/10 p-3 rounded-lg border border-orange-500/20 shadow-inner">
           {icon}
         </div>
       </div>
