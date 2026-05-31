@@ -12,6 +12,8 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^5.4.0",
     "@stripe/stripe-js": "^8.5.2",
+    "@types/react": "^18.3.29",
+    "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^5.1.1",
     "concurrently": "^9.2.1",
     "dotenv": "^17.2.3",
@@ -28,8 +30,6 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "@types/node": "^24.10.2",
-    "@types/react": "^18.3.27",
-    "@types/react-dom": "^18.3.7"
+    "@types/node": "^24.10.2"
   }
 }
