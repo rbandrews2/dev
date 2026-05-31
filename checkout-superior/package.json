@@ -1,0 +1,35 @@
+{
+  "name": "superior-consultation-checkout",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite --host 0.0.0.0 --port 5174\" \"node --watch server/index.mjs\"",
+    "build": "tsc && vite build",
+    "start": "node server/index.mjs",
+    "server": "node server/index.mjs"
+  },
+  "dependencies": {
+    "@stripe/react-stripe-js": "^5.4.0",
+    "@stripe/stripe-js": "^8.5.2",
+    "@vitejs/plugin-react": "^5.1.1",
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "lucide-react": "^0.562.0",
+    "pg": "^8.21.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "stripe": "^22.1.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.2",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7"
+  }
+}
