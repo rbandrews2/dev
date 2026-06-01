@@ -433,8 +433,7 @@ function AuthorizationStep(props: {
               onChange={() => choosePaymentFlow("standard")}
             />
             <span>
-              <strong>Card, wallet, or other Stripe method</strong>
-              <small>Cards, Link, Apple Pay, Google Pay, Cash App Pay, PayPal, Amazon Pay, pay-later, and other eligible methods enabled in Stripe.</small>
+              <strong>Cards, Apps, & Mobile Wallets</strong>
             </span>
           </label>
           <label className={`choice-card ${form.paymentFlow === "ach" ? "selected" : ""}`}>
