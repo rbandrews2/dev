@@ -47,6 +47,7 @@ type AuthorizationForm = {
   amount: string;
   withdrawalDate: string;
   description: string;
+  paymentFlow: "standard" | "ach";
   signatureAccepted: boolean;
 };
 
@@ -57,6 +58,7 @@ const defaultForm: AuthorizationForm = {
   amount: "250.00",
   withdrawalDate: nextBusinessDate(),
   description: "Professional consultation services",
+  paymentFlow: "standard",
   signatureAccepted: false
 };
 
@@ -113,34 +115,48 @@ function App() {
   const totalCents = subtotalCents + (config?.fee.amountCents || 0);
   const isThankYou = window.location.pathname === "/thank-you";
 
-  async function submitAuthorization(event: FormEvent) {
+  async function submitCheckout(event: FormEvent) {
     event.preventDefault();
     setError("");
     setSubmitting(true);
 
     try {
-      const authResponse = await fetch("/api/checkout/authorization", {
+      let authorizationId = "";
+
+      if (form.paymentFlow === "ach") {
+        const authResponse = await fetch("/api/checkout/authorization", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            customerName: form.customerName,
+            customerEmail: form.customerEmail,
+            customerPhone: form.customerPhone,
+            amountCents: subtotalCents,
+            withdrawalDate: form.withdrawalDate,
+            description: form.description,
+            signatureAccepted: form.signatureAccepted,
+            authorizationVersion: "superior-ach-bank-auth-v2"
+          })
+        });
+
+        const authData = await authResponse.json();
+        if (!authResponse.ok) throw new Error(authData.error || "Authorization could not be saved.");
+        authorizationId = authData.authorizationId;
+      }
+
+      const intentResponse = await fetch("/api/checkout/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          paymentFlow: form.paymentFlow,
+          authorizationId: authorizationId || undefined,
           customerName: form.customerName,
           customerEmail: form.customerEmail,
           customerPhone: form.customerPhone,
           amountCents: subtotalCents,
           withdrawalDate: form.withdrawalDate,
-          description: form.description,
-          signatureAccepted: form.signatureAccepted,
-          authorizationVersion: "superior-ach-card-auth-v1"
+          description: form.description
         })
-      });
-
-      const authData = await authResponse.json();
-      if (!authResponse.ok) throw new Error(authData.error || "Authorization could not be saved.");
-
-      const intentResponse = await fetch("/api/checkout/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ authorizationId: authData.authorizationId })
       });
 
       const intentData = await intentResponse.json();
@@ -205,7 +221,7 @@ function App() {
                 totalCents={totalCents}
                 submitting={submitting}
                 error={error}
-                onSubmit={submitAuthorization}
+                onSubmit={submitCheckout}
                 onStop={() => setStopped(true)}
               />
             ) : (
@@ -223,7 +239,7 @@ function App() {
                   }
                 }}
               >
-                <PaymentStep customerEmail={form.customerEmail} />
+                <PaymentStep customerEmail={form.customerEmail} paymentFlow={form.paymentFlow} />
               </Elements>
             )}
           </section>
@@ -332,15 +348,21 @@ function AuthorizationStep(props: {
   const { config, form, setForm, subtotalCents, totalCents, submitting, error, onSubmit, onStop } = props;
   const update = (key: keyof AuthorizationForm, value: string | boolean) =>
     setForm((current) => ({ ...current, [key]: value }));
+  const choosePaymentFlow = (paymentFlow: AuthorizationForm["paymentFlow"]) =>
+    setForm((current) => ({
+      ...current,
+      paymentFlow,
+      signatureAccepted: paymentFlow === "ach" ? current.signatureAccepted : false
+    }));
 
   return (
     <form onSubmit={onSubmit} className="form-flow">
       <div>
         <p className="eyebrow">Step 1 of 2</p>
-        <h2>Review and authorize withdrawal</h2>
+        <h2>Review payment details</h2>
         <p className="muted">
-          You may continue and authorize the withdrawal, or discontinue now. Payment fields are
-          displayed only after this authorization is accepted.
+          You may continue to payment, or discontinue now. Payment fields are displayed after this
+          step. Bank withdrawals require authorization before the ACH form opens.
         </p>
       </div>
 
@@ -400,22 +422,54 @@ function AuthorizationStep(props: {
         </label>
       </div>
 
-      <div className="authorization-copy">
-        <h3>Electronic payment authorization</h3>
+      <section className="payment-choice" aria-labelledby="payment-choice-heading">
+        <h3 id="payment-choice-heading">Choose payment method</h3>
+        <div className="payment-choice-grid">
+          <label className={`choice-card ${form.paymentFlow === "standard" ? "selected" : ""}`}>
+            <input
+              type="radio"
+              name="paymentFlow"
+              checked={form.paymentFlow === "standard"}
+              onChange={() => choosePaymentFlow("standard")}
+            />
+            <span>
+              <strong>Card, wallet, or other Stripe method</strong>
+              <small>Cards, Link, Apple Pay, Google Pay, Cash App Pay, PayPal, Amazon Pay, pay-later, and other eligible methods enabled in Stripe.</small>
+            </span>
+          </label>
+          <label className={`choice-card ${form.paymentFlow === "ach" ? "selected" : ""}`}>
+            <input
+              type="radio"
+              name="paymentFlow"
+              checked={form.paymentFlow === "ach"}
+              onChange={() => choosePaymentFlow("ach")}
+            />
+            <span>
+              <strong>ACH bank withdrawal</strong>
+              <small>Debit a United States bank account after you sign the authorization below.</small>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      {form.paymentFlow === "ach" ? (
+      <div className="authorization-copy" role="dialog" aria-labelledby="ach-authorization-heading">
+        <h3 id="ach-authorization-heading">ACH debit authorization</h3>
         <p>
-          I authorize {config.business.name} to initiate a one-time electronic debit, ACH debit,
-          card payment, wallet payment, or other selected payment method charge in the amount of{" "}
-          <strong>{money(totalCents)}</strong> on or after{" "}
-          <strong>{weekday(form.withdrawalDate)}</strong> for {form.description || "services"}.
-          This authorization includes the listed amount of {money(subtotalCents)}
-          {config.fee.amountCents > 0 ? ` plus ${money(config.fee.amountCents)} for ${config.fee.label}` : ""}
-          .
+          I authorize Superior Consultation, LLC to initiate an electronic ACH debit from the bank
+          account I provide through Stripe in the amount of <strong>{money(totalCents)}</strong> on
+          or after <strong>{weekday(form.withdrawalDate)}</strong> for{" "}
+          {form.description || "the agreed transaction"}. This authorization includes the agreed
+          transaction amount of {money(subtotalCents)}
+          {config.fee.amountCents > 0 ? ` plus ${money(config.fee.amountCents)} for ${config.fee.label}` : ""}.
         </p>
         <p>
-          I understand this authorization is voluntary. I may discontinue this checkout before
-          submitting payment. For ACH payments, I represent that I am an owner or authorized signer
-          on the bank account used and authorize any required account verification, including
-          instant account verification or micro-deposit verification.
+          I further authorize Superior Consultation, LLC to initiate ACH debits for any future
+          amounts that I separately agree to pay for subscriptions, renewals, services, or related
+          account obligations, and to initiate ACH credits to the same account for refunds,
+          reversals, adjustments, or verification deposits and withdrawals used to confirm account
+          ownership. I represent that I am an owner or authorized signer on the bank account and
+          that this electronic authorization has the same legal effect as a written signature.
         </p>
         <label className="check-row">
           <input
@@ -425,11 +479,12 @@ function AuthorizationStep(props: {
             onChange={(event) => update("signatureAccepted", event.target.checked)}
           />
           <span>
-            I electronically sign this authorization as {form.customerName || "the customer"} and
-            agree to proceed.
+            I electronically sign this ACH debit authorization as{" "}
+            {form.customerName || "the customer"} and agree to proceed.
           </span>
         </label>
       </div>
+      ) : null}
 
       {error && <Notice tone="error" text={error} />}
 
@@ -437,16 +492,25 @@ function AuthorizationStep(props: {
         <button type="button" className="secondary" onClick={onStop}>
           Discontinue
         </button>
-        <button type="submit" disabled={submitting || subtotalCents < 50 || !form.signatureAccepted}>
+        <button
+          type="submit"
+          disabled={submitting || subtotalCents < 50 || (form.paymentFlow === "ach" && !form.signatureAccepted)}
+        >
           {submitting ? <Loader2 className="spin" size={18} /> : <CheckCircle2 size={18} />}
-          Continue and authorize
+          {form.paymentFlow === "ach" ? "Continue and authorize" : "Continue to payment"}
         </button>
       </div>
     </form>
   );
 }
 
-function PaymentStep({ customerEmail }: { customerEmail: string }) {
+function PaymentStep({
+  customerEmail,
+  paymentFlow
+}: {
+  customerEmail: string;
+  paymentFlow: AuthorizationForm["paymentFlow"];
+}) {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState("");
@@ -476,10 +540,11 @@ function PaymentStep({ customerEmail }: { customerEmail: string }) {
     <form onSubmit={submitPayment} className="form-flow">
       <div>
         <p className="eyebrow">Step 2 of 2</p>
-        <h2>Select payment method</h2>
+        <h2>{paymentFlow === "ach" ? "Connect bank account" : "Select payment method"}</h2>
         <p className="muted">
-          Eligible cards, Cash App Pay, Google Pay, Samsung Pay, and ACH options are shown by Stripe
-          based on device, account settings, location, and payment eligibility.
+          {paymentFlow === "ach"
+            ? "Stripe will collect and verify the bank account details needed for ACH processing."
+            : "Stripe will show eligible card, wallet, pay-later, bank redirect, and other enabled methods based on device, account settings, location, and payment eligibility."}
         </p>
       </div>
       <PaymentElement />

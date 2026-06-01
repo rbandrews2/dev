@@ -35,12 +35,24 @@ const authorizationSchema = z.object({
   withdrawalDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   description: z.string().trim().min(2).max(180),
   signatureAccepted: z.literal(true),
-  authorizationVersion: z.literal("superior-ach-card-auth-v1")
+  authorizationVersion: z.enum(["superior-ach-card-auth-v1", "superior-ach-bank-auth-v2"])
 });
 
-const intentSchema = z.object({
-  authorizationId: z.string().uuid()
+const checkoutDetailsSchema = authorizationSchema.omit({
+  signatureAccepted: true,
+  authorizationVersion: true
 });
+
+const intentSchema = z.discriminatedUnion("paymentFlow", [
+  checkoutDetailsSchema.extend({
+    paymentFlow: z.literal("standard"),
+    authorizationId: z.string().uuid().optional()
+  }),
+  checkoutDetailsSchema.partial().extend({
+    paymentFlow: z.literal("ach"),
+    authorizationId: z.string().uuid()
+  })
+]);
 
 function requireStripe() {
   if (!stripe) {
@@ -149,28 +161,42 @@ app.post("/api/checkout/authorization", async (req, res, next) => {
 app.post("/api/checkout/create-payment-intent", async (req, res, next) => {
   try {
     const parsed = intentSchema.parse(req.body);
-    const auth = await appendAuthorization.get(parsed.authorizationId);
-    if (!auth) return res.status(404).json({ error: "Authorization record was not found." });
+    const auth =
+      parsed.paymentFlow === "ach" ? await appendAuthorization.get(parsed.authorizationId) : null;
+
+    if (parsed.paymentFlow === "ach" && !auth) {
+      return res.status(404).json({ error: "ACH authorization record was not found." });
+    }
+
+    const checkout = auth || parsed;
 
     const stripeClient = requireStripe();
-    const paymentIntent = await stripeClient.paymentIntents.create({
-      amount: auth.totalCents,
+    const paymentIntentParams = {
+      amount: auth ? auth.totalCents : parsed.amountCents + feeCents(),
       currency: business.currency,
-      receipt_email: auth.customerEmail,
-      description: auth.description,
+      receipt_email: checkout.customerEmail,
+      description: checkout.description,
       automatic_payment_methods: { enabled: true },
-      payment_method_options: {
+      metadata: {
+        payment_flow: parsed.paymentFlow,
+        authorization_id: auth?.id || "",
+        authorization_version: auth?.authorizationVersion || "",
+        customer_name: checkout.customerName,
+        withdrawal_date: checkout.withdrawalDate
+      }
+    };
+
+    if (parsed.paymentFlow === "standard") {
+      paymentIntentParams.excluded_payment_method_types = ["us_bank_account"];
+    } else {
+      paymentIntentParams.payment_method_options = {
         us_bank_account: {
           verification_method: "automatic"
         }
-      },
-      metadata: {
-        authorization_id: auth.id,
-        authorization_version: auth.authorizationVersion,
-        customer_name: auth.customerName,
-        withdrawal_date: auth.withdrawalDate
-      }
-    });
+      };
+    }
+
+    const paymentIntent = await stripeClient.paymentIntents.create(paymentIntentParams);
 
     res.json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {

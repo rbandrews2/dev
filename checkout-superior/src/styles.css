@@ -208,6 +208,59 @@ input:focus {
   background: #111111;
 }
 
+.payment-choice {
+  display: grid;
+  gap: 12px;
+}
+
+.payment-choice h3 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.payment-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.choice-card {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 12px;
+  min-height: 112px;
+  border: 1px solid #3f3f3f;
+  border-radius: 8px;
+  padding: 14px;
+  background: #111111;
+  cursor: pointer;
+}
+
+.choice-card.selected {
+  border-color: #5eead4;
+  background: #082f2d;
+}
+
+.choice-card input {
+  width: 18px;
+  min-height: 18px;
+  margin: 2px 0 0;
+  accent-color: #0f766e;
+}
+
+.choice-card strong,
+.choice-card small {
+  display: block;
+}
+
+.choice-card small {
+  margin-top: 6px;
+  color: #d7d7d7;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
 .authorization-copy h3 {
   margin: 0 0 0.7rem;
   color: #ffffff;
@@ -216,6 +269,11 @@ input:focus {
 .authorization-copy p {
   color: #dddddd;
   line-height: 1.58;
+}
+
+.authorization-copy[role="dialog"] {
+  border-color: #5eead4;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.36);
 }
 
 .check-row {
@@ -476,6 +534,7 @@ input:focus {
   }
 
   .field-grid,
+  .payment-choice-grid,
   .method-list {
     grid-template-columns: 1fr;
   }
