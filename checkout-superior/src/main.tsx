@@ -437,7 +437,7 @@ function AuthorizationStep(props: {
         <button type="button" className="secondary" onClick={onStop}>
           Discontinue
         </button>
-        <button type="submit" disabled={submitting || subtotalCents < 50}>
+        <button type="submit" disabled={submitting || subtotalCents < 50 || !form.signatureAccepted}>
           {submitting ? <Loader2 className="spin" size={18} /> : <CheckCircle2 size={18} />}
           Continue and authorize
         </button>

@@ -226,10 +226,37 @@ input:focus {
 }
 
 .check-row input {
+  appearance: none;
+  display: grid;
+  place-items: center;
   width: 18px;
+  height: 18px;
   min-height: 18px;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
   margin-top: 3px;
-  accent-color: #ffffff;
+  padding: 0;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.check-row input:checked {
+  background: #0f766e;
+  border-color: #5eead4;
+}
+
+.check-row input:checked::after {
+  content: "";
+  width: 5px;
+  height: 9px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.check-row input:focus {
+  outline: 3px solid rgba(94, 234, 212, 0.32);
+  outline-offset: 2px;
 }
 
 .button-row {

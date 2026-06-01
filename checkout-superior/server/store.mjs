@@ -4,10 +4,70 @@ import pg from "pg";
 
 const storePath = path.resolve(process.env.AUTHORIZATION_STORE_PATH || "./data/authorizations.json");
 const { Pool } = pg;
+const databaseUrl = process.env.DATABASE_URL?.trim();
+let databaseConfigError = null;
 
-const pool = process.env.DATABASE_URL
+function databaseConfigurationError(message) {
+  const error = new Error(message);
+  error.status = 503;
+  return error;
+}
+
+function validateDatabaseUrl(value) {
+  if (!value) return null;
+
+  let parsed;
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw databaseConfigurationError(
+      "Database is misconfigured. DATABASE_URL must be a valid PostgreSQL connection string."
+    );
+  }
+
+  if (!["postgres:", "postgresql:"].includes(parsed.protocol)) {
+    throw databaseConfigurationError(
+      "Database is misconfigured. DATABASE_URL must start with postgres:// or postgresql://, not an HTTPS project URL."
+    );
+  }
+
+  if (parsed.hostname === "db.https") {
+    throw databaseConfigurationError(
+      "Database is misconfigured. DATABASE_URL resolved to host db.https. Use the managed Postgres connection string, not a dashboard or project URL."
+    );
+  }
+
+  return value;
+}
+
+function configuredDatabaseUrl() {
+  try {
+    return validateDatabaseUrl(databaseUrl);
+  } catch (error) {
+    databaseConfigError = error;
+    return null;
+  }
+}
+
+function assertDatabaseConfigured() {
+  if (databaseConfigError) throw databaseConfigError;
+}
+
+function friendlyDatabaseError(error) {
+  if (error?.code === "ENOTFOUND" || error?.message?.includes("getaddrinfo ENOTFOUND")) {
+    return databaseConfigurationError(
+      "Database host could not be resolved. Check DATABASE_URL in Render and use the Postgres connection string from your database provider."
+    );
+  }
+
+  return error;
+}
+
+const validDatabaseUrl = configuredDatabaseUrl();
+
+const pool = validDatabaseUrl
   ? new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: validDatabaseUrl,
       ssl:
         process.env.DATABASE_SSL === "false"
           ? false
@@ -81,52 +141,58 @@ async function writeStore(records) {
 }
 
 export async function appendAuthorization(record) {
+  assertDatabaseConfigured();
+
   if (pool) {
     const dbRecord = toDbRecord(record);
-    const result = await pool.query(
-      `insert into checkout_authorizations (
-        id,
-        customer_name,
-        customer_email,
-        customer_phone,
-        amount_cents,
-        service_fee_cents,
-        total_cents,
-        currency,
-        withdrawal_date,
-        description,
-        signature_accepted,
-        authorization_version,
-        business_snapshot,
-        ip_address,
-        user_agent,
-        status,
-        created_at
-      ) values (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17
-      )
-      returning *`,
-      [
-        dbRecord.id,
-        dbRecord.customer_name,
-        dbRecord.customer_email,
-        dbRecord.customer_phone,
-        dbRecord.amount_cents,
-        dbRecord.service_fee_cents,
-        dbRecord.total_cents,
-        dbRecord.currency,
-        dbRecord.withdrawal_date,
-        dbRecord.description,
-        dbRecord.signature_accepted,
-        dbRecord.authorization_version,
-        dbRecord.business_snapshot,
-        dbRecord.ip_address,
-        dbRecord.user_agent,
-        dbRecord.status,
-        dbRecord.created_at
-      ]
-    );
-    return fromDbRecord(result.rows[0]);
+    try {
+      const result = await pool.query(
+        `insert into checkout_authorizations (
+          id,
+          customer_name,
+          customer_email,
+          customer_phone,
+          amount_cents,
+          service_fee_cents,
+          total_cents,
+          currency,
+          withdrawal_date,
+          description,
+          signature_accepted,
+          authorization_version,
+          business_snapshot,
+          ip_address,
+          user_agent,
+          status,
+          created_at
+        ) values (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17
+        )
+        returning *`,
+        [
+          dbRecord.id,
+          dbRecord.customer_name,
+          dbRecord.customer_email,
+          dbRecord.customer_phone,
+          dbRecord.amount_cents,
+          dbRecord.service_fee_cents,
+          dbRecord.total_cents,
+          dbRecord.currency,
+          dbRecord.withdrawal_date,
+          dbRecord.description,
+          dbRecord.signature_accepted,
+          dbRecord.authorization_version,
+          dbRecord.business_snapshot,
+          dbRecord.ip_address,
+          dbRecord.user_agent,
+          dbRecord.status,
+          dbRecord.created_at
+        ]
+      );
+      return fromDbRecord(result.rows[0]);
+    } catch (error) {
+      throw friendlyDatabaseError(error);
+    }
   }
 
   const records = await readStore();
@@ -136,9 +202,15 @@ export async function appendAuthorization(record) {
 }
 
 appendAuthorization.get = async (id) => {
+  assertDatabaseConfigured();
+
   if (pool) {
-    const result = await pool.query("select * from checkout_authorizations where id = $1", [id]);
-    return fromDbRecord(result.rows[0]);
+    try {
+      const result = await pool.query("select * from checkout_authorizations where id = $1", [id]);
+      return fromDbRecord(result.rows[0]);
+    } catch (error) {
+      throw friendlyDatabaseError(error);
+    }
   }
 
   const records = await readStore();
@@ -147,17 +219,23 @@ appendAuthorization.get = async (id) => {
 
 export async function markAuthorizationPaid(id, patch) {
   if (!id) return;
+  assertDatabaseConfigured();
+
   if (pool) {
-    await pool.query(
-      `update checkout_authorizations
-        set status = 'paid',
-            payment_intent_id = $2,
-            amount_received_cents = $3,
-            paid_at = $4,
-            updated_at = now()
-        where id = $1`,
-      [id, patch.paymentIntentId, patch.amountReceived, patch.paidAt]
-    );
+    try {
+      await pool.query(
+        `update checkout_authorizations
+          set status = 'paid',
+              payment_intent_id = $2,
+              amount_received_cents = $3,
+              paid_at = $4,
+              updated_at = now()
+          where id = $1`,
+        [id, patch.paymentIntentId, patch.amountReceived, patch.paidAt]
+      );
+    } catch (error) {
+      throw friendlyDatabaseError(error);
+    }
     return;
   }
 
