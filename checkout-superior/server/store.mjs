@@ -60,6 +60,40 @@ function friendlyDatabaseError(error) {
     );
   }
 
+  if (error?.code === "ENETUNREACH" || error?.message?.includes("connect ENETUNREACH")) {
+    return databaseConfigurationError(
+      "Database network is unreachable. If this database is hosted on Supabase, use the IPv4-compatible Supavisor pooler connection string or enable Supabase IPv4, then update DATABASE_URL in Render."
+    );
+  }
+
+  if (
+    error?.code === "ETIMEDOUT" ||
+    error?.code === "ECONNREFUSED" ||
+    error?.message?.includes("Connection terminated due to connection timeout")
+  ) {
+    return databaseConfigurationError(
+      "Database connection failed. Check DATABASE_URL, SSL settings, and database network access in Render."
+    );
+  }
+
+  if (error?.code === "28P01" || error?.message?.includes("password authentication failed")) {
+    return databaseConfigurationError(
+      "Database credentials were rejected. Check the username and password in DATABASE_URL."
+    );
+  }
+
+  if (error?.code === "3D000") {
+    return databaseConfigurationError(
+      "Database name was not found. Check the database path in DATABASE_URL."
+    );
+  }
+
+  if (error?.code === "42P01") {
+    return databaseConfigurationError(
+      "Database schema is missing. Run server/schema.sql against the production database."
+    );
+  }
+
   return error;
 }
 
@@ -68,6 +102,7 @@ const validDatabaseUrl = configuredDatabaseUrl();
 const pool = validDatabaseUrl
   ? new Pool({
       connectionString: validDatabaseUrl,
+      connectionTimeoutMillis: Number(process.env.DATABASE_CONNECTION_TIMEOUT_MS || 10000),
       ssl:
         process.env.DATABASE_SSL === "false"
           ? false

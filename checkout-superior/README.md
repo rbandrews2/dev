@@ -18,6 +18,7 @@ Secure checkout app for `checkout.superiorllc.org` with an explicit payment auth
 5. Enable payment methods in the Stripe Dashboard for the connected account.
 6. Provision the production database and run `server/schema.sql`.
 7. Add the managed Postgres connection string as `DATABASE_URL`.
+   - If using Supabase on Render, do not use the direct `db.<project>.supabase.co:5432` connection string unless your runtime supports IPv6. Use Supabase's IPv4-compatible Supavisor pooler connection string, or enable Supabase's IPv4 add-on, then set that value as `DATABASE_URL`.
 8. Register the webhook endpoint:
 
 ```bash
