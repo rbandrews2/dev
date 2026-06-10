@@ -17,3 +17,4 @@ PRIVACY_POLICY_URL=https://superiorllc.org/privacy-policy
 TERMS_URL=https://superiorllc.org/terms
 REFUND_POLICY_URL=
 SERVICE_FEE_CENTS=0
+SAVE_PAYMENT_METHODS_FOR_FUTURE_CHARGES=true

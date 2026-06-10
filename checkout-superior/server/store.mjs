@@ -1,8 +1,12 @@
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import pg from "pg";
 
 const storePath = path.resolve(process.env.AUTHORIZATION_STORE_PATH || "./data/authorizations.json");
+const subscriptionStorePath = path.resolve(
+  process.env.SUBSCRIPTION_STORE_PATH || "./data/subscriptions.json"
+);
 const { Pool } = pg;
 const databaseUrl = process.env.DATABASE_URL?.trim();
 let databaseConfigError = null;
@@ -161,6 +165,51 @@ function fromDbRecord(row) {
   };
 }
 
+function fromCustomerProfileRow(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    customerEmail: row.customer_email,
+    customerName: row.customer_name || "",
+    customerPhone: row.customer_phone || "",
+    stripeCustomerId: row.stripe_customer_id,
+    defaultPaymentMethodId: row.default_payment_method_id || "",
+    sourcePaymentIntentId: row.source_payment_intent_id || "",
+    createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at,
+    updatedAt: row.updated_at instanceof Date ? row.updated_at.toISOString() : row.updated_at
+  };
+}
+
+function fromSubscriptionRow(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    customerProfileId: row.customer_profile_id,
+    customerEmail: row.customer_email,
+    stripeCustomerId: row.stripe_customer_id,
+    stripeSubscriptionId: row.stripe_subscription_id,
+    defaultPaymentMethodId: row.default_payment_method_id,
+    sourcePaymentIntentId: row.source_payment_intent_id || "",
+    priceId: row.price_id || "",
+    amountCents: row.amount_cents,
+    currency: row.currency,
+    interval: row.interval,
+    intervalCount: row.interval_count,
+    description: row.description,
+    status: row.status,
+    currentPeriodStart:
+      row.current_period_start instanceof Date
+        ? row.current_period_start.toISOString()
+        : row.current_period_start,
+    currentPeriodEnd:
+      row.current_period_end instanceof Date
+        ? row.current_period_end.toISOString()
+        : row.current_period_end,
+    createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at,
+    updatedAt: row.updated_at instanceof Date ? row.updated_at.toISOString() : row.updated_at
+  };
+}
+
 async function readStore() {
   try {
     return JSON.parse(await fs.readFile(storePath, "utf8"));
@@ -173,6 +222,20 @@ async function readStore() {
 async function writeStore(records) {
   await fs.mkdir(path.dirname(storePath), { recursive: true });
   await fs.writeFile(storePath, JSON.stringify(records, null, 2));
+}
+
+async function readSubscriptionStore() {
+  try {
+    return JSON.parse(await fs.readFile(subscriptionStorePath, "utf8"));
+  } catch (error) {
+    if (error.code === "ENOENT") return { customerProfiles: [], subscriptions: [] };
+    throw error;
+  }
+}
+
+async function writeSubscriptionStore(records) {
+  await fs.mkdir(path.dirname(subscriptionStorePath), { recursive: true });
+  await fs.writeFile(subscriptionStorePath, JSON.stringify(records, null, 2));
 }
 
 export async function appendAuthorization(record) {
@@ -279,4 +342,191 @@ export async function markAuthorizationPaid(id, patch) {
     record.id === id ? { ...record, ...patch, status: "paid" } : record
   );
   await writeStore(next);
+}
+
+export async function upsertCustomerPaymentProfile(profile) {
+  assertDatabaseConfigured();
+
+  if (pool) {
+    try {
+      const result = await pool.query(
+        `insert into checkout_customer_profiles (
+          customer_email,
+          customer_name,
+          customer_phone,
+          stripe_customer_id,
+          default_payment_method_id,
+          source_payment_intent_id
+        ) values ($1, $2, $3, $4, $5, $6)
+        on conflict (stripe_customer_id) do update set
+          customer_email = excluded.customer_email,
+          customer_name = excluded.customer_name,
+          customer_phone = excluded.customer_phone,
+          default_payment_method_id = coalesce(excluded.default_payment_method_id, checkout_customer_profiles.default_payment_method_id),
+          source_payment_intent_id = coalesce(excluded.source_payment_intent_id, checkout_customer_profiles.source_payment_intent_id),
+          updated_at = now()
+        returning *`,
+        [
+          profile.customerEmail,
+          profile.customerName || null,
+          profile.customerPhone || null,
+          profile.stripeCustomerId,
+          profile.defaultPaymentMethodId || null,
+          profile.sourcePaymentIntentId || null
+        ]
+      );
+      return fromCustomerProfileRow(result.rows[0]);
+    } catch (error) {
+      throw friendlyDatabaseError(error);
+    }
+  }
+
+  const records = await readSubscriptionStore();
+  const now = new Date().toISOString();
+  const current = records.customerProfiles.find(
+    (item) => item.stripeCustomerId === profile.stripeCustomerId
+  );
+  const nextProfile = {
+    id: current?.id || crypto.randomUUID(),
+    ...current,
+    ...profile,
+    createdAt: current?.createdAt || now,
+    updatedAt: now
+  };
+  records.customerProfiles = [
+    ...records.customerProfiles.filter((item) => item.id !== nextProfile.id),
+    nextProfile
+  ];
+  await writeSubscriptionStore(records);
+  return nextProfile;
+}
+
+export async function getCustomerPaymentProfileByEmail(email) {
+  assertDatabaseConfigured();
+
+  if (pool) {
+    try {
+      const result = await pool.query(
+        "select * from checkout_customer_profiles where lower(customer_email) = lower($1)",
+        [email]
+      );
+      return fromCustomerProfileRow(result.rows[0]);
+    } catch (error) {
+      throw friendlyDatabaseError(error);
+    }
+  }
+
+  const records = await readSubscriptionStore();
+  return records.customerProfiles.find(
+    (item) => item.customerEmail.toLowerCase() === email.toLowerCase()
+  );
+}
+
+export async function upsertSubscriptionRecord(subscription) {
+  assertDatabaseConfigured();
+
+  if (pool) {
+    try {
+      const result = await pool.query(
+        `insert into checkout_subscriptions (
+          customer_profile_id,
+          customer_email,
+          stripe_customer_id,
+          stripe_subscription_id,
+          default_payment_method_id,
+          source_payment_intent_id,
+          price_id,
+          amount_cents,
+          currency,
+          interval,
+          interval_count,
+          description,
+          status,
+          current_period_start,
+          current_period_end
+        ) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+        on conflict (stripe_subscription_id) do update set
+          default_payment_method_id = excluded.default_payment_method_id,
+          status = excluded.status,
+          current_period_start = excluded.current_period_start,
+          current_period_end = excluded.current_period_end,
+          updated_at = now()
+        returning *`,
+        [
+          subscription.customerProfileId || null,
+          subscription.customerEmail,
+          subscription.stripeCustomerId,
+          subscription.stripeSubscriptionId,
+          subscription.defaultPaymentMethodId,
+          subscription.sourcePaymentIntentId || null,
+          subscription.priceId || null,
+          subscription.amountCents,
+          subscription.currency,
+          subscription.interval,
+          subscription.intervalCount,
+          subscription.description,
+          subscription.status,
+          subscription.currentPeriodStart || null,
+          subscription.currentPeriodEnd || null
+        ]
+      );
+      return fromSubscriptionRow(result.rows[0]);
+    } catch (error) {
+      throw friendlyDatabaseError(error);
+    }
+  }
+
+  const records = await readSubscriptionStore();
+  const now = new Date().toISOString();
+  const current = records.subscriptions.find(
+    (item) => item.stripeSubscriptionId === subscription.stripeSubscriptionId
+  );
+  const nextSubscription = {
+    id: current?.id || crypto.randomUUID(),
+    ...current,
+    ...subscription,
+    createdAt: current?.createdAt || now,
+    updatedAt: now
+  };
+  records.subscriptions = [
+    ...records.subscriptions.filter((item) => item.id !== nextSubscription.id),
+    nextSubscription
+  ];
+  await writeSubscriptionStore(records);
+  return nextSubscription;
+}
+
+export async function updateSubscriptionStatus(stripeSubscriptionId, patch) {
+  if (!stripeSubscriptionId) return;
+  assertDatabaseConfigured();
+
+  if (pool) {
+    try {
+      await pool.query(
+        `update checkout_subscriptions
+          set status = coalesce($2, status),
+              current_period_start = coalesce($3, current_period_start),
+              current_period_end = coalesce($4, current_period_end),
+              updated_at = now()
+          where stripe_subscription_id = $1`,
+        [
+          stripeSubscriptionId,
+          patch.status || null,
+          patch.currentPeriodStart || null,
+          patch.currentPeriodEnd || null
+        ]
+      );
+    } catch (error) {
+      throw friendlyDatabaseError(error);
+    }
+    return;
+  }
+
+  const records = await readSubscriptionStore();
+  records.subscriptions = records.subscriptions.map((record) =>
+    record.stripeSubscriptionId === stripeSubscriptionId
+      ? { ...record, ...patch, updatedAt: new Date().toISOString() }
+      : record
+  );
+  await writeSubscriptionStore(records);
 }

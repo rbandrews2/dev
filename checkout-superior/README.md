@@ -7,6 +7,7 @@ Secure checkout app for `checkout.superiorllc.org` with an explicit payment auth
 - Visa, Mastercard, American Express, eligible wallets, Cash App Pay, Google Pay, Samsung Pay where supported by Stripe, device, browser, and Dashboard settings.
 - ACH debit with Stripe-hosted bank collection. The server requests automatic bank verification so eligible customers can use instant verification with micro-deposit fallback.
 - Explicit authorization record with customer name, email, amount, withdrawal date, date/time, IP address, user agent, and electronic signature checkbox.
+- Optional recurring billing opt-in that creates a Stripe Customer, saves the confirmed payment method for off-session use, and creates a Stripe Billing Subscription for future automatic charges.
 - Payment summary, fee disclosure, loading states, payment errors, and a return confirmation page state through Stripe.
 
 ## Setup
@@ -25,7 +26,11 @@ Secure checkout app for `checkout.superiorllc.org` with an explicit payment auth
 https://checkout.superiorllc.org/api/webhooks/stripe
 ```
 
-Subscribe at minimum to `payment_intent.succeeded`.
+Subscribe at minimum to:
+
+- `payment_intent.succeeded`
+- `customer.subscription.updated`
+- `customer.subscription.deleted`
 
 ## Development
 
@@ -68,3 +73,38 @@ If `DATABASE_URL` is not set, the server falls back to `data/authorizations.json
 This code avoids collecting card or bank account numbers on your server by using Stripe-hosted Payment Element fields, reducing PCI exposure. For ACH/NACHA, keep authorization records for the required retention period, provide customer support contact information, and verify that the final authorization wording, cancellation process, fees, and timing comply with your state rules, card-network rules, and NACHA requirements.
 
 The local JSON authorization store is a development fallback. Use the managed Postgres schema before processing live payments.
+
+## Recurring Billing
+
+Recurring billing uses Stripe Billing Subscriptions and saved Stripe PaymentMethods. The app stores only Stripe object IDs and audit metadata. Do not store card numbers, bank account numbers, CVV, or raw payment method details.
+
+By default, checkout PaymentIntents are created with a Stripe Customer and `setup_future_usage=off_session` so Stripe can attach the confirmed payment method to the customer for later automatic billing. Set `SAVE_PAYMENT_METHODS_FOR_FUTURE_CHARGES=false` only if you are certain a checkout payment should never be reused for a later subscription or approved future charge.
+
+Recommended Stripe setup:
+
+- Create a Stripe Product and recurring Price, then set `STRIPE_SUBSCRIPTION_PRICE_ID=price_...`.
+- Keep `SUBSCRIPTIONS_ENABLED=true` only after the subscription terms, cancellation process, and recurring authorization language are reviewed.
+- Use a restricted API key with permissions for PaymentIntents, Customers, PaymentMethods, Subscriptions, Prices read, and Webhooks as needed.
+
+To create a subscription for an existing customer who already made a purchase, call the admin endpoint with a server-side token. The PaymentIntent should be succeeded, and the PaymentMethod should be reusable/saved or attachable to the Stripe Customer.
+
+```powershell
+$body = @{
+  paymentIntentId = "pi_replace_me"
+  paymentMethodId = "pm_replace_me"
+  customerEmail = "customer@example.com"
+  customerName = "Customer Name"
+  amountCents = 25000
+  interval = "month"
+  intervalCount = 1
+  description = "Monthly consultation plan"
+  firstBillingDate = "2026-07-09"
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Method Post `
+  -Uri "https://checkout.superiorllc.org/api/admin/subscriptions/from-purchase" `
+  -Headers @{ Authorization = "Bearer $env:SUBSCRIPTION_ADMIN_TOKEN" } `
+  -ContentType "application/json" `
+  -Body $body
+```

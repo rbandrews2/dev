@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"vite --host 0.0.0.0 --port 5174\" \"node --watch server/index.mjs\"",
+    "db:schema": "node server/apply-schema.mjs",
     "build": "tsc && vite build",
     "start": "node server/index.mjs",
     "server": "node server/index.mjs"

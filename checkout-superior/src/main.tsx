@@ -38,6 +38,13 @@ type Config = {
     label: string;
     amountCents: number;
   };
+  recurring: {
+    enabled: boolean;
+    label: string;
+    amountCents: number;
+    interval: "day" | "week" | "month" | "year";
+    intervalCount: number;
+  };
 };
 
 type AuthorizationForm = {
@@ -48,6 +55,10 @@ type AuthorizationForm = {
   withdrawalDate: string;
   description: string;
   paymentFlow: "standard" | "ach";
+  subscriptionEnabled: boolean;
+  subscriptionAmount: string;
+  subscriptionInterval: "day" | "week" | "month" | "year";
+  subscriptionFirstBillingDate: string;
   signatureAccepted: boolean;
 };
 
@@ -59,6 +70,10 @@ const defaultForm: AuthorizationForm = {
   withdrawalDate: nextBusinessDate(),
   description: "Professional consultation services",
   paymentFlow: "standard",
+  subscriptionEnabled: false,
+  subscriptionAmount: "250.00",
+  subscriptionInterval: "month",
+  subscriptionFirstBillingDate: nextMonthDate(),
   signatureAccepted: false
 };
 
@@ -66,6 +81,12 @@ function nextBusinessDate() {
   const date = new Date();
   date.setDate(date.getDate() + 1);
   while ([0, 6].includes(date.getDay())) date.setDate(date.getDate() + 1);
+  return date.toISOString().slice(0, 10);
+}
+
+function nextMonthDate() {
+  const date = new Date();
+  date.setMonth(date.getMonth() + 1);
   return date.toISOString().slice(0, 10);
 }
 
@@ -105,6 +126,11 @@ function App() {
       .then((response) => response.json())
       .then((data: Config) => {
         setConfig(data);
+        setForm((current) => ({
+          ...current,
+          subscriptionAmount: (data.recurring.amountCents / 100).toFixed(2),
+          subscriptionInterval: data.recurring.interval
+        }));
         if (data.publishableKey) setStripePromise(loadStripe(data.publishableKey));
       })
       .catch(() => setError("Checkout configuration could not be loaded."))
@@ -112,6 +138,10 @@ function App() {
   }, []);
 
   const subtotalCents = useMemo(() => centsFromDollars(form.amount || "0"), [form.amount]);
+  const subscriptionAmountCents = useMemo(
+    () => centsFromDollars(form.subscriptionAmount || "0"),
+    [form.subscriptionAmount]
+  );
   const totalCents = subtotalCents + (config?.fee.amountCents || 0);
   const isThankYou = window.location.pathname === "/thank-you";
 
@@ -155,7 +185,17 @@ function App() {
           customerPhone: form.customerPhone,
           amountCents: subtotalCents,
           withdrawalDate: form.withdrawalDate,
-          description: form.description
+          description: form.description,
+          subscription: form.subscriptionEnabled
+            ? {
+                enabled: true,
+                amountCents: subscriptionAmountCents,
+                interval: form.subscriptionInterval,
+                intervalCount: 1,
+                description: config?.recurring.label || "Recurring consultation subscription",
+                firstBillingDate: form.subscriptionFirstBillingDate
+              }
+            : { enabled: false }
         })
       });
 
@@ -219,6 +259,7 @@ function App() {
                 setForm={setForm}
                 subtotalCents={subtotalCents}
                 totalCents={totalCents}
+                subscriptionAmountCents={subscriptionAmountCents}
                 submitting={submitting}
                 error={error}
                 onSubmit={submitCheckout}
@@ -249,6 +290,7 @@ function App() {
             form={form}
             subtotalCents={subtotalCents}
             totalCents={totalCents}
+            subscriptionAmountCents={subscriptionAmountCents}
           />
         </main>
       )}
@@ -340,12 +382,24 @@ function AuthorizationStep(props: {
   setForm: React.Dispatch<React.SetStateAction<AuthorizationForm>>;
   subtotalCents: number;
   totalCents: number;
+  subscriptionAmountCents: number;
   submitting: boolean;
   error: string;
   onSubmit: (event: FormEvent) => void;
   onStop: () => void;
 }) {
-  const { config, form, setForm, subtotalCents, totalCents, submitting, error, onSubmit, onStop } = props;
+  const {
+    config,
+    form,
+    setForm,
+    subtotalCents,
+    totalCents,
+    subscriptionAmountCents,
+    submitting,
+    error,
+    onSubmit,
+    onStop
+  } = props;
   const update = (key: keyof AuthorizationForm, value: string | boolean) =>
     setForm((current) => ({ ...current, [key]: value }));
   const choosePaymentFlow = (paymentFlow: AuthorizationForm["paymentFlow"]) =>
@@ -485,6 +539,73 @@ function AuthorizationStep(props: {
       </div>
       ) : null}
 
+      {config.recurring.enabled ? (
+        <section className="subscription-panel" aria-labelledby="subscription-heading">
+          <label className="check-row">
+            <input
+              type="checkbox"
+              checked={form.subscriptionEnabled}
+              onChange={(event) => update("subscriptionEnabled", event.target.checked)}
+            />
+            <span>
+              Save my selected payment method and start recurring billing for{" "}
+              <strong>{config.recurring.label}</strong>.
+            </span>
+          </label>
+
+          {form.subscriptionEnabled ? (
+            <div className="subscription-fields">
+              <h3 id="subscription-heading">Recurring billing authorization</h3>
+              <p>
+                I authorize {config.business.name} to automatically charge my saved payment
+                method <strong>{money(subscriptionAmountCents)}</strong> every{" "}
+                {form.subscriptionInterval} beginning{" "}
+                <strong>{weekday(form.subscriptionFirstBillingDate)}</strong>. I understand I may
+                contact support to update or cancel future billing according to the posted terms.
+              </p>
+              <div className="field-grid compact">
+                <label>
+                  <span className="label-text"><DollarSign size={16} /> Recurring amount</span>
+                  <input
+                    required
+                    inputMode="decimal"
+                    value={form.subscriptionAmount}
+                    onChange={(event) => update("subscriptionAmount", event.target.value)}
+                  />
+                </label>
+                <label>
+                  <span className="label-text"><CalendarDays size={16} /> First recurring bill date</span>
+                  <input
+                    required
+                    type="date"
+                    value={form.subscriptionFirstBillingDate}
+                    onChange={(event) => update("subscriptionFirstBillingDate", event.target.value)}
+                  />
+                </label>
+                <label>
+                  <span className="label-text"><FileText size={16} /> Frequency</span>
+                  <select
+                    required
+                    value={form.subscriptionInterval}
+                    onChange={(event) =>
+                      update(
+                        "subscriptionInterval",
+                        event.target.value as AuthorizationForm["subscriptionInterval"]
+                      )
+                    }
+                  >
+                    <option value="day">Daily</option>
+                    <option value="month">Monthly</option>
+                    <option value="week">Weekly</option>
+                    <option value="year">Yearly</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
+
       {error && <Notice tone="error" text={error} />}
 
       <div className="button-row">
@@ -493,7 +614,12 @@ function AuthorizationStep(props: {
         </button>
         <button
           type="submit"
-          disabled={submitting || subtotalCents < 50 || (form.paymentFlow === "ach" && !form.signatureAccepted)}
+          disabled={
+            submitting ||
+            subtotalCents < 50 ||
+            (form.paymentFlow === "ach" && !form.signatureAccepted) ||
+            (form.subscriptionEnabled && subscriptionAmountCents < 50)
+          }
         >
           {submitting ? <Loader2 className="spin" size={18} /> : <CheckCircle2 size={18} />}
           {form.paymentFlow === "ach" ? "Continue and authorize" : "Continue to payment"}
@@ -561,8 +687,9 @@ function Summary(props: {
   form: AuthorizationForm;
   subtotalCents: number;
   totalCents: number;
+  subscriptionAmountCents: number;
 }) {
-  const { config, form, subtotalCents, totalCents } = props;
+  const { config, form, subtotalCents, totalCents, subscriptionAmountCents } = props;
   return (
     <aside className="summary" aria-label="Payment summary">
       <h2>Payment summary</h2>
@@ -578,6 +705,15 @@ function Summary(props: {
         <span>Total authorized</span>
         <strong>{money(totalCents)}</strong>
       </div>
+      {form.subscriptionEnabled ? (
+        <div className="recurring-summary">
+          <span>Recurring billing</span>
+          <strong>
+            {money(subscriptionAmountCents)} / {form.subscriptionInterval}
+          </strong>
+          <small>First automatic charge: {weekday(form.subscriptionFirstBillingDate)}</small>
+        </div>
+      ) : null}
       <div className="method-list">
         <PaymentMethodLogo brand="visa" label="Visa" />
         <PaymentMethodLogo brand="mastercard" label="Mastercard" />
