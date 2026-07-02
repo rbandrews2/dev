@@ -11,9 +11,12 @@ const { Pool } = pg;
 const databaseUrl = process.env.DATABASE_URL?.trim();
 let databaseConfigError = null;
 
-function databaseConfigurationError(message) {
+function databaseConfigurationError(message, publicMessage) {
   const error = new Error(message);
   error.status = 503;
+  error.publicMessage =
+    publicMessage ||
+    "Checkout is temporarily unavailable while we verify our payment records connection. Please try again shortly or contact support.";
   return error;
 }
 
@@ -58,6 +61,13 @@ function assertDatabaseConfigured() {
 }
 
 function friendlyDatabaseError(error) {
+  if (error?.message?.includes("tenant/user") && error?.message?.includes("not found")) {
+    return databaseConfigurationError(
+      "Supabase pooler rejected the DATABASE_URL tenant/user. Check the project ref, pooler host, and username format in Render. The username should usually look like postgres.<project-ref> for Supabase pooler connections.",
+      "Checkout is temporarily unavailable while we verify our payment records connection. Please try again shortly or contact support."
+    );
+  }
+
   if (error?.code === "ENOTFOUND" || error?.message?.includes("getaddrinfo ENOTFOUND")) {
     return databaseConfigurationError(
       "Database host could not be resolved. Check DATABASE_URL in Render and use the Postgres connection string from your database provider."

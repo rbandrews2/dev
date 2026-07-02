@@ -101,6 +101,11 @@ function money(cents: number) {
   }).format(cents / 100);
 }
 
+function checkoutApiError(data: { error?: string; errorId?: string }, fallback: string) {
+  if (!data.error) return fallback;
+  return data.errorId ? `${data.error} Reference: ${data.errorId}` : data.error;
+}
+
 function weekday(value: string) {
   const date = new Date(`${value}T12:00:00`);
   return new Intl.DateTimeFormat("en-US", {
@@ -170,7 +175,9 @@ function App() {
         });
 
         const authData = await authResponse.json();
-        if (!authResponse.ok) throw new Error(authData.error || "Authorization could not be saved.");
+        if (!authResponse.ok) {
+          throw new Error(checkoutApiError(authData, "Authorization could not be saved."));
+        }
         authorizationId = authData.authorizationId;
       }
 
@@ -200,7 +207,9 @@ function App() {
       });
 
       const intentData = await intentResponse.json();
-      if (!intentResponse.ok) throw new Error(intentData.error || "Payment setup failed.");
+      if (!intentResponse.ok) {
+        throw new Error(checkoutApiError(intentData, "Payment setup failed."));
+      }
 
       setClientSecret(intentData.clientSecret);
     } catch (caught) {

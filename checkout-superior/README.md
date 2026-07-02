@@ -68,6 +68,24 @@ psql "$DATABASE_URL" -f server/schema.sql
 
 If `DATABASE_URL` is not set, the server falls back to `data/authorizations.json` for local development only.
 
+### Supabase Pooler Errors
+
+If checkout shows a temporary-unavailable message and Render logs include:
+
+```text
+tenant/user postgres.<project-ref> not found
+```
+
+the Supabase pooler rejected the database identity. Check the `DATABASE_URL` in Render:
+
+- Copy the connection string from the same Supabase project that owns the database.
+- For Supabase pooler URLs, the username is usually `postgres.<project-ref>`.
+- The pooler host must match the region/project shown in Supabase Connect settings.
+- Use the database password, not the Supabase dashboard password.
+- If the password was pasted into chat, logs, screenshots, or source files, rotate it and update Render.
+
+After updating `DATABASE_URL`, redeploy or restart the Render Web Service and test checkout again.
+
 ## Compliance Notes
 
 This code avoids collecting card or bank account numbers on your server by using Stripe-hosted Payment Element fields, reducing PCI exposure. For ACH/NACHA, keep authorization records for the required retention period, provide customer support contact information, and verify that the final authorization wording, cancellation process, fees, and timing comply with your state rules, card-network rules, and NACHA requirements.

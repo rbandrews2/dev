@@ -554,11 +554,23 @@ app.use("/api", (_req, res) => {
 
 app.use((error, _req, res, _next) => {
   const status = error.status || (error instanceof z.ZodError ? 400 : 500);
+  const errorId = crypto.randomUUID();
+  console.error(`[checkout-error:${errorId}]`, {
+    status,
+    message: error.message,
+    code: error.code,
+    stack: error.stack
+  });
+
   const message =
     error instanceof z.ZodError
       ? "Please check the authorization form and try again."
-      : error.message || "Unexpected checkout error.";
-  res.status(status).json({ error: message });
+      : status >= 500
+        ? error.publicMessage ||
+          "Checkout is temporarily unavailable. Please try again shortly or contact support if the problem continues."
+        : error.message || "Unexpected checkout error.";
+
+  res.status(status).json({ error: message, errorId });
 });
 
 const distPath = path.resolve(__dirname, "../dist");
