@@ -5,12 +5,12 @@ export default function LicenseAgreement() {
     <LegalPageShell title="Limited Ownership License Agreement" kicker="Work Zone OS">
       <div className="space-y-4 text-orange-100/85">
         <p>Work Zone OS (WZOS)</p>
-        <p>Superior Consultation, LLC</p>
+        <p>Molecular Project Development LLC</p>
         <p>Contact: info@superiorllc.org</p>
         <p>Effective Date: [Insert Date]</p>
         <p>
           This Limited Ownership License Agreement (“Agreement”) is a legally binding agreement
-          between Superior Consultation, LLC (“Licensor,” “we,” “us,” or “our”) and the
+          between Molecular Project Development LLC (“Licensor,” “we,” “us,” or “our”) and the
           individual or entity (“Licensee,” “you,” or “your”) accessing or using Work Zone OS
           (WZOS) (the “Software”).
         </p>
@@ -24,7 +24,7 @@ export default function LicenseAgreement() {
         <p>
           The Software, including but not limited to all source code, object code, designs,
           workflows, interfaces, documentation, databases, and associated intellectual property, is
-          owned exclusively by Superior Consultation, LLC.
+          owned exclusively by Molecular Project Development LLC.
         </p>
         <p>
           Subject to your compliance with this Agreement, Licensor grants you a limited,
@@ -43,7 +43,7 @@ export default function LicenseAgreement() {
         </ul>
         <p>
           Any modification, customization, or alteration of the Software requires explicit written
-          authorization from Superior Consultation, LLC. Unauthorized changes immediately terminate
+          authorization from Molecular Project Development LLC. Unauthorized changes immediately terminate
           this license.
         </p>
 
@@ -57,7 +57,7 @@ export default function LicenseAgreement() {
 
         <p className="font-semibold">4. Limited Warranty</p>
         <p>The Software is provided with a one (1) year limited warranty from the date of initial activation.</p>
-        <p>During the warranty period, Superior Consultation, LLC warrants that:</p>
+        <p>During the warranty period, Molecular Project Development LLC warrants that:</p>
         <ul className="list-disc list-inside space-y-1">
           <li>The Software will operate substantially as described under normal use</li>
           <li>Material defects affecting core functionality will be addressed in a commercially reasonable timeframe</li>
@@ -86,7 +86,7 @@ export default function LicenseAgreement() {
         </p>
 
         <p className="font-semibold">6. Termination</p>
-        <p>This license may be terminated immediately by Superior Consultation, LLC if you:</p>
+        <p>This license may be terminated immediately by Molecular Project Development LLC if you:</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Violate any term of this Agreement</li>
           <li>Attempt unauthorized modification or redistribution</li>
@@ -99,7 +99,7 @@ export default function LicenseAgreement() {
 
         <p className="font-semibold">7. Limitation of Liability</p>
         <p>
-          To the maximum extent permitted by law, Superior Consultation, LLC shall not be liable for
+          To the maximum extent permitted by law, Molecular Project Development LLC shall not be liable for
           any indirect, incidental, consequential, or special damages arising from or related to use
           of the Software, including but not limited to loss of data, business interruption, or lost
           profits.
@@ -117,7 +117,7 @@ export default function LicenseAgreement() {
           Software and supersedes all prior agreements or understandings, whether written or oral.
         </p>
 
-        <p>Superior Consultation, LLC</p>
+        <p>Molecular Project Development LLC</p>
         <p>All rights reserved.</p>
       </div>
     </LegalPageShell>

@@ -6,7 +6,7 @@ Below is a **professional, production-ready instruction manual** suitable for di
 
 **Installation, Activation & Operations Manual**
 Version 1.0
-Prepared by Superior Consultation LLC
+Prepared by Molecular Project Development LLC
 
 ---
 
@@ -223,7 +223,7 @@ Unauthorized modification of the application is prohibited.
 
 For technical assistance, licensing issues, or account recovery:
 
-**Superior Consultation LLC**
+**Molecular Project Development LLC**
 Customer Support Division
 (Official contact method provided at purchase)
 
@@ -232,7 +232,7 @@ Customer Support Division
 ## 13. Legal Notice
 
 This software is licensed, not sold.
-Unauthorized modification, redistribution, or reverse engineering is strictly prohibited without written consent from Superior Consultation LLC.
+Unauthorized modification, redistribution, or reverse engineering is strictly prohibited without written consent from Molecular Project Development LLC.
 
 ---
 

@@ -16,7 +16,7 @@ export default function Install() {
       <section className="grid gap-4 md:grid-cols-3">
         <StepCard icon={<Download className="h-5 w-5" />} title="1. Install the app" body="Use your device or browser install flow for Work Zone OS. Keep your activation email open." />
         <StepCard icon={<KeyRound className="h-5 w-5" />} title="2. Enter the code" body="When prompted, paste or type the 15-character activation code exactly as provided." />
-        <StepCard icon={<Sparkles className="h-5 w-5" />} title="3. Finish setup" body="Start configuration with Atlas AI or schedule a Superior Consultation installation appointment." />
+        <StepCard icon={<Sparkles className="h-5 w-5" />} title="3. Finish setup" body="Start configuration with Atlas AI or schedule a Molecular Project Development LLC installation appointment." />
       </section>
 
       <section className="rounded-3xl border border-white/10 bg-black/40 p-6">

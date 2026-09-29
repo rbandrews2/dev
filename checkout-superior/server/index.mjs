@@ -30,7 +30,7 @@ const stripe = stripeKey
   : null;
 
 const business = {
-  name: "Superior Consultation, LLC",
+  name: "Molecular Project Development LLC",
   address: "915 Pocahontas Ave. Suite B Rke., VA 24012",
   supportEmail: "inf0@workzoneos.org",
   supportPhone: "(844) 685-7207",
@@ -556,5 +556,5 @@ if (isProduction || existsSync(distPath)) {
 }
 
 app.listen(port, () => {
-  console.log(`Superior checkout server listening on http://localhost:${port}`);
+  console.log(`Molecular Project Development LLC checkout server listening on http://localhost:${port}`);
 });
