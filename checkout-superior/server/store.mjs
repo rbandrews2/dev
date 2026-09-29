@@ -2,6 +2,9 @@ import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import pg from "pg";
+import { AsyncLocalStorage } from "node:async_hooks";
+
+const transaction = new AsyncLocalStorage();
 
 const storePath = path.resolve(process.env.AUTHORIZATION_STORE_PATH || "./data/authorizations.json");
 const subscriptionStorePath = path.resolve(
@@ -21,7 +24,12 @@ function databaseConfigurationError(message, publicMessage) {
 }
 
 function validateDatabaseUrl(value) {
-  if (!value) return null;
+  if (!value) {
+    if (process.env.NODE_ENV === 'production' || process.env.RENDER === 'true') {
+      throw databaseConfigurationError('Production checkout requires DATABASE_URL; file storage is disabled.');
+    }
+    return null;
+  }
 
   let parsed;
   try {
@@ -125,6 +133,38 @@ const pool = validDatabaseUrl
             }
     })
   : null;
+
+const db = { query: (...args) => (transaction.getStore() || pool).query(...args) };
+
+export async function databaseReadiness() {
+  assertDatabaseConfigured();
+  if (!pool) throw databaseConfigurationError('Durable database is required.');
+  await db.query('select 1 from checkout_webhook_events limit 0');
+  await db.query('select 1 from checkout_authorizations limit 0');
+}
+
+export async function processWebhookOnce(event, handler) {
+  assertDatabaseConfigured();
+  if (!pool) throw databaseConfigurationError('Webhook processing requires durable database storage.');
+  const client = await pool.connect();
+  try {
+    await client.query('begin');
+    // Serialize events that can change the same customer/subscription, including different event IDs.
+    const object = event.data.object;
+    const customerId = typeof object.customer === 'string' ? object.customer : object.customer?.id;
+    await client.query('select pg_advisory_xact_lock(hashtextextended($1, 0))',
+      [`${event.account || 'platform'}:${event.livemode}:${customerId || object.id}`]);
+    const inserted = await client.query(`insert into checkout_webhook_events(account_id,livemode,event_id,event_type)
+      values($1,$2,$3,$4) on conflict do nothing returning event_id`,
+      [event.account || 'platform', Boolean(event.livemode), event.id, event.type]);
+    if (inserted.rowCount) await transaction.run(client, handler);
+    await client.query('commit');
+    return { duplicate: !inserted.rowCount };
+  } catch (error) {
+    await client.query('rollback');
+    throw error;
+  } finally { client.release(); }
+}
 
 function toDbRecord(record) {
   return {
@@ -254,7 +294,7 @@ export async function appendAuthorization(record) {
   if (pool) {
     const dbRecord = toDbRecord(record);
     try {
-      const result = await pool.query(
+      const result = await db.query(
         `insert into checkout_authorizations (
           id,
           customer_name,
@@ -314,7 +354,7 @@ appendAuthorization.get = async (id) => {
 
   if (pool) {
     try {
-      const result = await pool.query("select * from checkout_authorizations where id = $1", [id]);
+      const result = await db.query("select * from checkout_authorizations where id = $1", [id]);
       return fromDbRecord(result.rows[0]);
     } catch (error) {
       throw friendlyDatabaseError(error);
@@ -331,7 +371,7 @@ export async function markAuthorizationPaid(id, patch) {
 
   if (pool) {
     try {
-      await pool.query(
+      await db.query(
         `update checkout_authorizations
           set status = 'paid',
               payment_intent_id = $2,
@@ -356,10 +396,14 @@ export async function markAuthorizationPaid(id, patch) {
 
 export async function upsertCustomerPaymentProfile(profile) {
   assertDatabaseConfigured();
+  profile = { ...profile, customerEmail: profile.customerEmail?.trim().toLowerCase() };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.customerEmail || '')) {
+    throw new Error('A valid customer email is required');
+  }
 
   if (pool) {
     try {
-      const result = await pool.query(
+      const result = await db.query(
         `insert into checkout_customer_profiles (
           customer_email,
           customer_name,
@@ -416,7 +460,7 @@ export async function getCustomerPaymentProfileByEmail(email) {
 
   if (pool) {
     try {
-      const result = await pool.query(
+      const result = await db.query(
         "select * from checkout_customer_profiles where lower(customer_email) = lower($1)",
         [email]
       );
@@ -437,7 +481,7 @@ export async function upsertSubscriptionRecord(subscription) {
 
   if (pool) {
     try {
-      const result = await pool.query(
+      const result = await db.query(
         `insert into checkout_subscriptions (
           customer_profile_id,
           customer_email,
@@ -512,7 +556,7 @@ export async function updateSubscriptionStatus(stripeSubscriptionId, patch) {
 
   if (pool) {
     try {
-      await pool.query(
+      await db.query(
         `update checkout_subscriptions
           set status = coalesce($2, status),
               current_period_start = coalesce($3, current_period_start),
