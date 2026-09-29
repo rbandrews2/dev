@@ -77,7 +77,7 @@ BEGIN
       activation_code_id
     )
     VALUES (
-      'Superior Consultation Testing',
+      'Molecular Project Development LLC Testing',
       'Roadway Operations',
       v_user_id,
       v_code_id

@@ -48,11 +48,11 @@ export default function LicenseModal() {
         </p>
         <h2 className="text-2xl font-semibold text-white mb-2">Work Zone OS (WZOS)</h2>
         <p className="text-sm text-orange-100/80 mb-4">
-          Superior Consultation, LLC
+          Molecular Project Development LLC
         </p>
 
         <ul className="space-y-2 text-sm text-orange-100/85 list-disc list-inside mb-5">
-          <li>Work Zone OS is the exclusive property of Superior Consultation, LLC.</li>
+          <li>Work Zone OS is the exclusive property of Molecular Project Development LLC.</li>
           <li>You are granted a limited, non-transferable license for internal business use only.</li>
           <li>No modifications, reverse engineering, or integrations without explicit written consent.</li>
           <li>Unauthorized modification or misuse immediately terminates your license.</li>

@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <LegalPageShell title="Contact" kicker="Support">
       <p>
-        Need help with Work Zone OS? Reach out to Superior Consultation, LLC.
+        Need help with Work Zone OS? Reach out to Molecular Project Development LLC.
       </p>
       <ul className="space-y-1 text-orange-100/85">
         <li>Email: <a className="underline decoration-orange-400" href="mailto:support@superiorconsultation.com">support@superiorconsultation.com</a></li>

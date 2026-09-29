@@ -1695,7 +1695,7 @@ export default function App() {
                 Activate this company workspace with a small upfront payment and monthly access.
               </p>
               <p className="text-xs text-zinc-500">
-                Also available from the WZOS page and Superior Consultation page.
+                Also available from the WZOS page and Molecular Project Development LLC page.
               </p>
               {isAdmin ? (
                 <button
