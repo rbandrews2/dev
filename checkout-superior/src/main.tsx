@@ -529,7 +529,7 @@ function AuthorizationStep(props: {
       <div className="authorization-copy" role="dialog" aria-labelledby="ach-authorization-heading">
         <h3 id="ach-authorization-heading">ACH debit authorization</h3>
         <p>
-          I authorize Molecular Project Development LLC to initiate an electronic ACH debit from the bank
+          I authorize Luxury Choice Inc. to initiate an electronic ACH debit from the bank
           account I provide through Stripe in the amount of <strong>{money(totalCents)}</strong> when
           I submit payment today for{" "}
           {form.description || "the agreed transaction"}. This authorization includes the agreed
@@ -537,7 +537,7 @@ function AuthorizationStep(props: {
           {config.fee.amountCents > 0 ? ` plus ${money(config.fee.amountCents)} for ${config.fee.label}` : ""}.
         </p>
         <p>
-          I further authorize Molecular Project Development LLC to initiate ACH debits for any future
+          I further authorize Luxury Choice Inc. to initiate ACH debits for any future
           amounts that I separately agree to pay for subscriptions, renewals, services, or related
           account obligations, and to initiate ACH credits to the same account for refunds,
           reversals, adjustments, or verification deposits and withdrawals used to confirm account

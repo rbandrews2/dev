@@ -1,4 +1,4 @@
-# Molecular Project Development LLC Checkout
+# Luxury Choice Inc. Checkout
 
 Secure checkout app for `checkout.superiorllc.org` with an explicit payment authorization step before Stripe payment collection.
 
