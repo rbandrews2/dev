@@ -31,9 +31,6 @@ const stripe = stripeKey
 
 const business = {
   name: "Luxury Choice Inc.",
-  address: "915 Pocahontas Ave. Suite B Rke., VA 24012",
-  supportEmail: "inf0@workzoneos.org",
-  supportPhone: "(844) 685-7207",
   currency: "usd"
 };
 

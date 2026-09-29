@@ -5,7 +5,6 @@ import { loadStripe, Stripe } from "@stripe/stripe-js";
 import {
   AlertCircle,
   BadgeCheck,
-  Building2,
   CalendarDays,
   CheckCircle2,
   DollarSign,
@@ -24,9 +23,6 @@ type Config = {
   publishableKey: string;
   business: {
     name: string;
-    address: string;
-    supportEmail: string;
-    supportPhone: string;
     currency: string;
   };
   policies: {
@@ -313,7 +309,6 @@ function BrandHeader({ config }: { config: Config }) {
       <div>
         <p className="eyebrow">Secure payment authorization</p>
         <h1>{config.business.name}</h1>
-        <p>{config.business.address}</p>
       </div>
       <div className="trust-stack" aria-label="Security assurances">
         <span><LockKeyhole size={16} /> TLS encrypted</span>
@@ -387,9 +382,6 @@ function ThankYou({
       {tone === "success" ? <CheckCircle2 size={42} /> : <AlertCircle size={42} />}
       <h1>{heading}</h1>
       <Notice tone={tone} text={message} />
-      <p>
-        Questions? Contact {config.business.supportEmail} or {config.business.supportPhone}.
-      </p>
       <a className="home-link" href="/">Start another checkout</a>
     </section>
   );
@@ -746,12 +738,6 @@ function Summary(props: {
         <PaymentMethodLogo brand="ach" label="ACH bank debit" />
         <PaymentMethodLogo brand="instantbank" label="Instant bank verification" />
         <PaymentMethodLogo brand="microdeposit" label="Micro-deposit verification" />
-      </div>
-      <div className="support-box">
-        <Building2 size={18} />
-        <p>
-          Questions? Contact {config.business.supportEmail} or {config.business.supportPhone}.
-        </p>
       </div>
       <nav className="legal-links">
         <a href={config.policies.privacyUrl}>Privacy</a>
