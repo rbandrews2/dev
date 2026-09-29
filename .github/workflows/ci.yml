@@ -6,29 +6,47 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: npm
+      - run: npm ci
+      # Activation is verified by the activate server function. The retired
+      # check:license command and VITE_ACTIVATION_PUBLIC_KEY are no longer used.
+      - run: npm run build
 
-      - name: Install dependencies
-        run: npm ci
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
 
-      - name: Check activation key is configured
-        run: npm run check:license
-        env:
-          VITE_ACTIVATION_PUBLIC_KEY: ${{ secrets.VITE_ACTIVATION_PUBLIC_KEY }}
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Build
-        run: npm run build
+  checkout:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: checkout-superior
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: checkout-superior/package-lock.json
+      - run: npm ci
+      - run: node --test server/webhook.test.mjs
+      - run: npx tsc --noEmit
+      - run: npm run build
