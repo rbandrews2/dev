@@ -86,4 +86,3 @@ create table if not exists public.checkout_webhook_events (
 alter table public.checkout_webhook_events enable row level security;
 revoke all on public.checkout_webhook_events from public,anon,authenticated;
 create index if not exists checkout_subscriptions_customer_profile_idx on public.checkout_subscriptions(customer_profile_id);
-

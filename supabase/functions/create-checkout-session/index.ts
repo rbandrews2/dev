@@ -1,109 +1,144 @@
 /// <reference lib="deno.ns" />
 /// <reference lib="dom" />
 
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import Stripe from "npm:stripe@22.1.0";
-import { handleCors } from "../shared/cors.ts";
-import { json, badRequest, forbidden, serverError } from "../shared/http.ts";
-import { mustGetEnv } from "../shared/env.ts";
-import { supabaseServiceClient } from "../shared/supabase.ts";
-import { createDeliveryToken, sha256Hex } from "../shared/license.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
 
-function normalizeSiteUrl(value: string) {
-  return value.replace(/\/+$/, "");
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS"
+};
+
+function json(status: number, body: unknown) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      ...corsHeaders,
+      "Content-Type": "application/json; charset=utf-8"
+    }
+  });
 }
 
-function isAllowedOrigin(origin: string | null, siteUrl: string) {
+function normalize(url: string) {
+  return url.replace(/\/+$/, "");
+}
+
+function createDeliveryToken() {
+  return crypto.randomUUID() + crypto.randomUUID().replace(/-/g, "");
+}
+
+async function sha256Hex(value: string) {
+  const encoded = new TextEncoder().encode(value);
+  const hash = await crypto.subtle.digest("SHA-256", encoded);
+  return Array.from(new Uint8Array(hash)).map((part) => part.toString(16).padStart(2, "0")).join("");
+}
+
+function allowedOrigin(origin: string | null) {
+  const site = normalize(Deno.env.get("PUBLIC_SITE_URL") || "https://workzoneos.org");
   if (!origin) return true;
-  const allowed = new Set([
-    normalizeSiteUrl(siteUrl),
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-  ]);
-  return allowed.has(normalizeSiteUrl(origin));
+  return [
+    site,
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500"
+  ].includes(normalize(origin));
 }
 
-serve(async (req) => {
-  const cors = handleCors(req);
-  if (cors) return cors;
-  if (req.method !== "POST") return badRequest("POST required");
+function supabaseAdmin() {
+  const url = Deno.env.get("SUPABASE_URL");
+  const serviceRole = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!url || !serviceRole) throw new Error("Missing Supabase service role configuration.");
+  return createClient(url, serviceRole, { auth: { persistSession: false } });
+}
+
+Deno.serve(async (request) => {
+  if (request.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+
+  if (!allowedOrigin(request.headers.get("origin"))) {
+    return json(403, { error: "forbidden", message: "Origin not allowed." });
+  }
+
+  if (request.method !== "POST") {
+    return json(400, { error: "bad_request", message: "POST required." });
+  }
 
   try {
-    const siteUrl = normalizeSiteUrl(mustGetEnv("PUBLIC_SITE_URL"));
-    if (!isAllowedOrigin(req.headers.get("origin"), siteUrl)) {
-      return forbidden("Origin is not allowed for checkout.");
+    const body = await request.json().catch(() => ({}));
+    const admin = supabaseAdmin();
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "");
+    const siteUrl = normalize(Deno.env.get("PUBLIC_SITE_URL") || "https://workzoneos.org");
+    const priceId = Deno.env.get("STRIPE_PRICE_ID_WZOS_CORE") || "";
+
+    if (!priceId) throw new Error("Missing STRIPE_PRICE_ID_WZOS_CORE.");
+
+    const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    const company = typeof body.company === "string" ? body.company.trim() : "";
+    const phone = typeof body.phone === "string" ? body.phone.trim() : "";
+    const productSku = typeof body.product_sku === "string" ? body.product_sku.trim() : "WZOS_CORE";
+
+    if (productSku !== "WZOS_CORE") {
+      return json(400, {error:"unsupported_product",message:"This checkout supports WZOS_CORE only."});
     }
-
-    const stripeSecretKey = mustGetEnv("STRIPE_SECRET_KEY");
-    const stripePriceId = mustGetEnv("STRIPE_PRICE_ID_WZOS_CORE");
-    const service = supabaseServiceClient();
-    const stripe = new Stripe(stripeSecretKey);
-
-    const body = await req.json().catch(() => ({}));
-    const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
-    const company = typeof body?.company === "string" ? body.company.trim() : "";
-    const productSku = typeof body?.product_sku === "string" && body.product_sku.trim()
-      ? body.product_sku.trim()
-      : "WZOS_CORE";
-
+    if (email.length > 160 || (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) || company.length > 200 || phone.length > 30) {
+      return json(400, {error:"bad_request",message:"Check your email and company contact details."});
+    }
     const deliveryToken = createDeliveryToken();
     const deliveryTokenHash = await sha256Hex(deliveryToken);
 
-    const { error: pendingError } = await service.from("purchase_deliveries").insert({
+    const { error: insertError } = await admin.from("purchase_deliveries").insert({
       delivery_token_hash: deliveryTokenHash,
       customer_email: email || null,
+      company: company || null,
+      phone: phone || null,
       product_sku: productSku,
       status: "pending",
-      metadata: company ? { company } : {},
+      metadata: {
+        source: "workzoneos_org"
+      }
     });
 
-    if (pendingError) {
-      return serverError("Could not initialize purchase delivery.", pendingError.message);
-    }
+    if (insertError) throw new Error(insertError.message);
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}&delivery_token=${deliveryToken}`,
-      cancel_url: `${siteUrl}/cancelled.html`,
       billing_address_collection: "auto",
       customer_email: email || undefined,
-      customer_creation: "always",
+      success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}&delivery_token=${deliveryToken}`,
+      cancel_url: `${siteUrl}/cancelled.html`,
       allow_promotion_codes: true,
-      line_items: [{ price: stripePriceId, quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       metadata: {
         delivery_token_hash: deliveryTokenHash,
         product_sku: productSku,
         company,
-      },
-      custom_fields: company
-        ? []
-        : [{
-          key: "company_name",
-          label: { type: "custom", custom: "Company name" },
-          type: "text",
-          optional: true,
-        }],
+        phone
+      }
     });
 
-    const { error: linkError } = await service
+    const { error: updateError } = await admin
       .from("purchase_deliveries")
       .update({
         checkout_session_id: session.id,
         stripe_payment_intent_id: typeof session.payment_intent === "string" ? session.payment_intent : null,
-        stripe_customer_id: typeof session.customer === "string" ? session.customer : null,
+        stripe_customer_id: typeof session.customer === "string" ? session.customer : null
       })
       .eq("delivery_token_hash", deliveryTokenHash);
 
-    if (linkError) {
-      return serverError("Checkout created but delivery link update failed.", linkError.message);
-    }
+    if (updateError) throw new Error(updateError.message);
 
-    return json({
+    return json(200, {
       ok: true,
-      checkout_url: session.url,
       session_id: session.id,
+      checkout_url: session.url
     });
   } catch (error) {
-    return serverError("Failed to create checkout session.", error instanceof Error ? error.message : String(error));
+    return json(500, {
+      error: "server_error",
+      message: error instanceof Error ? error.message : String(error)
+    });
   }
 });
