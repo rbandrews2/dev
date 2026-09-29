@@ -67,7 +67,7 @@ const defaultForm: AuthorizationForm = {
   customerEmail: "",
   customerPhone: "",
   amount: "250.00",
-  withdrawalDate: nextBusinessDate(),
+  withdrawalDate: new Date().toISOString().slice(0, 10),
   description: "Professional consultation services",
   paymentFlow: "standard",
   subscriptionEnabled: false,
@@ -332,7 +332,8 @@ function ThankYou({
   stripePromise: Promise<Stripe | null> | null;
 }) {
   const [message, setMessage] = useState("Confirming payment status...");
-  const [tone, setTone] = useState<"success" | "error">("success");
+  const [tone, setTone] = useState<"success" | "error">("error");
+  const [heading, setHeading] = useState("Checking payment");
 
   useEffect(() => {
     const clientSecret = new URLSearchParams(window.location.search).get("payment_intent_client_secret");
@@ -353,29 +354,38 @@ function ThankYou({
       const status = result.paymentIntent?.status;
 
       if (status === "succeeded") {
+        setTone("success");
+        setHeading("Payment received");
         setMessage("Thank you. Your payment was completed and a receipt will be emailed.");
         return;
       }
 
       if (status === "processing") {
+        setHeading("Payment processing");
         setMessage("Thank you. Your payment is processing. ACH payments may take several business days.");
         return;
       }
 
       if (status === "requires_payment_method") {
+        setHeading("Payment not completed");
         setTone("error");
         setMessage("Payment was not completed. Please return to checkout and try another payment method.");
         return;
       }
 
-      setMessage("Thank you. Your payment status is being finalized.");
+      setHeading("Payment not confirmed");
+      setMessage("Your payment is not confirmed. Return to checkout or contact support before trying again.");
+    }).catch(() => {
+      setTone("error");
+      setHeading("Payment status unavailable");
+      setMessage("We could not check your payment. Contact support before submitting another payment.");
     });
   }, [stripePromise]);
 
   return (
     <section className="single-panel">
       {tone === "success" ? <CheckCircle2 size={42} /> : <AlertCircle size={42} />}
-      <h1>Payment received</h1>
+      <h1>{heading}</h1>
       <Notice tone={tone} text={message} />
       <p>
         Questions? Contact {config.business.supportEmail} or {config.business.supportPhone}.
@@ -467,10 +477,11 @@ function AuthorizationStep(props: {
           />
         </label>
         <label>
-          <span className="label-text"><CalendarDays size={16} /> Withdrawal date</span>
+            <span className="label-text"><CalendarDays size={16} /> Payment initiation date (today)</span>
           <input
             required
-            type="date"
+              type="date"
+              readOnly
             value={form.withdrawalDate}
             onChange={(event) => update("withdrawalDate", event.target.value)}
           />
@@ -519,8 +530,8 @@ function AuthorizationStep(props: {
         <h3 id="ach-authorization-heading">ACH debit authorization</h3>
         <p>
           I authorize Superior Consultation, LLC to initiate an electronic ACH debit from the bank
-          account I provide through Stripe in the amount of <strong>{money(totalCents)}</strong> on
-          or after <strong>{weekday(form.withdrawalDate)}</strong> for{" "}
+          account I provide through Stripe in the amount of <strong>{money(totalCents)}</strong> when
+          I submit payment today for{" "}
           {form.description || "the agreed transaction"}. This authorization includes the agreed
           transaction amount of {money(subtotalCents)}
           {config.fee.amountCents > 0 ? ` plus ${money(config.fee.amountCents)} for ${config.fee.label}` : ""}.

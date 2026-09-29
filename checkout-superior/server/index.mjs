@@ -11,10 +11,13 @@ import {
   appendAuthorization,
   getCustomerPaymentProfileByEmail,
   markAuthorizationPaid,
-  updateSubscriptionStatus,
+  processWebhookOnce,
+  databaseReadiness,
   upsertCustomerPaymentProfile,
   upsertSubscriptionRecord
 } from "./store.mjs";
+
+import { processStripeEvent, subscriptionPeriods } from "./webhook.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -79,7 +82,8 @@ const existingPurchaseSubscriptionSchema = z.object({
   stripeCustomerId: z.string().trim().startsWith("cus_").optional(),
   paymentIntentId: z.string().trim().startsWith("pi_").optional(),
   paymentMethodId: z.string().trim().startsWith("pm_").optional(),
-  priceId: z.string().trim().startsWith("price_").optional(),
+  priceId: z.string().trim().min(1).max(200).optional(),
+  requestId: z.string().uuid().optional(),
   amountCents: z.number().int().min(50).max(5000000).optional(),
   interval: z.enum(["day", "week", "month", "year"]).default("month"),
   intervalCount: z.number().int().min(1).max(12).default(1),
@@ -118,8 +122,9 @@ function shouldSavePaymentMethodsForFutureCharges() {
   return process.env.SAVE_PAYMENT_METHODS_FOR_FUTURE_CHARGES !== "false";
 }
 
-function nextBillingTimestamp(firstBillingDate) {
-  const date = firstBillingDate ? new Date(`${firstBillingDate}T12:00:00Z`) : new Date();
+function nextBillingTimestamp(firstBillingDate, referenceTimestamp) {
+  if (!firstBillingDate && !referenceTimestamp) throw Object.assign(new Error("A fixed first billing date is required."), { status: 400 });
+  const date = firstBillingDate ? new Date(`${firstBillingDate}T12:00:00Z`) : new Date(referenceTimestamp * 1000);
   if (!firstBillingDate) date.setMonth(date.getMonth() + 1);
   return Math.floor(date.getTime() / 1000);
 }
@@ -132,14 +137,12 @@ async function getOrCreateStripeCustomer(stripeClient, checkout) {
   const existingProfile = await getCustomerPaymentProfileByEmail(checkout.customerEmail);
   if (existingProfile?.stripeCustomerId) return existingProfile.stripeCustomerId;
 
-  const customer = await stripeClient.customers.create({
-    name: checkout.customerName,
-    email: checkout.customerEmail,
-    phone: checkout.customerPhone || undefined,
-    metadata: {
-      source: "checkout-superior"
-    }
-  });
+  const email = checkout.customerEmail.trim().toLowerCase();
+  const matches = await stripeClient.customers.list({email, limit: 100});
+  const customer = matches.data.find(item => item.metadata?.source === 'checkout-superior') ||
+    await stripeClient.customers.create({email, metadata: {source: 'checkout-superior'}}, {
+      idempotencyKey: `checkout-customer-${crypto.createHash('sha256').update(email).digest('hex')}`
+    });
 
   await upsertCustomerPaymentProfile({
     customerEmail: checkout.customerEmail,
@@ -174,17 +177,39 @@ async function ensurePaymentMethodAttached(stripeClient, paymentMethodId, stripe
 }
 
 async function createStripeSubscriptionFromSavedPaymentMethod(stripeClient, input) {
+  const operationKey = input.paymentIntentId || input.requestId;
+  if (!operationKey) throw Object.assign(new Error("requestId is required when no PaymentIntent is supplied."), { status: 400 });
+  let existingSubscription;
+  for await (const candidate of stripeClient.subscriptions.list({customer: input.stripeCustomerId, status: 'all', limit: 100})) {
+    if (candidate.metadata?.source_payment_intent_id === input.paymentIntentId && input.paymentIntentId ||
+        candidate.metadata?.checkout_operation_id === operationKey) { existingSubscription = candidate; break; }
+  }
   await ensurePaymentMethodAttached(stripeClient, input.paymentMethodId, input.stripeCustomerId);
 
   const configuredPriceId = process.env.STRIPE_SUBSCRIPTION_PRICE_ID || "";
   const priceId = input.priceId || configuredPriceId;
+  const price = priceId ? await stripeClient.prices.retrieve(priceId) : null;
+  if (price && (!price.active || !price.recurring || !price.unit_amount)) {
+    throw Object.assign(new Error('The selected recurring price is unavailable.'), {status: 400});
+  }
+  if (price) {
+    input.amountCents = price.unit_amount;
+    input.interval = price.recurring.interval;
+    input.intervalCount = price.recurring.interval_count;
+  }
+  if (!Number.isInteger(input.amountCents) || input.amountCents < 50 || !['day','week','month','year'].includes(input.interval)) {
+    throw Object.assign(new Error('Invalid recurring payment terms.'), {status: 400});
+  }
+  const product = !priceId ? await stripeClient.products.create({ name: input.description },
+    {idempotencyKey: `checkout-product-${operationKey}`}) : null;
   const subscriptionParams = {
     customer: input.stripeCustomerId,
     default_payment_method: input.paymentMethodId,
     collection_method: "charge_automatically",
-    trial_end: nextBillingTimestamp(input.firstBillingDate),
+    trial_end: nextBillingTimestamp(input.firstBillingDate, input.referenceTimestamp),
     metadata: {
       source: input.source || "checkout-superior",
+      checkout_operation_id: operationKey,
       source_payment_intent_id: input.paymentIntentId || "",
       customer_email: input.customerEmail,
       payment_method_id: input.paymentMethodId
@@ -200,18 +225,19 @@ async function createStripeSubscriptionFromSavedPaymentMethod(stripeClient, inpu
                 interval: input.interval,
                 interval_count: input.intervalCount
               },
-              product_data: {
-                name: input.description
-              }
+              product: product.id
             }
           }
     ]
   };
 
-  const subscription = await stripeClient.subscriptions.create(subscriptionParams, {
+  if (!existingSubscription && subscriptionParams.trial_end <= Math.floor(Date.now()/1000)) {
+    throw Object.assign(new Error('The agreed billing date has passed. Review this subscription before retrying.'), {status: 409});
+  }
+  const subscription = existingSubscription || await stripeClient.subscriptions.create(subscriptionParams, {
     idempotencyKey: input.paymentIntentId
       ? `subscription-from-pi-${input.paymentIntentId}`
-      : `subscription-from-pm-${input.paymentMethodId}-${Date.now()}`
+      : `subscription-from-request-${operationKey}`
   });
 
   const profile = await upsertCustomerPaymentProfile({
@@ -232,13 +258,12 @@ async function createStripeSubscriptionFromSavedPaymentMethod(stripeClient, inpu
     sourcePaymentIntentId: input.paymentIntentId || "",
     priceId: priceId || "",
     amountCents: input.amountCents,
-    currency: business.currency,
+    currency: price?.currency || business.currency,
     interval: input.interval,
     intervalCount: input.intervalCount,
     description: input.description,
     status: subscription.status,
-    currentPeriodStart: timestampFromStripe(subscription.current_period_start),
-    currentPeriodEnd: timestampFromStripe(subscription.current_period_end)
+    ...subscriptionPeriods(subscription)
   });
 }
 
@@ -287,82 +312,24 @@ app.post(
       return res.status(400).send(`Webhook signature verification failed: ${error.message}`);
     }
 
-    if (event.type === "payment_intent.succeeded") {
-      const paymentIntent = event.data.object;
-      await markAuthorizationPaid(paymentIntent.metadata.authorization_id, {
-        paymentIntentId: paymentIntent.id,
-        amountReceived: paymentIntent.amount_received,
-        paidAt: new Date().toISOString()
-      });
-
-      if (paymentIntent.customer && paymentIntent.payment_method) {
-        const stripeCustomerId =
-          typeof paymentIntent.customer === "string"
-            ? paymentIntent.customer
-            : paymentIntent.customer.id;
-        const paymentMethodId =
-          typeof paymentIntent.payment_method === "string"
-            ? paymentIntent.payment_method
-            : paymentIntent.payment_method.id;
-
-        await upsertCustomerPaymentProfile({
-          customerEmail: paymentIntent.metadata.customer_email || paymentIntent.receipt_email || "",
-          customerName: paymentIntent.metadata.customer_name || "",
-          customerPhone: paymentIntent.metadata.customer_phone || "",
-          stripeCustomerId,
-          defaultPaymentMethodId: paymentMethodId,
-          sourcePaymentIntentId: paymentIntent.id
-        });
-      }
-
-      if (
-        paymentIntent.metadata.subscription_requested === "true" &&
-        paymentIntent.customer &&
-        paymentIntent.payment_method
-      ) {
-        const stripeCustomerId =
-          typeof paymentIntent.customer === "string"
-            ? paymentIntent.customer
-            : paymentIntent.customer.id;
-        const paymentMethodId =
-          typeof paymentIntent.payment_method === "string"
-            ? paymentIntent.payment_method
-            : paymentIntent.payment_method.id;
-
-        await createStripeSubscriptionFromSavedPaymentMethod(stripe, {
-          stripeCustomerId,
-          paymentMethodId,
-          paymentIntentId: paymentIntent.id,
-          customerEmail: paymentIntent.receipt_email || paymentIntent.metadata.customer_email,
-          customerName: paymentIntent.metadata.customer_name,
-          customerPhone: paymentIntent.metadata.customer_phone || "",
-          amountCents: Number(paymentIntent.metadata.subscription_amount_cents),
-          interval: paymentIntent.metadata.subscription_interval,
-          intervalCount: Number(paymentIntent.metadata.subscription_interval_count),
-          description: paymentIntent.metadata.subscription_description,
-          firstBillingDate: paymentIntent.metadata.subscription_first_billing_date || undefined,
-          source: "checkout-payment-intent"
-        });
-      }
-    }
-
-    if (
-      event.type === "customer.subscription.updated" ||
-      event.type === "customer.subscription.deleted"
-    ) {
-      const subscription = event.data.object;
-      await updateSubscriptionStatus(subscription.id, {
-        status: subscription.status,
-        currentPeriodStart: timestampFromStripe(subscription.current_period_start),
-        currentPeriodEnd: timestampFromStripe(subscription.current_period_end)
-      });
-    }
-
-    res.json({ received: true });
+    const result = await processWebhookOnce(event, () => processStripeEvent(event, {
+      getAuthorization: appendAuthorization.get,
+      markPaid: markAuthorizationPaid,
+      upsertProfile: upsertCustomerPaymentProfile,
+      upsertSubscription: upsertSubscriptionRecord,
+      retrieveSubscription: id => stripe.subscriptions.retrieve(id),
+      createSubscription: input => createStripeSubscriptionFromSavedPaymentMethod(stripe, input)
+    }));
+    res.json({ received: true, ...result });
   }
 );
 
 app.use(express.json({ limit: "32kb" }));
+
+app.get('/api/health/live', (_req, res) => res.json({ok: true}));
+app.get('/api/health/ready', async (_req, res, next) => {
+  try { await databaseReadiness(); res.json({ok: true}); } catch (error) { next(error); }
+});
 
 app.get("/api/checkout/config", (_req, res) => {
   res.json({
@@ -384,6 +351,9 @@ app.get("/api/checkout/config", (_req, res) => {
 app.post("/api/checkout/authorization", async (req, res, next) => {
   try {
     const parsed = authorizationSchema.parse(req.body);
+    if (parsed.withdrawalDate !== new Date().toISOString().slice(0, 10)) {
+      return res.status(400).json({error: 'This checkout initiates payment today. Future debit scheduling is not available.'});
+    }
     const totalCents = parsed.amountCents + feeCents();
     const id = crypto.randomUUID();
     const createdAt = new Date().toISOString();
@@ -418,6 +388,9 @@ app.post("/api/checkout/create-payment-intent", async (req, res, next) => {
     }
 
     const checkout = auth || parsed;
+    if (auth && auth.withdrawalDate > new Date().toISOString().slice(0, 10)) {
+      return res.status(409).json({error: 'This authorization has a future debit date; payment cannot be initiated yet.'});
+    }
     const subscription = parsed.subscription?.enabled ? parsed.subscription : null;
     const saveForFutureCharges = shouldSavePaymentMethodsForFutureCharges() || Boolean(subscription);
 
@@ -436,6 +409,7 @@ app.post("/api/checkout/create-payment-intent", async (req, res, next) => {
       setup_future_usage: saveForFutureCharges ? "off_session" : undefined,
       automatic_payment_methods: { enabled: true },
       metadata: {
+        source: "checkout-superior",
         payment_flow: parsed.paymentFlow,
         authorization_id: auth?.id || "",
         authorization_version: auth?.authorizationVersion || "",
@@ -534,6 +508,8 @@ app.post("/api/admin/subscriptions/from-purchase", async (req, res, next) => {
       intervalCount: parsed.intervalCount,
       description: parsed.description,
       firstBillingDate: parsed.firstBillingDate,
+      requestId: parsed.requestId,
+      referenceTimestamp: paymentIntent?.created,
       source: "admin-existing-purchase"
     });
 
