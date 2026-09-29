@@ -5,7 +5,6 @@ import { loadStripe, Stripe } from "@stripe/stripe-js";
 import {
   AlertCircle,
   BadgeCheck,
-  Building2,
   CalendarDays,
   CheckCircle2,
   DollarSign,
@@ -24,9 +23,6 @@ type Config = {
   publishableKey: string;
   business: {
     name: string;
-    address: string;
-    supportEmail: string;
-    supportPhone: string;
     currency: string;
   };
   policies: {
@@ -313,7 +309,6 @@ function BrandHeader({ config }: { config: Config }) {
       <div>
         <p className="eyebrow">Secure payment authorization</p>
         <h1>{config.business.name}</h1>
-        <p>{config.business.address}</p>
       </div>
       <div className="trust-stack" aria-label="Security assurances">
         <span><LockKeyhole size={16} /> TLS encrypted</span>
@@ -387,9 +382,6 @@ function ThankYou({
       {tone === "success" ? <CheckCircle2 size={42} /> : <AlertCircle size={42} />}
       <h1>{heading}</h1>
       <Notice tone={tone} text={message} />
-      <p>
-        Questions? Contact {config.business.supportEmail} or {config.business.supportPhone}.
-      </p>
       <a className="home-link" href="/">Start another checkout</a>
     </section>
   );
@@ -529,7 +521,7 @@ function AuthorizationStep(props: {
       <div className="authorization-copy" role="dialog" aria-labelledby="ach-authorization-heading">
         <h3 id="ach-authorization-heading">ACH debit authorization</h3>
         <p>
-          I authorize Molecular Project Development LLC to initiate an electronic ACH debit from the bank
+          I authorize Luxury Choice Inc. to initiate an electronic ACH debit from the bank
           account I provide through Stripe in the amount of <strong>{money(totalCents)}</strong> when
           I submit payment today for{" "}
           {form.description || "the agreed transaction"}. This authorization includes the agreed
@@ -537,7 +529,7 @@ function AuthorizationStep(props: {
           {config.fee.amountCents > 0 ? ` plus ${money(config.fee.amountCents)} for ${config.fee.label}` : ""}.
         </p>
         <p>
-          I further authorize Molecular Project Development LLC to initiate ACH debits for any future
+          I further authorize Luxury Choice Inc. to initiate ACH debits for any future
           amounts that I separately agree to pay for subscriptions, renewals, services, or related
           account obligations, and to initiate ACH credits to the same account for refunds,
           reversals, adjustments, or verification deposits and withdrawals used to confirm account
@@ -746,12 +738,6 @@ function Summary(props: {
         <PaymentMethodLogo brand="ach" label="ACH bank debit" />
         <PaymentMethodLogo brand="instantbank" label="Instant bank verification" />
         <PaymentMethodLogo brand="microdeposit" label="Micro-deposit verification" />
-      </div>
-      <div className="support-box">
-        <Building2 size={18} />
-        <p>
-          Questions? Contact {config.business.supportEmail} or {config.business.supportPhone}.
-        </p>
       </div>
       <nav className="legal-links">
         <a href={config.policies.privacyUrl}>Privacy</a>

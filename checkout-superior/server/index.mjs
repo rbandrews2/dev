@@ -30,10 +30,7 @@ const stripe = stripeKey
   : null;
 
 const business = {
-  name: "Molecular Project Development LLC",
-  address: "915 Pocahontas Ave. Suite B Rke., VA 24012",
-  supportEmail: "inf0@workzoneos.org",
-  supportPhone: "(844) 685-7207",
+  name: "Luxury Choice Inc.",
   currency: "usd"
 };
 
@@ -556,5 +553,5 @@ if (isProduction || existsSync(distPath)) {
 }
 
 app.listen(port, () => {
-  console.log(`Molecular Project Development LLC checkout server listening on http://localhost:${port}`);
+  console.log(`Luxury Choice Inc. checkout server listening on http://localhost:${port}`);
 });
